@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CG Mindset — Don't Judge Just Moove</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noir: #0a0a0a;
+    --rose: #FF1B8D;
+    --cyan: #00F0FF;
+    --jaune: #FFE600;
+    --violet: #BF00FF;
+    --blanc: #ffffff;
+    --gris: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--noir);
+    color: var(--blanc);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,27,141,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 24px;
+    background: linear-gradient(90deg, var(--rose), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rose); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 50% at 20% 50%, rgba(255,27,141,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(0,240,255,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .hero-title {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(60px, 12vw, 140px);
+    line-height: 0.9;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--violet) 40%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 40px rgba(255,27,141,0.3));
+  }
+
+  .hero-sub {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(16px, 3vw, 28px);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--jaune);
+    margin-bottom: 16px;
+  }
+
+  .hero-tagline {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--rose), var(--violet));
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+    padding: 16px 40px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: var(--cyan);
+    color: var(--noir);
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--rose);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 20s linear infinite;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTION COMMUNE */
+  section {
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-full { max-width: 100%; padding: 100px 0; }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(36px, 6vw, 72px);
+    background: linear-gradient(135deg, var(--blanc), rgba(255,255,255,0.6));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* COLLECTION GRID */
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2px;
+    background: var(--noir);
+    padding: 0 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    background: var(--gris);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    group: true;
+  }
+
+  .product-card:hover .product-overlay { opacity: 1; }
+  .product-card:hover .product-img { transform: scale(1.05); }
+
+  .product-img-wrap {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+
+  .product-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #111, #1a1a1a);
+    gap: 12px;
+  }
+
+  .product-img-placeholder .design-name {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 48px;
+    background: linear-gradient(135deg, var(--rose), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .product-img-placeholder .design-sub {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .product-info {
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .product-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .product-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .product-price {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    color: var(--jaune);
+  }
+
+  /* STICKER SECTION */
+  .sticker-section {
+    background: var(--gris);
+    padding: 100px 40px;
+  }
+
+  .sticker-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .sticker-img-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .sticker-img-wrap img {
+    width: 380px;
+    max-width: 100%;
+    filter: drop-shadow(0 0 60px rgba(255,27,141,0.4));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+  }
+
+  .sticker-content h2 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, var(--rose), var(--jaune));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .sticker-content p {
+    color: rgba(255,255,255,0.6);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .tag {
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 6px 14px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* PHILOSOPHIE */
+  .philo-section {
+    text-align: center;
+    padding: 120px 40px;
+    position: relative;
+  }
+
+  .philo-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(191,0,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .philo-quote {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(28px, 5vw, 56px);
+    line-height: 1.2;
+    max-width: 800px;
+    margin: 0 auto 48px;
+    color: var(--blanc);
+  }
+
+  .philo-quote span { color: var(--rose); }
+
+  .pilliers {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-top: 64px;
+  }
+
+  .pillier {
+    text-align: center;
+  }
+
+  .pillier-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .pillier-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--gris);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 36px;
+    background: linear-gradient(90deg, var(--rose), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+
+  .footer-tagline {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 32px;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    list-style: none;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--rose); }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .social-link {
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 18px;
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    border-color: var(--rose);
+    color: var(--rose);
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    section { padding: 60px 20px; }
+    .collection-grid { padding: 0 20px; grid-template-columns: 1fr 1fr; }
+    .sticker-inner { grid-template-columns: 1fr; gap: 40px; }
+    .sticker-img-wrap img { width: 280px; }
+    .sticker-section { padding: 60px 20px; }
+    footer { padding: 40px 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .collection-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">CG Mindset</a>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#stickers">Stickers</a></li>
+    <li><a href="#about">Mindset</a></li>
+    <li><a href="mailto:contact@cgmindset.fr">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Nouvelle collection 2026</p>
+  <h1 class="hero-title">CG<br>Mindset</h1>
+  <p class="hero-sub">Don't Judge Just Moove</p>
+  <p class="hero-tagline">Mindset · Lifestyle · Freedom</p>
+  <div class="hero-cta">
+    <a href="#collection" class="btn-primary">Voir la collection</a>
+    <a href="mailto:contact@cgmindset.fr" class="btn-outline">Nous contacter</a>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    &nbsp;DON'T JUDGE JUST MOOVE &nbsp;·&nbsp; MINDSET &nbsp;·&nbsp; LIFESTYLE &nbsp;·&nbsp; FREEDOM &nbsp;·&nbsp; CG MINDSET &nbsp;·&nbsp; BREATHE &nbsp;·&nbsp; FOCUS &nbsp;·&nbsp; EVOLVE &nbsp;·&nbsp; FREE &nbsp;·&nbsp; TRUST &nbsp;·&nbsp; ALIVE &nbsp;·&nbsp; HEAL &nbsp;·&nbsp; GOOD VIBES &nbsp;·&nbsp; ESCAPE &nbsp;·&nbsp;
+    &nbsp;DON'T JUDGE JUST MOOVE &nbsp;·&nbsp; MINDSET &nbsp;·&nbsp; LIFESTYLE &nbsp;·&nbsp; FREEDOM &nbsp;·&nbsp; CG MINDSET &nbsp;·&nbsp; BREATHE &nbsp;·&nbsp; FOCUS &nbsp;·&nbsp; EVOLVE &nbsp;·&nbsp; FREE &nbsp;·&nbsp; TRUST &nbsp;·&nbsp; ALIVE &nbsp;·&nbsp; HEAL &nbsp;·&nbsp; GOOD VIBES &nbsp;·&nbsp; ESCAPE &nbsp;·&nbsp;
+  </div>
+</div>
+
+<!-- COLLECTION -->
+<div id="collection" style="padding: 100px 0 40px;">
+  <div style="text-align:center; padding: 0 40px; margin-bottom: 64px;">
+    <span class="section-eyebrow">Collection Homme 2026</span>
+    <h2 class="section-title">9 Designs<br>Wear Your Mindset</h2>
+  </div>
+</div>
+
+<div class="collection-grid">
+  <!-- BREATHE -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <div class="product-img-placeholder">
+        <span class="design-name">BREATHE</span>
+        <span class="design-sub">Respire. Rien ne presse.</span>
+      </div>
+    </div>
+    <div class="product-overlay">
+      <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt BREATHE" class="btn-primary" style="font-size:12px; padding:12px 28px;">Commander</a>
+    </div>
+    <div class="product-info">
+      <p class="product-name">Breathe</p>
+      <p class="product-desc">T-shirt · Avant & Dos</p>
+      <p class="product-price">35 €</p>
+    </div>
+  </div>
+
+  <!-- FOCUS -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <div class="product-img-placeholder">
+        <span class="design-name">FOCUS</span>
+        <span class="design-sub">Esprit clair. Objectifs nets.</span>
+      </div>
+    </div>
+    <div class="product-overlay">
+      <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt FOCUS" class="btn-primary" style="font-size:12px; padding:12px 28px;">Commander</a>
+    </div>
+    <div class="product-info">
+      <p class="product-name">Focus</p>
+      <p class="product-desc">T-shirt · Avant & Dos</p>
+      <p class="product-price">35 €</p>
+    </div>
+  </div>
+
+  <!-- EVOLVE -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <div class="product-img-placeholder">
+        <span class="design-name">EVOLVE</span>
+        <span class="design-sub">Grandir est ta seule direction.</span>
+      </div>
+    </div>
+    <div class="product-overlay">
+      <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt EVOLVE" class="btn-primary" style="font-size:12px; padding:12px 28px;">Commander</a>
+    </div>
+    <div class="product-info">
+      <p class="product-name">Evolve</p>
+      <p class="product-desc">T-shirt · Avant & Dos</p>
+      <p class="product-price">35 €</p>
+    </div>
+  </div>
+
+  <!-- FREE -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <div class="product-img-placeholder">
+        <span class="design-name">FREE</span>
+        <span class="design-sub">Libre d'être. Libre de vivre.</span>
+      </div>
+    </div>
+    <div class="product-overlay">
+      <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt FREE" class="btn-primary" style="font-size:12px; padding:12px 28px;">Commander</a>
+    </div>
+    <div class="product-info">
+      <p class="product-name">Free</p>
+      <p class="product-desc">T-shirt · Avant & Dos</p>
+      <p class="product-price">35 €</p>
+    </div>
+  </div>
+
+  <!-- TRUST -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <div class="product-img-placeholder">
+        <span class="design-name">TRUST</span>
+        <span class="design-sub">Fais-toi confiance.</span>
+      </div>
+    </div>
+    <div class="product-overlay">
+      <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt TRUST" class="btn-primary" style="font-size:12px; padding:12px 28px;">Commander</a>
+    </div>
+    <div class="product-info">
+      <p class="product-name">Trust</p>
+      <p class="product-desc">T-shirt · Avant & Dos</p>
+      <p class="product-price">35 €</p>
+    </div>
+  </div>
+
+  <!-- ALIVE -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <div class="product-img-placeholder">
+        <span class="design-name">ALIVE</span>
+        <span class="design-sub">Vis pleinement.</span>
+      </div>
+    </div>
+    <div class="product-overlay">
+      <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt ALIVE" class="btn-primary" style="font-size:12px; padding:12px 28px;">Commander</a>
+    </div>
+    <div class="product-info">
+      <p class="product-name">Alive</p>
+      <p class="product-desc">T-shirt · Avant & Dos</p>
+      <p class="product-price">35 €</p>
+    </div>
+  </div>
+
+  <!-- HEAL -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <div class="product-img-placeholder">
+        <span class="design-name">HEAL</span>
+        <span class="design-sub">Tomber. Apprendre. Grandir.</span>
+      </div>
+    </div>
+    <div class="product-overlay">
+      <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt HEAL" class="btn-primary" style="font-size:12px; padding:12px 28px;">Commander</a>
+    </div>
+    <div class="product-info">
+      <p class="product-name">Heal</p>
+      <p class="product-desc">T-shirt · Avant & Dos</p>
+      <p class="product-price">35 €</p>
+    </div>
+  </div>
+
+  <!-- GOOD VIBES -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <div class="product-img-placeholder">
+        <span class="design-name" style="font-size:32px;">GOOD VIBES</span>
+        <span class="design-sub">Toujours de bonnes vibrations.</span>
+      </div>
+    </div>
+    <div class="product-overlay">
+      <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt GOOD VIBES" class="btn-primary" style="font-size:12px; padding:12px 28px;">Commander</a>
+    </div>
+    <div class="product-info">
+      <p class="product-name">Good Vibes</p>
+      <p class="product-desc">T-shirt · Avant & Dos</p>
+      <p class="product-price">35 €</p>
+    </div>
+  </div>
+
+  <!-- ESCAPE -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <div class="product-img-placeholder">
+        <span class="design-name">ESCAPE</span>
+        <span class="design-sub">Sors. Respire. Vis.</span>
+      </div>
+    </div>
+    <div class="product-overlay">
+      <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt ESCAPE" class="btn-primary" style="font-size:12px; padding:12px 28px;">Commander</a>
+    </div>
+    <div class="product-info">
+      <p class="product-name">Escape</p>
+      <p class="product-desc">T-shirt · Avant & Dos</p>
+      <p class="product-price">35 €</p>
+    </div>
+  </div>
+</div>
+
+<!-- NOTE COLLECTION FEMME -->
+<div style="text-align:center; padding: 60px 40px; background: var(--gris); margin-top: 2px;">
+  <span class="section-eyebrow">Collection Femme</span>
+  <h3 style="font-family:'Permanent Marker',cursive; font-size:36px; color:rgba(255,255,255,0.4); margin-bottom:16px;">Bientôt disponible</h3>
+  <p style="color:rgba(255,255,255,0.3); font-size:13px; letter-spacing:2px; text-transform:uppercase;">Les mêmes 9 designs en coupe féminine · Précommande disponible sur demande</p>
+  <a href="mailto:contact@cgmindset.fr?subject=Précommande collection femme" class="btn-outline" style="margin-top:32px; display:inline-block;">Me prévenir</a>
+</div>
+
+<!-- STICKER SECTION -->
+<div id="stickers" class="sticker-section">
+  <div class="sticker-inner">
+    <div class="sticker-img-wrap">
+      <img src="sticker-cpms.png" alt="Sticker C'est pas marrant sinon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+      <div style="display:none; width:320px; height:320px; background:linear-gradient(135deg,#111,#1a1a1a); border-radius:50%; align-items:center; justify-content:center; text-align:center; padding:40px;">
+        <div>
+          <div style="font-family:'Permanent Marker',cursive; font-size:22px; background:linear-gradient(135deg,#FF1B8D,#FFE600); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1.2;">C'EST PAS MARRANT SINON.</div>
+          <div style="font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.3); margin-top:12px; text-transform:uppercase;">CG Mindset</div>
+        </div>
+      </div>
+    </div>
+    <div class="sticker-content">
+      <span class="section-eyebrow">Collection Stickers</span>
+      <h2>C'est pas<br>marrant sinon.</h2>
+      <p>Le sticker qui dit tout. Parce que la vie, c'est fait pour être vécu avec humour, résilience et bonne humeur. Disponible en rond, rectangulaire et holographique.</p>
+      <div class="tag-list">
+        <span class="tag">Résilience</span>
+        <span class="tag">Humour</span>
+        <span class="tag">Mindset</span>
+        <span class="tag">Qualité premium</span>
+        <span class="tag">Waterproof</span>
+      </div>
+      <a href="mailto:contact@cgmindset.fr?subject=Commande stickers" class="btn-primary">Commander les stickers — 5 €</a>
+    </div>
+  </div>
+</div>
+
+<!-- PHILOSOPHIE -->
+<div id="about" class="philo-section">
+  <p class="section-eyebrow" style="display:block; text-align:center; margin-bottom:32px;">Notre philosophie</p>
+  <p class="philo-quote">
+    La vie est trop courte pour rester <span>immobile</span>.<br>
+    Bouge. Crée. Vis.
+  </p>
+  <p style="color:rgba(255,255,255,0.4); font-size:14px; max-width:600px; margin:0 auto; line-height:1.8; text-align:center;">
+    CG Mindset, c'est une marque née d'une conviction : le mindset change tout. Chaque vêtement est un rappel que tu peux choisir ton état d'esprit chaque matin. 
+    Créé à Ruelle-sur-Touvre, pensé pour le monde entier.
+  </p>
+  <div class="pilliers">
+    <div class="pillier">
+      <span class="pillier-icon">🧠</span>
+      <span class="pillier-label">Mindset</span>
+    </div>
+    <div class="pillier">
+      <span class="pillier-icon">🌴</span>
+      <span class="pillier-label">Lifestyle</span>
+    </div>
+    <div class="pillier">
+      <span class="pillier-icon">⚡</span>
+      <span class="pillier-label">Freedom</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">CG Mindset</p>
+  <p class="footer-tagline">Don't Judge Just Moove</p>
+  <div class="social-links">
+    <a href="https://instagram.com/cg.mindset" class="social-link" target="_blank" aria-label="Instagram">📷</a>
+    <a href="https://facebook.com/cgmindset" class="social-link" target="_blank" aria-label="Facebook">📘</a>
+    <a href="mailto:contact@cgmindset.fr" class="social-link" aria-label="Email">✉️</a>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#stickers">Stickers</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="mailto:contact@cgmindset.fr">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 CG Mindset — Marque déposée INPI n°5263394 · Tous droits réservés · contact@cgmindset.fr</p>
+</footer>
+
+</body>
+</html>
