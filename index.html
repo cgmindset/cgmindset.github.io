@@ -67,11 +67,26 @@
 
   /* COLLECTION TSHIRTS */
   .collection-section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
-  .collection-tabs { display: flex; gap: 0; justify-content: center; margin-bottom: 48px; }
+
+  /* TABS GENRE (Homme / Femme) */
+  .collection-tabs { display: flex; gap: 0; justify-content: center; margin-bottom: 32px; }
   .tab-btn { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); padding: 12px 32px; font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
   .tab-btn.active { background: var(--rose); border-color: var(--rose); color: white; }
   .tab-content { display: none; }
   .tab-content.active { display: block; }
+
+  /* TOGGLE COULEUR (Noir / Blanc) */
+  .color-toggle { display: flex; gap: 0; justify-content: center; margin-bottom: 32px; }
+  .color-btn { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); padding: 10px 28px; font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+  .color-btn .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .color-btn.noir-btn .dot { background: #fff; border: 1px solid rgba(255,255,255,0.3); }
+  .color-btn.blanc-btn .dot { background: #fff; border: 1px solid rgba(0,0,0,0.4); }
+  .color-btn.active.noir-btn { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.4); color: white; }
+  .color-btn.active.blanc-btn { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6); color: white; }
+
+  .planche-view { display: none; }
+  .planche-view.active { display: block; }
+
   .tshirt-img { width: 100%; border-radius: 4px; display: block; transition: transform 0.3s; }
   .tshirt-img:hover { transform: scale(1.02); }
 
@@ -122,6 +137,7 @@
     .sticker-section-wrap { padding: 60px 20px; }
     .sticker-grid { grid-template-columns: 1fr; }
     footer { padding: 40px 20px; }
+    .color-toggle { flex-wrap: wrap; }
   }
 </style>
 </head>
@@ -170,24 +186,71 @@
     <p style="color:rgba(255,255,255,0.4); font-size:13px; margin-top:16px; letter-spacing:1px;">T-shirts · Avant & Dos · Qualité premium · Expédition France 🇫🇷</p>
   </div>
 
+  <!-- TABS GENRE -->
   <div class="collection-tabs">
-    <button class="tab-btn active" onclick="showTab('homme')">👨 Homme</button>
-    <button class="tab-btn" onclick="showTab('femme')">👩 Femme</button>
+    <button class="tab-btn active" onclick="showTab('homme', event)">👨 Homme</button>
+    <button class="tab-btn" onclick="showTab('femme', event)">👩 Femme</button>
   </div>
 
+  <!-- ===== ONGLET HOMME ===== -->
   <div id="tab-homme" class="tab-content active">
-    <img src="PLANCHE%20HOMME" alt="Collection Homme CG Mindset" class="tshirt-img">
-    <div style="text-align:center; margin-top:32px;">
-      <p style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; margin-bottom:24px;">9 designs disponibles · T-shirt noir · Thermocollant vinyle premium</p>
-      <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Homme CG Mindset" class="btn-primary">Commander — 35 €</a>
+    <!-- Toggle couleur -->
+    <div class="color-toggle">
+      <button class="color-btn noir-btn active" onclick="showPlanche('homme', 'noir', event)">
+        <span class="dot" style="background:#222; border:1px solid rgba(255,255,255,0.4);"></span> T-shirt Noir
+      </button>
+      <button class="color-btn blanc-btn" onclick="showPlanche('homme', 'blanc', event)">
+        <span class="dot" style="background:#fff; border:1px solid rgba(0,0,0,0.3);"></span> T-shirt Blanc
+      </button>
+    </div>
+
+    <!-- Planche Noir Homme -->
+    <div id="planche-homme-noir" class="planche-view active">
+      <img src="PLANCHE%20HOMME" alt="Collection Homme Noir CG Mindset" class="tshirt-img">
+      <div style="text-align:center; margin-top:32px;">
+        <p style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; margin-bottom:24px;">9 designs disponibles · T-shirt noir · Thermocollant vinyle premium</p>
+        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Homme Noir CG Mindset" class="btn-primary">Commander — 35 €</a>
+      </div>
+    </div>
+
+    <!-- Planche Blanc Homme -->
+    <div id="planche-homme-blanc" class="planche-view">
+      <img src="PLANCHE%20HOMME%20TEESHIRT%20BLANC.PNG" alt="Collection Homme Blanc CG Mindset" class="tshirt-img">
+      <div style="text-align:center; margin-top:32px;">
+        <p style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; margin-bottom:24px;">9 designs disponibles · T-shirt blanc · Thermocollant vinyle premium</p>
+        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Homme Blanc CG Mindset" class="btn-primary">Commander — 35 €</a>
+      </div>
     </div>
   </div>
 
+  <!-- ===== ONGLET FEMME ===== -->
   <div id="tab-femme" class="tab-content">
-    <div style="text-align:center; padding:80px 40px; border:1px solid rgba(255,27,141,0.2);">
-      <p style="font-family:'Permanent Marker',cursive; font-size:48px; color:rgba(255,255,255,0.3); margin-bottom:16px;">Bientôt disponible</p>
-      <p style="color:rgba(255,255,255,0.3); font-size:13px; letter-spacing:2px; text-transform:uppercase; margin-bottom:32px;">Les 9 designs en coupe féminine · Précommande disponible sur demande</p>
-      <a href="mailto:contact@cgmindset.fr?subject=Précommande collection femme CG Mindset" class="btn-outline">Me prévenir</a>
+    <!-- Toggle couleur -->
+    <div class="color-toggle">
+      <button class="color-btn blanc-btn active" onclick="showPlanche('femme', 'blanc', event)">
+        <span class="dot" style="background:#fff; border:1px solid rgba(0,0,0,0.3);"></span> T-shirt Blanc
+      </button>
+      <button class="color-btn noir-btn" onclick="showPlanche('femme', 'noir', event)">
+        <span class="dot" style="background:#222; border:1px solid rgba(255,255,255,0.4);"></span> T-shirt Noir
+      </button>
+    </div>
+
+    <!-- Planche Blanc Femme -->
+    <div id="planche-femme-blanc" class="planche-view active">
+      <img src="PLANCHE%20FEMME.PNG" alt="Collection Femme Blanc CG Mindset" class="tshirt-img">
+      <div style="text-align:center; margin-top:32px;">
+        <p style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; margin-bottom:24px;">9 designs disponibles · T-shirt blanc · Coupe féminine · Thermocollant vinyle premium</p>
+        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Femme Blanc CG Mindset" class="btn-primary">Commander — 35 €</a>
+      </div>
+    </div>
+
+    <!-- Planche Noir Femme -->
+    <div id="planche-femme-noir" class="planche-view">
+      <img src="PLANCHE%20FEMME%20TEESHIRT%20NOIR.PNG" alt="Collection Femme Noir CG Mindset" class="tshirt-img">
+      <div style="text-align:center; margin-top:32px;">
+        <p style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; margin-bottom:24px;">9 designs disponibles · T-shirt noir · Coupe féminine · Thermocollant vinyle premium</p>
+        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Femme Noir CG Mindset" class="btn-primary">Commander — 35 €</a>
+      </div>
     </div>
   </div>
 </div>
@@ -225,7 +288,6 @@
   </div>
 
   <div class="sticker-grid" style="max-width:1200px; margin:0 auto;">
-    <!-- COLLECTION NEON -->
     <div class="sticker-card">
       <img src="STICKERS%20NEON%20PLANCHE%201.jpg" alt="Collection Stickers Neon CG Mindset">
       <div class="sticker-card-info">
@@ -235,9 +297,6 @@
         <a href="mailto:contact@cgmindset.fr?subject=Commande stickers Street Neon CG Mindset" class="btn-primary" style="font-size:12px; padding:12px 24px;">Commander</a>
       </div>
     </div>
-
-    
-    <!-- COLLECTION SPORT -->
     <div class="sticker-card">
       <img src="STICKERS%20ESPRIT%20SPORT.PNG" alt="Collection Stickers Esprit Sport CG Mindset">
       <div class="sticker-card-info">
@@ -247,8 +306,6 @@
         <a href="mailto:contact@cgmindset.fr?subject=Commande stickers Esprit Sport CG Mindset" class="btn-primary" style="font-size:12px; padding:12px 24px;">Commander</a>
       </div>
     </div>
-
-    <!-- COLLECTION CHILL -->
     <div class="sticker-card">
       <img src="STICKERS%20PLANCHE%20CHILL.PNG" alt="Collection Stickers Chill CG Mindset">
       <div class="sticker-card-info">
@@ -258,8 +315,6 @@
         <a href="mailto:contact@cgmindset.fr?subject=Commande stickers Chill CG Mindset" class="btn-primary" style="font-size:12px; padding:12px 24px;">Commander</a>
       </div>
     </div>
-
-    <!-- CTA PACK -->
     <div class="sticker-card" style="border-color:rgba(255,27,141,0.2); background:linear-gradient(135deg,#111,#1a0a1a);">
       <div class="sticker-card-info" style="padding:48px 24px; text-align:center;">
         <p style="font-family:'Permanent Marker',cursive; font-size:32px; color:var(--blanc); margin-bottom:16px;">Pack<br>Personnalisé</p>
@@ -310,11 +365,22 @@
 </footer>
 
 <script>
-function showTab(tab) {
+function showTab(tab, event) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   event.target.classList.add('active');
+}
+
+function showPlanche(genre, couleur, event) {
+  // Masquer toutes les planches du genre actif
+  document.querySelectorAll('[id^="planche-' + genre + '"]').forEach(el => el.classList.remove('active'));
+  // Afficher la bonne planche
+  document.getElementById('planche-' + genre + '-' + couleur).classList.add('active');
+  // Gérer les boutons couleur dans cet onglet
+  const tab = document.getElementById('tab-' + genre);
+  tab.querySelectorAll('.color-btn').forEach(el => el.classList.remove('active'));
+  event.target.closest('.color-btn').classList.add('active');
 }
 </script>
 
