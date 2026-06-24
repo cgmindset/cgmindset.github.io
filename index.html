@@ -74,10 +74,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2px;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
   }
-  .lifestyle-card { position: relative; overflow: hidden; aspect-ratio: 16/9; }
+  .lifestyle-card { position: relative; overflow: hidden; aspect-ratio: 4/5; max-width: 600px; margin: 0 auto; }
   .lifestyle-card img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; transition: transform 0.5s; }
   .lifestyle-card:hover img { transform: scale(1.04); }
   .lifestyle-card-overlay {
@@ -180,7 +180,7 @@
 
   @media (max-width: 900px) {
     .lifestyle-grid { grid-template-columns: 1fr; }
-    .lifestyle-card { aspect-ratio: 16/9; }
+    .lifestyle-card { aspect-ratio: 4/5; }
     .about-inner { grid-template-columns: 1fr; min-height: auto; }
     .about-portrait { height: 60vw; max-height: 420px; }
     .about-portrait::after { background: linear-gradient(to bottom, transparent 60%, var(--noir) 100%); }
@@ -291,7 +291,7 @@
   <div class="lifestyle-grid">
     <!-- Carte 1 — mockup homme sunset -->
     <div class="lifestyle-card">
-      <img src="DEVANT%20SWEAT%20TRUST%20HOLOGRAPHIQUE%20COBALT.png" alt="Sweat TRUST Devant CG Mindset" style="object-position: center 60%;">
+      <img src="DEVANT%20SWEAT%20TRUST%20HOLOGRAPHIQUE%20COBALT.png" alt="Sweat TRUST Devant CG Mindset" style="object-position: center 75%;">
       <div class="lifestyle-card-overlay">
         <span class="lifestyle-card-tag">⚡ Édition limitée</span>
         <p class="lifestyle-card-title">Sweat à capuche TRUST</p>
@@ -301,7 +301,7 @@
     </div>
     <!-- Carte 2 — sweat TRUST -->
     <div class="lifestyle-card">
-      <img src="DOS%20SWEAT%20TRUST%20HOLOGRAPHIQUE%20.jpg" alt="Sweat TRUST Dos CG Mindset" style="object-position: center 40%;">
+      <img src="DOS%20SWEAT%20TRUST%20HOLOGRAPHIQUE%20.jpg" alt="Sweat TRUST Dos CG Mindset" style="object-position: center 65%;">
       <div class="lifestyle-card-overlay">
         <span class="lifestyle-card-tag">⚡ Édition limitée</span>
         <p class="lifestyle-card-title">Sweat à capuche TRUST</p>
