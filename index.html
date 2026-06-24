@@ -276,6 +276,44 @@
   .nav-menu-btn { display: none; }
   .nav-mobile-open { display: flex !important; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,10,10,0.97); z-index: 99; align-items: center; justify-content: center; gap: 40px; }
   .nav-mobile-open a { font-size: 18px !important; letter-spacing: 4px !important; }
+
+  /* ===== PROTECTION VISUELS ===== */
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-touch-callout: none;
+    pointer-events: none;
+  }
+  /* Réactiver pointer-events uniquement pour les boutons/liens */
+  a img, button img { pointer-events: auto; }
+
+  /* Bloquer sélection texte sur les zones sensibles */
+  .slide-img-wrap, .lifestyle-card, .about-portrait, .tshirt-img,
+  .sticker-slide, .flyer-banner, .lifestyle-grid {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Overlay invisible sur toutes les images produits */
+  .slide-img-wrap, .lifestyle-card, .about-portrait, .flyer-banner {
+    position: relative;
+  }
+  .slide-img-wrap::after, .lifestyle-card::after,
+  .flyer-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: transparent;
+    pointer-events: auto;
+  }
+  /* S'assurer que les overlays about-portrait existants restent au-dessus */
+  .about-portrait::after { z-index: 2; }
+
+  /* Bloquer sélection globale sur mobile */
+  body { -webkit-touch-callout: none; }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
     .lifestyle-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
@@ -630,6 +668,32 @@ track.addEventListener('touchend', e => {
 </script>
 
 <script>
+
+// ===== PROTECTION VISUELS =====
+// Bloquer clic droit
+document.addEventListener('contextmenu', e => {
+  if (e.target.tagName === 'IMG' || e.target.closest('.slide-img-wrap, .lifestyle-card, .about-portrait, .flyer-banner')) {
+    e.preventDefault();
+    return false;
+  }
+});
+
+// Bloquer raccourcis clavier de sauvegarde sur les images
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && ['s','S','u','U'].includes(e.key)) {
+    e.preventDefault();
+  }
+});
+
+// Bloquer drag des images
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('dragstart', e => e.preventDefault());
+  img.setAttribute('draggable', 'false');
+});
+
+// Watermark invisible dans la console (preuve de propriété)
+console.log('%c© CG Mindset 2026 — Marque déposée INPI n°5263394. Toute reproduction interdite.', 'color: #FF1B8D; font-weight: bold; font-size: 14px;');
+
 // Service Worker PWA
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
