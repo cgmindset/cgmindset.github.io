@@ -65,57 +65,180 @@
   .section-eyebrow { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); margin-bottom: 16px; display: block; }
   .section-title { font-family: 'Permanent Marker', cursive; font-size: clamp(36px, 6vw, 72px); background: linear-gradient(135deg, var(--blanc), rgba(255,255,255,0.6)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-  /* COLLECTION TSHIRTS */
+  /* COLLECTION */
   .collection-section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
-
-  /* TABS GENRE (Homme / Femme) */
   .collection-tabs { display: flex; gap: 0; justify-content: center; margin-bottom: 32px; }
   .tab-btn { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); padding: 12px 32px; font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
   .tab-btn.active { background: var(--rose); border-color: var(--rose); color: white; }
   .tab-content { display: none; }
   .tab-content.active { display: block; }
-
-  /* TOGGLE COULEUR (Noir / Blanc) */
   .color-toggle { display: flex; gap: 0; justify-content: center; margin-bottom: 32px; }
   .color-btn { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); padding: 10px 28px; font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
   .color-btn .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-  .color-btn.noir-btn .dot { background: #fff; border: 1px solid rgba(255,255,255,0.3); }
-  .color-btn.blanc-btn .dot { background: #fff; border: 1px solid rgba(0,0,0,0.4); }
   .color-btn.active.noir-btn { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.4); color: white; }
   .color-btn.active.blanc-btn { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6); color: white; }
-
   .planche-view { display: none; }
   .planche-view.active { display: block; }
-
   .tshirt-img { width: 100%; border-radius: 4px; display: block; transition: transform 0.3s; }
   .tshirt-img:hover { transform: scale(1.02); }
 
-  /* STICKERS */
-  .sticker-section-wrap { background: var(--gris); padding: 100px 40px; }
-  .sticker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
-  .sticker-card { background: #111; border: 1px solid rgba(255,255,255,0.06); overflow: hidden; transition: border-color 0.2s; }
-  .sticker-card:hover { border-color: rgba(255,27,141,0.4); }
-  .sticker-card img { width: 100%; display: block; }
-  .sticker-card-info { padding: 24px; }
-  .sticker-card-title { font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-  .sticker-card-price { color: var(--jaune); font-family: 'Oswald', sans-serif; font-size: 20px; margin-bottom: 16px; }
-
-  /* PRIX */
-  .prix-grid { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+  /* STICKERS CARROUSEL */
+  .sticker-section-wrap { background: var(--gris); padding: 100px 0; overflow: hidden; }
+  .sticker-header { padding: 0 40px; text-align: center; margin-bottom: 56px; }
+  .prix-grid { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; padding: 0 40px; }
   .prix-card { border: 1px solid rgba(255,255,255,0.1); padding: 20px 28px; text-align: center; min-width: 140px; }
   .prix-label { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
   .prix-amount { font-family: 'Permanent Marker', cursive; font-size: 32px; color: var(--jaune); }
   .prix-size { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .carousel-wrapper { position: relative; }
+  .carousel-track-outer { overflow: hidden; padding: 20px 0 40px; }
+  .carousel-track { display: flex; gap: 24px; padding: 0 40px; transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+  .sticker-slide { flex: 0 0 420px; background: #111; border: 1px solid rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+  .sticker-slide:hover { border-color: rgba(255,27,141,0.5); transform: translateY(-4px); }
+  .sticker-slide .slide-img-wrap { width: 100%; aspect-ratio: 1/1; overflow: hidden; background: #0d0d0d; display: flex; align-items: center; justify-content: center; }
+  .sticker-slide .slide-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+  .sticker-slide:hover .slide-img-wrap img { transform: scale(1.04); }
+  .sticker-slide.slide-neon { border-top: 3px solid var(--rose); }
+  .sticker-slide.slide-sport { border-top: 3px solid var(--cyan); }
+  .sticker-slide.slide-chill { border-top: 3px solid var(--violet); }
+  .sticker-slide.slide-pack { border-top: 3px solid var(--jaune); background: linear-gradient(135deg, #111, #140a1a); }
+  .slide-info { padding: 28px; }
+  .slide-tag { display: inline-block; font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; padding: 4px 10px; margin-bottom: 14px; border-radius: 2px; }
+  .slide-neon .slide-tag { background: rgba(255,27,141,0.15); color: var(--rose); }
+  .slide-sport .slide-tag { background: rgba(0,240,255,0.15); color: var(--cyan); }
+  .slide-chill .slide-tag { background: rgba(191,0,255,0.15); color: var(--violet); }
+  .slide-pack .slide-tag { background: rgba(255,230,0,0.15); color: var(--jaune); }
+  .slide-title { font-family: 'Oswald', sans-serif; font-size: 20px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; color: var(--blanc); }
+  .slide-desc { color: rgba(255,255,255,0.45); font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
+  .slide-price { font-family: 'Permanent Marker', cursive; font-size: 28px; color: var(--jaune); margin-bottom: 20px; }
+  .slide-pack .slide-img-wrap { background: linear-gradient(135deg, #1a0a2a, #0a1a2a); flex-direction: column; }
+  .slide-pack .pack-icon { font-size: 72px; }
+  .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 16px; padding: 0 40px; }
+  .carousel-btn { width: 48px; height: 48px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%); }
+  .carousel-btn:hover { background: var(--rose); border-color: var(--rose); }
+  .carousel-btn:disabled { opacity: 0.2; cursor: default; }
+  .carousel-dots { display: flex; gap: 8px; }
+  .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; cursor: pointer; padding: 0; transition: all 0.2s; }
+  .carousel-dot.active { background: var(--rose); width: 24px; border-radius: 4px; }
 
-  /* PHILOSOPHIE */
-  .philo-section { text-align: center; padding: 120px 40px; position: relative; }
-  .philo-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(191,0,255,0.08) 0%, transparent 70%); pointer-events: none; }
-  .philo-quote { font-family: 'Permanent Marker', cursive; font-size: clamp(28px, 5vw, 56px); line-height: 1.2; max-width: 800px; margin: 0 auto 48px; color: var(--blanc); }
-  .philo-quote span { color: var(--rose); }
-  .pilliers { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; margin-top: 64px; }
-  .pillier { text-align: center; }
-  .pillier-icon { font-size: 32px; margin-bottom: 12px; display: block; }
-  .pillier-label { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+  /* ===== SECTION ABOUT / FONDATRICE ===== */
+  .about-section {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--noir);
+  }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Colonne gauche — portrait */
+  .about-portrait {
+    position: relative;
+    overflow: hidden;
+  }
+  .about-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: saturate(1.1);
+  }
+  /* Dégradé de fondu sur la droite pour raccorder avec le texte */
+  .about-portrait::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 60%, var(--noir) 100%);
+  }
+
+  /* Colonne droite — texte */
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 80% 50%, rgba(191,0,255,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .about-quote {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(28px, 4vw, 52px);
+    line-height: 1.15;
+    margin-bottom: 32px;
+    color: var(--blanc);
+  }
+  .about-quote .rose { color: var(--rose); }
+  .about-quote .cyan { color: var(--cyan); }
+  .about-quote .jaune { color: var(--jaune); }
+
+  .about-text {
+    color: rgba(255,255,255,0.55);
+    font-size: 15px;
+    line-height: 1.85;
+    margin-bottom: 48px;
+    max-width: 480px;
+  }
+
+  /* Valeurs en ligne */
+  .about-valeurs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .valeur-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .valeur-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.2);
+    min-width: 28px;
+  }
+  .valeur-bar {
+    height: 1px;
+    width: 32px;
+    background: var(--rose);
+    opacity: 0.5;
+  }
+  .valeur-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .valeur-row:nth-child(1) .valeur-label { color: var(--rose); }
+  .valeur-row:nth-child(2) .valeur-label { color: var(--jaune); }
+  .valeur-row:nth-child(3) .valeur-label { color: var(--cyan); }
+  .valeur-row:nth-child(4) .valeur-label { color: var(--violet); }
+
+  .about-signature {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 20px;
+    background: linear-gradient(90deg, var(--rose), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.6;
+  }
 
   /* FOOTER */
   footer { background: var(--gris); border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 40px; text-align: center; }
@@ -130,14 +253,23 @@
   .social-link:hover { border-color: var(--rose); color: var(--rose); }
   .footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
 
+  @media (max-width: 900px) {
+    .about-inner { grid-template-columns: 1fr; min-height: auto; }
+    .about-portrait { height: 60vw; max-height: 420px; }
+    .about-portrait::after { background: linear-gradient(to bottom, transparent 60%, var(--noir) 100%); }
+    .about-content { padding: 40px 24px 60px; }
+  }
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
     .nav-links { display: none; }
     .collection-section { padding: 60px 20px; }
-    .sticker-section-wrap { padding: 60px 20px; }
-    .sticker-grid { grid-template-columns: 1fr; }
+    .sticker-section-wrap { padding: 60px 0; }
+    .sticker-header { padding: 0 20px; }
+    .prix-grid { padding: 0 20px; }
+    .carousel-track { padding: 0 20px; }
+    .sticker-slide { flex: 0 0 300px; }
+    .carousel-controls { padding: 0 20px; }
     footer { padding: 40px 20px; }
-    .color-toggle { flex-wrap: wrap; }
   }
 </style>
 </head>
@@ -178,78 +310,54 @@
   </div>
 </div>
 
-<!-- COLLECTION TSHIRTS -->
+<!-- COLLECTION -->
 <div id="collection" class="collection-section">
   <div style="text-align:center; margin-bottom:48px;">
     <span class="section-eyebrow">Collection 2026</span>
     <h2 class="section-title">9 Designs<br>Wear Your Mindset</h2>
     <p style="color:rgba(255,255,255,0.4); font-size:13px; margin-top:16px; letter-spacing:1px;">T-shirts · Avant & Dos · Qualité premium · Expédition France 🇫🇷</p>
   </div>
-
-  <!-- TABS GENRE -->
   <div class="collection-tabs">
-    <button class="tab-btn active" onclick="showTab('homme', event)">👨 Homme</button>
-    <button class="tab-btn" onclick="showTab('femme', event)">👩 Femme</button>
+    <button class="tab-btn active" onclick="showTab('homme',event)">👨 Homme</button>
+    <button class="tab-btn" onclick="showTab('femme',event)">👩 Femme</button>
   </div>
-
-  <!-- ===== ONGLET HOMME ===== -->
   <div id="tab-homme" class="tab-content active">
-    <!-- Toggle couleur -->
     <div class="color-toggle">
-      <button class="color-btn noir-btn active" onclick="showPlanche('homme', 'noir', event)">
-        <span class="dot" style="background:#222; border:1px solid rgba(255,255,255,0.4);"></span> T-shirt Noir
-      </button>
-      <button class="color-btn blanc-btn" onclick="showPlanche('homme', 'blanc', event)">
-        <span class="dot" style="background:#fff; border:1px solid rgba(0,0,0,0.3);"></span> T-shirt Blanc
-      </button>
+      <button class="color-btn noir-btn active" onclick="showPlanche('homme','noir',event)"><span class="dot" style="background:#222;border:1px solid rgba(255,255,255,0.4);"></span> T-shirt Noir</button>
+      <button class="color-btn blanc-btn" onclick="showPlanche('homme','blanc',event)"><span class="dot" style="background:#fff;border:1px solid rgba(0,0,0,0.3);"></span> T-shirt Blanc</button>
     </div>
-
-    <!-- Planche Noir Homme -->
     <div id="planche-homme-noir" class="planche-view active">
-      <img src="PLANCHE%20HOMME" alt="Collection Homme Noir CG Mindset" class="tshirt-img">
-      <div style="text-align:center; margin-top:32px;">
-        <p style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; margin-bottom:24px;">9 designs disponibles · T-shirt noir · Thermocollant vinyle premium</p>
-        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Homme Noir CG Mindset" class="btn-primary">Commander — 35 €</a>
+      <img src="PLANCHE%20HOMME" alt="Collection Homme Noir" class="tshirt-img">
+      <div style="text-align:center;margin-top:32px;">
+        <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:24px;">9 designs · T-shirt noir · Thermocollant vinyle premium</p>
+        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Homme Noir" class="btn-primary">Commander — 35 €</a>
       </div>
     </div>
-
-    <!-- Planche Blanc Homme -->
     <div id="planche-homme-blanc" class="planche-view">
-      <img src="PLANCHE%20HOMME%20TEESHIRT%20BLANC.PNG" alt="Collection Homme Blanc CG Mindset" class="tshirt-img">
-      <div style="text-align:center; margin-top:32px;">
-        <p style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; margin-bottom:24px;">9 designs disponibles · T-shirt blanc · Thermocollant vinyle premium</p>
-        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Homme Blanc CG Mindset" class="btn-primary">Commander — 35 €</a>
+      <img src="PLANCHE%20HOMME%20TEESHIRT%20BLANC.PNG" alt="Collection Homme Blanc" class="tshirt-img">
+      <div style="text-align:center;margin-top:32px;">
+        <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:24px;">9 designs · T-shirt blanc · Thermocollant vinyle premium</p>
+        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Homme Blanc" class="btn-primary">Commander — 35 €</a>
       </div>
     </div>
   </div>
-
-  <!-- ===== ONGLET FEMME ===== -->
   <div id="tab-femme" class="tab-content">
-    <!-- Toggle couleur -->
     <div class="color-toggle">
-      <button class="color-btn blanc-btn active" onclick="showPlanche('femme', 'blanc', event)">
-        <span class="dot" style="background:#fff; border:1px solid rgba(0,0,0,0.3);"></span> T-shirt Blanc
-      </button>
-      <button class="color-btn noir-btn" onclick="showPlanche('femme', 'noir', event)">
-        <span class="dot" style="background:#222; border:1px solid rgba(255,255,255,0.4);"></span> T-shirt Noir
-      </button>
+      <button class="color-btn blanc-btn active" onclick="showPlanche('femme','blanc',event)"><span class="dot" style="background:#fff;border:1px solid rgba(0,0,0,0.3);"></span> T-shirt Blanc</button>
+      <button class="color-btn noir-btn" onclick="showPlanche('femme','noir',event)"><span class="dot" style="background:#222;border:1px solid rgba(255,255,255,0.4);"></span> T-shirt Noir</button>
     </div>
-
-    <!-- Planche Blanc Femme -->
     <div id="planche-femme-blanc" class="planche-view active">
-      <img src="PLANCHE%20FEMME.PNG" alt="Collection Femme Blanc CG Mindset" class="tshirt-img">
-      <div style="text-align:center; margin-top:32px;">
-        <p style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; margin-bottom:24px;">9 designs disponibles · T-shirt blanc · Coupe féminine · Thermocollant vinyle premium</p>
-        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Femme Blanc CG Mindset" class="btn-primary">Commander — 35 €</a>
+      <img src="PLANCHE%20FEMME.PNG" alt="Collection Femme Blanc" class="tshirt-img">
+      <div style="text-align:center;margin-top:32px;">
+        <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:24px;">9 designs · T-shirt blanc · Coupe féminine</p>
+        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Femme Blanc" class="btn-primary">Commander — 35 €</a>
       </div>
     </div>
-
-    <!-- Planche Noir Femme -->
     <div id="planche-femme-noir" class="planche-view">
-      <img src="PLANCHE%20FEMME%20TEESHIRT%20NOIR.PNG" alt="Collection Femme Noir CG Mindset" class="tshirt-img">
-      <div style="text-align:center; margin-top:32px;">
-        <p style="color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:1px; margin-bottom:24px;">9 designs disponibles · T-shirt noir · Coupe féminine · Thermocollant vinyle premium</p>
-        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Femme Noir CG Mindset" class="btn-primary">Commander — 35 €</a>
+      <img src="PLANCHE%20FEMME%20TEESHIRT%20NOIR.PNG" alt="Collection Femme Noir" class="tshirt-img">
+      <div style="text-align:center;margin-top:32px;">
+        <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:24px;">9 designs · T-shirt noir · Coupe féminine</p>
+        <a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Femme Noir" class="btn-primary">Commander — 35 €</a>
       </div>
     </div>
   </div>
@@ -257,89 +365,117 @@
 
 <!-- STICKERS -->
 <div id="stickers" class="sticker-section-wrap">
-  <div style="text-align:center; margin-bottom:48px;">
+  <div class="sticker-header">
     <span class="section-eyebrow">Collection Stickers</span>
     <h2 class="section-title">Wear Your Mindset.<br>Partout.</h2>
-    <p style="color:rgba(255,255,255,0.5); font-size:14px; margin-top:16px;">Stickers premium waterproof · Vinyle haute qualité · Expédition France 🇫🇷</p>
+    <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-top:16px;">Stickers premium waterproof · Vinyle haute qualité · Expédition France 🇫🇷</p>
   </div>
-
-  <!-- PRIX -->
   <div class="prix-grid">
-    <div class="prix-card">
-      <div class="prix-label" style="color:var(--rose);">Petit</div>
-      <div class="prix-amount">3 €</div>
-      <div class="prix-size">5–6 cm</div>
-    </div>
-    <div class="prix-card" style="border-color:rgba(0,240,255,0.3); background:rgba(0,240,255,0.03);">
-      <div class="prix-label">Moyen</div>
-      <div class="prix-amount">4,50 €</div>
-      <div class="prix-size">8–10 cm</div>
-    </div>
-    <div class="prix-card" style="border-color:rgba(191,0,255,0.3);">
-      <div class="prix-label" style="color:var(--violet);">Grand</div>
-      <div class="prix-amount">7 €</div>
-      <div class="prix-size">12–15 cm</div>
-    </div>
-    <div class="prix-card" style="border-color:rgba(255,230,0,0.4); background:rgba(255,230,0,0.03);">
-      <div class="prix-label" style="color:var(--jaune);">✨ Holographique</div>
-      <div class="prix-amount">+2 €</div>
-      <div class="prix-size">Effet premium</div>
-    </div>
+    <div class="prix-card"><div class="prix-label" style="color:var(--rose);">Petit</div><div class="prix-amount">3 €</div><div class="prix-size">5–6 cm</div></div>
+    <div class="prix-card" style="border-color:rgba(0,240,255,0.3);background:rgba(0,240,255,0.03);"><div class="prix-label">Moyen</div><div class="prix-amount">4,50 €</div><div class="prix-size">8–10 cm</div></div>
+    <div class="prix-card" style="border-color:rgba(191,0,255,0.3);"><div class="prix-label" style="color:var(--violet);">Grand</div><div class="prix-amount">7 €</div><div class="prix-size">12–15 cm</div></div>
+    <div class="prix-card" style="border-color:rgba(255,230,0,0.4);background:rgba(255,230,0,0.03);"><div class="prix-label" style="color:var(--jaune);">✨ Holographique</div><div class="prix-amount">+2 €</div><div class="prix-size">Effet premium</div></div>
   </div>
-
-  <div class="sticker-grid" style="max-width:1200px; margin:0 auto;">
-    <div class="sticker-card">
-      <img src="STICKERS%20NEON%20PLANCHE%201.jpg" alt="Collection Stickers Neon CG Mindset">
-      <div class="sticker-card-info">
-        <p class="sticker-card-title">⚡ Collection Street Neon</p>
-        <p style="color:rgba(255,255,255,0.5); font-size:13px; margin-bottom:16px;">12 designs · Fond noir · Couleurs fluo · Résilience · Humour · Mindset</p>
-        <p class="sticker-card-price">À partir de 3 €</p>
-        <a href="mailto:contact@cgmindset.fr?subject=Commande stickers Street Neon CG Mindset" class="btn-primary" style="font-size:12px; padding:12px 24px;">Commander</a>
+  <div class="carousel-wrapper">
+    <div class="carousel-track-outer">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="sticker-slide slide-neon">
+          <div class="slide-img-wrap"><img src="STICKERS%20NEON%20PLANCHE%201.jpg" alt="Street Neon"></div>
+          <div class="slide-info">
+            <span class="slide-tag">⚡ Street Neon</span>
+            <p class="slide-title">Collection Street Neon</p>
+            <p class="slide-desc">12 designs · Fond noir · Couleurs fluo · Résilience · Humour · Mindset</p>
+            <p class="slide-price">À partir de 3 €</p>
+            <a href="mailto:contact@cgmindset.fr?subject=Commande stickers Street Neon" class="btn-primary" style="font-size:12px;padding:12px 24px;">Commander</a>
+          </div>
+        </div>
+        <div class="sticker-slide slide-sport">
+          <div class="slide-img-wrap"><img src="STICKERS%20ESPRIT%20SPORT.PNG" alt="Esprit Sport"></div>
+          <div class="slide-info">
+            <span class="slide-tag">💪 Esprit Sport</span>
+            <p class="slide-title">Collection Esprit Sport</p>
+            <p class="slide-desc">12 designs · Énergie · Force · Dépassement de soi</p>
+            <p class="slide-price">À partir de 3 €</p>
+            <a href="mailto:contact@cgmindset.fr?subject=Commande stickers Esprit Sport" class="btn-primary" style="font-size:12px;padding:12px 24px;">Commander</a>
+          </div>
+        </div>
+        <div class="sticker-slide slide-chill">
+          <div class="slide-img-wrap"><img src="STICKERS%20PLANCHE%20CHILL.PNG" alt="Chill"></div>
+          <div class="slide-info">
+            <span class="slide-tag">🌅 Chill Vibes</span>
+            <p class="slide-title">Collection Chill</p>
+            <p class="slide-desc">9 designs · Tons naturels · Aquarelle · Focus · Grow · Inspire</p>
+            <p class="slide-price">À partir de 3 €</p>
+            <a href="mailto:contact@cgmindset.fr?subject=Commande stickers Chill" class="btn-primary" style="font-size:12px;padding:12px 24px;">Commander</a>
+          </div>
+        </div>
+        <div class="sticker-slide slide-pack">
+          <div class="slide-img-wrap"><span class="pack-icon">🎁</span></div>
+          <div class="slide-info">
+            <span class="slide-tag">✨ Sur mesure</span>
+            <p class="slide-title">Pack Personnalisé</p>
+            <p class="slide-desc">Tu veux mixer les collections ? Tarifs dégressifs dès 5 stickers. On crée ton pack sur mesure !</p>
+            <p class="slide-price">Nous contacter</p>
+            <a href="mailto:contact@cgmindset.fr?subject=Pack stickers personnalisé" class="btn-primary" style="font-size:12px;padding:12px 24px;">Créer mon pack</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="sticker-card">
-      <img src="STICKERS%20ESPRIT%20SPORT.PNG" alt="Collection Stickers Esprit Sport CG Mindset">
-      <div class="sticker-card-info">
-        <p class="sticker-card-title">💪 Collection Esprit Sport</p>
-        <p style="color:rgba(255,255,255,0.5); font-size:13px; margin-bottom:16px;">12 designs · Énergie · Force · Dépassement de soi</p>
-        <p class="sticker-card-price">À partir de 3 €</p>
-        <a href="mailto:contact@cgmindset.fr?subject=Commande stickers Esprit Sport CG Mindset" class="btn-primary" style="font-size:12px; padding:12px 24px;">Commander</a>
-      </div>
-    </div>
-    <div class="sticker-card">
-      <img src="STICKERS%20PLANCHE%20CHILL.PNG" alt="Collection Stickers Chill CG Mindset">
-      <div class="sticker-card-info">
-        <p class="sticker-card-title">🌅 Collection Chill</p>
-        <p style="color:rgba(255,255,255,0.5); font-size:13px; margin-bottom:16px;">9 designs · Tons naturels · Aquarelle · Focus · Grow · Inspire</p>
-        <p class="sticker-card-price">À partir de 3 €</p>
-        <a href="mailto:contact@cgmindset.fr?subject=Commande stickers Chill CG Mindset" class="btn-primary" style="font-size:12px; padding:12px 24px;">Commander</a>
-      </div>
-    </div>
-    <div class="sticker-card" style="border-color:rgba(255,27,141,0.2); background:linear-gradient(135deg,#111,#1a0a1a);">
-      <div class="sticker-card-info" style="padding:48px 24px; text-align:center;">
-        <p style="font-family:'Permanent Marker',cursive; font-size:32px; color:var(--blanc); margin-bottom:16px;">Pack<br>Personnalisé</p>
-        <p style="color:rgba(255,255,255,0.5); font-size:13px; margin-bottom:24px;">Tu veux mixer les deux collections ? Tarifs dégressifs dès 5 stickers. On crée ton pack sur mesure !</p>
-        <p class="sticker-card-price">Nous contacter</p>
-        <a href="mailto:contact@cgmindset.fr?subject=Pack stickers personnalisé CG Mindset" class="btn-primary" style="font-size:12px; padding:12px 24px;">Créer mon pack</a>
-      </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prevBtn" onclick="carouselMove(-1)" disabled>&#8592;</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <button class="carousel-btn" id="nextBtn" onclick="carouselMove(1)">&#8594;</button>
     </div>
   </div>
 </div>
 
-<!-- PHILOSOPHIE -->
-<div id="about" class="philo-section">
-  <p class="section-eyebrow" style="display:block; text-align:center; margin-bottom:32px;">Notre philosophie</p>
-  <p class="philo-quote">
-    La vie est trop courte pour rester <span>immobile</span>.<br>
-    Bouge. Crée. Vis.
-  </p>
-  <p style="color:rgba(255,255,255,0.4); font-size:14px; max-width:600px; margin:0 auto; line-height:1.8; text-align:center;">
-    CG Mindset, c'est une marque née d'une conviction : le mindset change tout. Chaque vêtement est un rappel que tu peux choisir ton état d'esprit chaque matin. Créé à Ruelle-sur-Touvre, pensé pour le monde entier.
-  </p>
-  <div class="pilliers">
-    <div class="pillier"><span class="pillier-icon">🧠</span><span class="pillier-label">Mindset</span></div>
-    <div class="pillier"><span class="pillier-icon">🌴</span><span class="pillier-label">Lifestyle</span></div>
-    <div class="pillier"><span class="pillier-icon">⚡</span><span class="pillier-label">Freedom</span></div>
+<!-- ===== ABOUT / FONDATRICE ===== -->
+<div id="about" class="about-section">
+  <div class="about-inner">
+
+    <!-- Portrait -->
+    <div class="about-portrait">
+      <img src="FONDATRICE.png" alt="CG Mindset — Fondatrice"
+           onerror="this.parentElement.style.background='linear-gradient(135deg,#1a0a2a,#0a0a1a)'">
+    </div>
+
+    <!-- Contenu -->
+    <div class="about-content">
+      <span class="section-eyebrow">La vision</span>
+      <p class="about-quote">
+        Faire de son vécu<br>
+        une <span class="rose">force</span>.<br>
+        Croire en ses <span class="cyan">rêves</span>.<br>
+        Prôner ce qui <span class="jaune">compte</span>.
+      </p>
+      <p class="about-text">
+        CG Mindset n'est pas juste une marque de vêtements. C'est une conviction portée sur tissu. Chaque design naît d'une émotion vraie, d'un mot qui résonne, d'un état d'esprit qu'on refuse d'abandonner. Créé depuis Ruelle-sur-Touvre, pensé pour ceux qui refusent de rester immobiles.
+      </p>
+      <div class="about-valeurs">
+        <div class="valeur-row">
+          <span class="valeur-num">01</span>
+          <span class="valeur-bar"></span>
+          <span class="valeur-label">Passion</span>
+        </div>
+        <div class="valeur-row">
+          <span class="valeur-num">02</span>
+          <span class="valeur-bar" style="background:var(--jaune);"></span>
+          <span class="valeur-label">Créativité</span>
+        </div>
+        <div class="valeur-row">
+          <span class="valeur-num">03</span>
+          <span class="valeur-bar" style="background:var(--cyan);"></span>
+          <span class="valeur-label">Authenticité</span>
+        </div>
+        <div class="valeur-row">
+          <span class="valeur-num">04</span>
+          <span class="valeur-bar" style="background:var(--violet);"></span>
+          <span class="valeur-label">Engagement</span>
+        </div>
+      </div>
+      <p class="about-signature">Don't Judge Just Moove ⚡</p>
+    </div>
+
   </div>
 </div>
 
@@ -348,7 +484,7 @@
   <div class="footer-logo">
     <img src="logo%20CG%20MINDSET%20noir%20blanc.jpeg" alt="CG Mindset" onerror="this.style.display='none'">
   </div>
-  <p style="font-family:'Permanent Marker',cursive; font-size:32px; background:linear-gradient(90deg,var(--rose),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px;">CG Mindset</p>
+  <p style="font-family:'Permanent Marker',cursive;font-size:32px;background:linear-gradient(90deg,var(--rose),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;">CG Mindset</p>
   <p class="footer-tagline">Don't Judge Just Moove</p>
   <div class="social-links">
     <a href="https://instagram.com/cgmindset" class="social-link" target="_blank">📷</a>
@@ -371,17 +507,42 @@ function showTab(tab, event) {
   document.getElementById('tab-' + tab).classList.add('active');
   event.target.classList.add('active');
 }
-
 function showPlanche(genre, couleur, event) {
-  // Masquer toutes les planches du genre actif
   document.querySelectorAll('[id^="planche-' + genre + '"]').forEach(el => el.classList.remove('active'));
-  // Afficher la bonne planche
   document.getElementById('planche-' + genre + '-' + couleur).classList.add('active');
-  // Gérer les boutons couleur dans cet onglet
-  const tab = document.getElementById('tab-' + genre);
-  tab.querySelectorAll('.color-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + genre).querySelectorAll('.color-btn').forEach(el => el.classList.remove('active'));
   event.target.closest('.color-btn').classList.add('active');
 }
+
+// Carrousel
+const track = document.getElementById('carouselTrack');
+const slides = track.querySelectorAll('.sticker-slide');
+const dotsContainer = document.getElementById('carouselDots');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+let current = 0;
+const total = slides.length;
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => goTo(i);
+  dotsContainer.appendChild(dot);
+});
+function getSlideWidth() { return slides[0].offsetWidth + 24; }
+function goTo(index) {
+  current = Math.max(0, Math.min(index, total - 1));
+  track.style.transform = `translateX(-${current * getSlideWidth()}px)`;
+  dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+}
+function carouselMove(dir) { goTo(current + dir); }
+let startX = 0;
+track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+track.addEventListener('touchend', e => {
+  const diff = startX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) carouselMove(diff > 0 ? 1 : -1);
+});
 </script>
 
 </body>
