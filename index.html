@@ -1,9 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CG Mindset — Don't Judge Just Moove</title>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CG Mindset">
+<meta name="theme-color" content="#FF1B8D">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-startup-image" href="icon-512.png">
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   /* ===== VARIABLES ===== */
@@ -165,7 +174,7 @@
   .prix-size { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 4px; }
   .carousel-wrapper { position: relative; }
   .carousel-track-outer { overflow: hidden; padding: 8px 0 40px; }
-  .carousel-track { display: flex; gap: 16px; padding: 0 40px; transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .carousel-track { display: flex; gap: 16px; padding: 0 40px; transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: grab; user-select: none; }
   .sticker-slide {
     flex: 0 0 300px; background: var(--gris-dark);
     border: var(--border); overflow: hidden;
@@ -263,6 +272,11 @@
   .footer-links a:hover { color: var(--rose); }
   .footer-copy { font-size: 10px; color: rgba(255,255,255,0.15); letter-spacing: 1px; }
 
+
+  /* Hamburger */
+  .nav-menu-btn { display: none; }
+  .nav-mobile-open { display: flex !important; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,10,10,0.97); z-index: 99; align-items: center; justify-content: center; gap: 40px; }
+  .nav-mobile-open a { font-size: 18px !important; letter-spacing: 4px !important; }
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
     .lifestyle-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
@@ -272,15 +286,64 @@
     .about-content { padding: 40px 28px 60px; }
   }
   @media (max-width: 768px) {
-    :root { --section-pad: 60px 20px; }
+    :root { --section-pad: 56px 20px; }
+
+    /* NAV mobile */
     nav { padding: 14px 20px; }
     .nav-links { display: none; }
-    .section-header { padding: 0 20px; }
-    .sticker-header { padding: 0 20px; }
-    .prix-grid { padding: 0 20px; margin-bottom: 40px; }
+    .nav-menu-btn { display: flex; }
+
+    /* HERO mobile */
+    .hero { padding: 100px 24px 60px; }
+    .hero-logo { width: 100px; margin-bottom: 24px; }
+    .hero-title { font-size: clamp(48px, 16vw, 80px); }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-outline { width: 100%; max-width: 280px; text-align: center; padding: 16px 24px; }
+
+    /* COLLECTION mobile */
+    .collection-section { padding: 56px 20px; }
+    .tab-btn { padding: 12px 24px; font-size: 11px; }
+    .color-btn { padding: 10px 16px; font-size: 10px; }
+
+    /* LIFESTYLE mobile */
+    .lifestyle-section { padding: 56px 0; }
+    .lifestyle-header { padding: 0 20px; margin-bottom: 40px; }
+    .lifestyle-grid { grid-template-columns: 1fr; gap: 1px; }
+
+    /* STICKERS mobile */
+    .sticker-section-wrap { padding: 56px 0; }
+    .sticker-header { padding: 0 20px; margin-bottom: 40px; }
+    .prix-grid { padding: 0 20px; margin-bottom: 40px; gap: 8px; }
+    .prix-card { padding: 16px 12px; min-width: 0; }
+    .prix-amount { font-size: 24px; }
     .carousel-track { padding: 0 20px; gap: 12px; }
-    .sticker-slide { flex: 0 0 260px; }
+    .sticker-slide { flex: 0 0 240px; }
+    .slide-info { padding: 16px; }
+    .slide-title { font-size: 14px; }
+    .slide-desc { font-size: 11px; }
+    .slide-price { font-size: 20px; }
+
+    /* FLYER mobile */
+    .flyer-banner img { max-height: 160px; }
+    .flyer-banner-text { font-size: clamp(16px, 6vw, 28px); }
+
+    /* ABOUT mobile */
+    .about-portrait { height: 80vw; max-height: 360px; }
+    .about-content { padding: 36px 20px 56px; }
+    .about-quote { font-size: clamp(22px, 7vw, 36px); margin-bottom: 20px; }
+    .about-text { font-size: 13px; margin-bottom: 28px; }
+
+    /* FOOTER mobile */
     footer { padding: 40px 20px; }
+    .footer-links { gap: 16px; }
+    .social-links { gap: 10px; }
+  }
+
+  /* Très petit écran */
+  @media (max-width: 375px) {
+    .hero-title { font-size: 44px; }
+    .sticker-slide { flex: 0 0 220px; }
+    .prix-card { min-width: 0; padding: 12px 8px; }
   }
 </style>
 </head>
@@ -292,6 +355,12 @@
     <img src="logo%20CG%20MINDSET%20noir%20blanc.jpeg" alt="CG Mindset" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
     <span style="display:none; font-family:'Permanent Marker',cursive; font-size:24px; background:linear-gradient(90deg,var(--rose),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">CG Mindset</span>
   </a>
+  <!-- Hamburger mobile -->
+  <button class="nav-menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="Menu" style="display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:4px;">
+    <span style="width:22px;height:2px;background:white;display:block;transition:all 0.3s;"></span>
+    <span style="width:22px;height:2px;background:white;display:block;transition:all 0.3s;"></span>
+    <span style="width:22px;height:2px;background:white;display:block;transition:all 0.3s;"></span>
+  </button>
   <ul class="nav-links">
     <li><a href="#collection">Collection</a></li>
     <li><a href="#lifestyle">Lifestyle</a></li>
@@ -559,6 +628,48 @@ track.addEventListener('touchend', e => {
   const diff = startX - e.changedTouches[0].clientX;
   if (Math.abs(diff) > 50) carouselMove(diff > 0 ? 1 : -1);
 });
+</script>
+
+<script>
+// Service Worker PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(r => console.log('SW registered'))
+      .catch(e => console.log('SW error', e));
+  });
+}
+
+// Menu hamburger mobile
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  const btn = document.getElementById('menuBtn');
+  links.classList.toggle('nav-mobile-open');
+  const spans = btn.querySelectorAll('span');
+  if (links.classList.contains('nav-mobile-open')) {
+    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+  } else {
+    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  }
+}
+// Fermer menu au clic sur un lien
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('nav-mobile-open');
+    const spans = document.getElementById('menuBtn').querySelectorAll('span');
+    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  });
+});
+// Afficher hamburger sur mobile
+function checkMenu() {
+  const btn = document.getElementById('menuBtn');
+  if (window.innerWidth <= 768) btn.style.display = 'flex';
+  else { btn.style.display = 'none'; document.querySelector('.nav-links').classList.remove('nav-mobile-open'); }
+}
+checkMenu();
+window.addEventListener('resize', checkMenu);
 </script>
 </body>
 </html>
