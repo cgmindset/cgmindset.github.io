@@ -77,18 +77,17 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-  .lifestyle-card { position: relative; overflow: hidden; aspect-ratio: 4/5; max-width: 600px; margin: 0 auto; }
-  .lifestyle-card img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; transition: transform 0.5s; }
-  .lifestyle-card:hover img { transform: scale(1.04); }
+  .lifestyle-card { position: relative; overflow: hidden; display: flex; flex-direction: column; max-width: 600px; margin: 0 auto; }
+  .lifestyle-card img { width: 100%; height: 400px; object-fit: cover; display: block; transition: transform 0.5s; flex-shrink: 0; }
+  .lifestyle-card:hover img { transform: scale(1.03); }
   .lifestyle-card-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 50%);
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 32px;
+    padding: 20px 24px 24px;
+    background: #111;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
-  .lifestyle-card-tag { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
-  .lifestyle-card-title { font-family: 'Permanent Marker', cursive; font-size: clamp(24px, 3vw, 40px); color: white; margin-bottom: 8px; }
-  .lifestyle-card-sub { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .lifestyle-card-tag { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; display: block; }
+  .lifestyle-card-title { font-family: 'Permanent Marker', cursive; font-size: clamp(20px, 2.5vw, 32px); color: white; margin-bottom: 6px; }
+  .lifestyle-card-sub { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
 
   /* ===== STICKERS CARROUSEL ===== */
   .sticker-section-wrap { background: var(--gris); padding: 100px 0; overflow: hidden; }
@@ -180,7 +179,7 @@
 
   @media (max-width: 900px) {
     .lifestyle-grid { grid-template-columns: 1fr; }
-    .lifestyle-card { aspect-ratio: 4/5; }
+    .lifestyle-card { aspect-ratio: auto; }
     .about-inner { grid-template-columns: 1fr; min-height: auto; }
     .about-portrait { height: 60vw; max-height: 420px; }
     .about-portrait::after { background: linear-gradient(to bottom, transparent 60%, var(--noir) 100%); }
@@ -291,7 +290,7 @@
   <div class="lifestyle-grid">
     <!-- Carte 1 — mockup homme sunset -->
     <div class="lifestyle-card">
-      <img src="DEVANT%20SWEAT%20TRUST%20HOLOGRAPHIQUE%20COBALT.png" alt="Sweat TRUST Devant CG Mindset" style="object-position: center 75%;">
+      <img src="DEVANT%20SWEAT%20TRUST%20HOLOGRAPHIQUE%20COBALT.png" alt="Sweat TRUST Devant CG Mindset" style="object-position: center 70%;">
       <div class="lifestyle-card-overlay">
         <span class="lifestyle-card-tag">⚡ Édition limitée</span>
         <p class="lifestyle-card-title">Sweat à capuche TRUST</p>
@@ -301,7 +300,7 @@
     </div>
     <!-- Carte 2 — sweat TRUST -->
     <div class="lifestyle-card">
-      <img src="DOS%20SWEAT%20TRUST%20HOLOGRAPHIQUE%20.jpg" alt="Sweat TRUST Dos CG Mindset" style="object-position: center 65%;">
+      <img src="DOS%20SWEAT%20TRUST%20HOLOGRAPHIQUE%20.jpg" alt="Sweat TRUST Dos CG Mindset" style="object-position: center 60%;">
       <div class="lifestyle-card-overlay">
         <span class="lifestyle-card-tag">⚡ Édition limitée</span>
         <p class="lifestyle-card-title">Sweat à capuche TRUST</p>
