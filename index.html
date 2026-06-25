@@ -226,21 +226,7 @@
   .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; cursor: pointer; padding: 0; transition: all 0.2s; }
   .carousel-dot.active { background: var(--rose); width: 20px; border-radius: 3px; }
 
-  /* ===== FLYER BANNER ===== */
-  .flyer-banner { width: 100%; overflow: hidden; position: relative; }
-  .flyer-banner img { width: 100%; display: block; max-height: 180px; object-fit: cover; object-position: center; opacity: 0.8; }
-  .flyer-banner-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(90deg, rgba(10,10,10,0.7) 0%, transparent 35%, transparent 65%, rgba(10,10,10,0.7) 100%);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .flyer-banner-text {
-    font-family: 'Permanent Marker', cursive;
-    font-size: clamp(18px, 4vw, 44px);
-    background: linear-gradient(90deg, var(--rose), var(--cyan));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    text-align: center; letter-spacing: 3px;
-  }
+
 
   /* ===== ABOUT ===== */
   .about-section { background: var(--noir); overflow: hidden; }
@@ -407,9 +393,6 @@
     .slide-desc { font-size: 11px; }
     .slide-price { font-size: 20px; }
 
-    /* FLYER mobile */
-    .flyer-banner img { max-height: 120px; }
-    .flyer-banner-text { font-size: clamp(16px, 6vw, 28px); }
 
     /* ABOUT mobile */
     .about-portrait { height: 80vw; max-height: 360px; }
@@ -616,6 +599,18 @@
     <div class="carousel-track-outer">
       <div class="carousel-track" id="carouselTrack">
 
+        <!-- Street Neon -->
+        <div class="sticker-slide slide-neon">
+          <div class="slide-img-wrap"><img src="STICKERS%20NEON%20PLANCHE%201.jpg" alt="Street Neon"></div>
+          <div class="slide-info">
+            <span class="slide-tag">⚡ Street Neon</span>
+            <p class="slide-title">Collection Street Neon</p>
+            <p class="slide-desc">12 designs · Fond noir · Couleurs fluo · Mindset · Positif · Motivation · Progrès</p>
+            <p class="slide-price">À partir de 3 €</p>
+            <a href="mailto:contact@cgmindset.fr?subject=Commande stickers Street Neon" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a>
+          </div>
+        </div>
+
         <!-- C'est Pas Marrant Sinon — Rond Neon -->
         <div class="sticker-slide slide-cpms-rond">
           <div class="slide-img-wrap"><img src="STICKER%20SYMBOLIQUE.PNG" alt="CPMS Rond Neon"></div>
@@ -697,13 +692,7 @@
   </div>
 </div>
 
-<!-- ===== BANNIERE FLYER ===== -->
-<div class="flyer-banner">
-  <img src="FLYER.png" alt="CG Mindset — Lifestyle Mindset Freedom">
-  <div class="flyer-banner-overlay">
-    <p class="flyer-banner-text">Lifestyle · Mindset · Freedom</p>
-  </div>
-</div>
+
 
 <!-- ===== FOOTER ===== -->
 <footer>
