@@ -314,6 +314,28 @@
   /* Bloquer sélection globale sur mobile */
   body { -webkit-touch-callout: none; }
 
+
+  /* ===== SUNSET & BEACH COLLECTION ===== */
+  .sunset-section { background: var(--noir); padding: var(--section-pad); padding-left: 0; padding-right: 0; border-top: 1px solid rgba(255,107,53,0.2); }
+  .sunset-section .section-header { padding: 0 40px; margin-bottom: 48px; }
+  .sunset-grid { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+  .sunset-img { width: 100%; display: block; border-radius: 2px; transition: transform 0.3s; }
+  .sunset-img:hover { transform: scale(1.01); }
+  .sunset-model-card {
+    background: var(--gris-dark); border: var(--border);
+    padding: 24px; flex: 1 1 200px; max-width: 280px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .sunset-model-tag { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; display: inline-block; }
+  .sunset-model-title { font-family: 'Permanent Marker', cursive; font-size: 22px; color: var(--blanc); }
+  .sunset-model-desc { color: rgba(255,255,255,0.4); font-size: 12px; line-height: 1.6; flex: 1; }
+
+  @media (max-width: 768px) {
+    .sunset-grid { padding: 0 20px; }
+    .sunset-section .section-header { padding: 0 20px; }
+    .sunset-model-card { max-width: 100%; flex: 1 1 100%; }
+  }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
     .lifestyle-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
@@ -402,6 +424,7 @@
   </button>
   <ul class="nav-links">
     <li><a href="#collection">Collection</a></li>
+    <li><a href="#sunset">Sunset</a></li>
     <li><a href="#lifestyle">Lifestyle</a></li>
     <li><a href="#stickers">Stickers</a></li>
     <li><a href="#about">Mindset</a></li>
@@ -467,6 +490,49 @@
     <div id="planche-femme-noir" class="planche-view">
       <img src="PLANCHE%20FEMME%20TEESHIRT%20NOIR.PNG" alt="Collection Femme Noir" class="tshirt-img">
       <div style="text-align:center;margin-top:32px;"><p style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:24px;">9 designs · T-shirt noir · Coupe féminine</p><a href="mailto:contact@cgmindset.fr?subject=Commande T-shirt Femme Noir" class="btn-primary">Commander — 35 €</a></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== SUNSET & BEACH COLLECTION ===== -->
+<div id="sunset" class="sunset-section">
+  <div class="section-header">
+    <span class="eyebrow">New Drop 2026</span>
+    <h2 class="section-title">Sunset & Beach<br>Collection</h2>
+    <p class="section-sub">4 modèles exclusifs · T-shirts colorés · Designs lifestyle · Expédition France 🇫🇷</p>
+  </div>
+
+  <div class="sunset-grid">
+    <div class="sunset-card">
+      <img src="COLLECTION_SUNSET_BEACH.png" alt="Sunset Beach Collection CG Mindset" class="sunset-img">
+    </div>
+  </div>
+
+  <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:40px; padding:0 40px;">
+    <div class="sunset-model-card">
+      <div class="sunset-model-tag" style="background:rgba(255,107,53,0.15);color:#FF6B35;">🌅 Modèle 01</div>
+      <p class="sunset-model-title">Sunset Vibes</p>
+      <p class="sunset-model-desc">Create Your Own Sunset · Énergie positive · Vibes plage</p>
+      <a href="mailto:contact@cgmindset.fr?subject=Commande Sunset Vibes CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
+    </div>
+    <div class="sunset-model-card">
+      <div class="sunset-model-tag" style="background:rgba(0,180,150,0.15);color:#00B496;">🌊 Modèle 02</div>
+      <p class="sunset-model-title">Good Life</p>
+      <p class="sunset-model-desc">Good Mind · Good Life · Profite du moment</p>
+      <a href="mailto:contact@cgmindset.fr?subject=Commande Good Life CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
+    </div>
+    <div class="sunset-model-card">
+      <div class="sunset-model-tag" style="background:rgba(100,200,180,0.15);color:#64C8B4;">🌴 Modèle 03</div>
+      <p class="sunset-model-title">Paradise State</p>
+      <p class="sunset-model-desc">Paradise is a State of Mind · Esprit positif · Vivre l'instant</p>
+      <a href="mailto:contact@cgmindset.fr?subject=Commande Paradise State CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
+    </div>
+    <div class="sunset-model-card">
+      <div class="sunset-model-tag" style="background:rgba(180,150,220,0.15);color:#B496DC;">⚡ Modèle 04</div>
+      <p class="sunset-model-title">Ocean Energy</p>
+      <p class="sunset-model-desc">Energy Flows Where Focus Goes · Focus · Énergie positive</p>
+      <a href="mailto:contact@cgmindset.fr?subject=Commande Ocean Energy CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
     </div>
   </div>
 </div>
@@ -617,6 +683,8 @@
     </div>
     <ul class="footer-links">
       <li><a href="#collection">Collection</a></li>
+      <li><a href="#sunset">Sunset</a></li>
+    <li><a href="#sunset">Sunset</a></li>
       <li><a href="#lifestyle">Lifestyle</a></li>
       <li><a href="#stickers">Stickers</a></li>
       <li><a href="#about">À propos</a></li>
