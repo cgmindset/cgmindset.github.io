@@ -253,6 +253,77 @@ clip-path: polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
 .valeur-row:nth-child(4) .valeur-bar { background: var(--violet); }
 .about-signature { font-family: 'Permanent Marker', cursive; font-size: 18px; background: linear-gradient(90deg, var(--rose), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.7; }
 
+/* ===== TRUST HOLO SECTION ===== */
+.trust-holo-section {
+background: var(--noir);
+border-top: 1px solid rgba(0,229,255,0.15);
+padding: 100px 40px;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+.trust-holo-section::before {
+content: '';
+position: absolute; inset: 0;
+background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,229,255,0.04) 0%, transparent 70%);
+pointer-events: none;
+}
+.trust-holo-eyebrow {
+font-family: 'Oswald', sans-serif;
+font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+color: var(--cyan); display: block; margin-bottom: 16px;
+}
+.trust-holo-title {
+font-family: 'Permanent Marker', cursive;
+font-size: clamp(32px, 5vw, 64px);
+background: linear-gradient(135deg, #00e5ff, #00ff88);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent;
+margin-bottom: 12px;
+line-height: 1.1;
+}
+.trust-holo-subtitle {
+font-family: 'Oswald', sans-serif;
+color: rgba(255,255,255,0.35);
+font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+margin-bottom: 48px;
+}
+.trust-holo-img-wrap {
+max-width: 1000px;
+margin: 0 auto 40px;
+border-radius: 4px;
+overflow: hidden;
+box-shadow: 0 0 60px rgba(0,229,255,0.12), 0 0 120px rgba(0,255,136,0.06);
+position: relative;
+}
+.trust-holo-img-wrap::after {
+content: '';
+position: absolute; inset: 0;
+z-index: 2;
+background: transparent;
+pointer-events: auto;
+}
+.trust-holo-img {
+width: 100%; display: block;
+-webkit-user-drag: none; user-drag: none;
+}
+.trust-holo-badges {
+display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+margin-bottom: 32px;
+}
+.trust-holo-badge {
+font-family: 'Oswald', sans-serif;
+font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+padding: 6px 14px; border-radius: 2px;
+}
+.trust-holo-badge.cyan { background: rgba(0,240,255,0.1); color: var(--cyan); border: 1px solid rgba(0,240,255,0.2); }
+.trust-holo-badge.green { background: rgba(0,255,136,0.1); color: #00ff88; border: 1px solid rgba(0,255,136,0.2); }
+.trust-holo-badge.jaune { background: rgba(255,230,0,0.1); color: var(--jaune); border: 1px solid rgba(255,230,0,0.2); }
+.trust-holo-ia {
+font-family: 'Oswald', sans-serif;
+font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+color: rgba(255,255,255,0.15); margin-top: 24px;
+}
+
 /* ===== FOOTER ===== */
 footer { background: var(--gris); border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 40px; text-align: center; }
 .footer-logo-name { font-family: 'Permanent Marker', cursive; font-size: 28px; background: linear-gradient(90deg, var(--rose), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; display: block; }
@@ -277,7 +348,7 @@ user-drag: none;
 -webkit-touch-callout: none;
 }
 .slide-img-wrap, .lifestyle-card, .about-portrait, .tshirt-img,
-.sticker-slide, .flyer-banner, .lifestyle-grid {
+.sticker-slide, .flyer-banner, .lifestyle-grid, .trust-holo-img-wrap {
 -webkit-user-select: none;
 user-select: none;
 -webkit-touch-callout: none;
@@ -375,6 +446,8 @@ nav { padding: 14px 20px; }
 footer { padding: 40px 20px; }
 .footer-links { gap: 16px; }
 .social-links { gap: 10px; }
+.trust-holo-section { padding: 60px 20px; }
+.trust-holo-badges { gap: 8px; }
 }
 @media (max-width: 375px) {
 .hero-title { font-size: 44px; }
@@ -401,6 +474,7 @@ footer { padding: 40px 20px; }
     <li><a href="#collection">Collection</a></li>
     <li><a href="#lifestyle">Lifestyle</a></li>
     <li><a href="#stickers">Stickers</a></li>
+    <li><a href="#trust">Signature</a></li>
     <li><a href="#about">Mindset</a></li>
     <li><a href="mailto:contact@cgmindset.fr">Contact</a></li>
   </ul>
@@ -622,6 +696,23 @@ footer { padding: 40px 20px; }
   </div>
 </div>
 
+<!-- ===== SWEAT TRUST HOLOGRAPHIQUE ===== -->
+<div id="trust" class="trust-holo-section">
+  <span class="trust-holo-eyebrow">Pièce Signature · Édition Limitée</span>
+  <h2 class="trust-holo-title">✨ Sweat TRUST<br>Holographique</h2>
+  <p class="trust-holo-subtitle">Recto · Verso · Design exclusif CG Mindset</p>
+  <div class="trust-holo-img-wrap">
+    <img src="SWEAT%20HOLOGRAPHIQUE.PNG" alt="Sweat TRUST Holographique CG Mindset — Recto Verso" class="trust-holo-img" draggable="false">
+  </div>
+  <div class="trust-holo-badges">
+    <span class="trust-holo-badge cyan">✨ Holographique vert/bleu</span>
+    <span class="trust-holo-badge green">🖨️ Impression DTF</span>
+    <span class="trust-holo-badge jaune">🖤 Sweat noir premium</span>
+  </div>
+  <a href="mailto:contact@cgmindset.fr?subject=Commande Sweat TRUST Holographique CG Mindset" class="btn-primary">Commander ce modèle</a>
+  <p class="trust-holo-ia">🤖 Visuel généré par IA · Rendu à titre indicatif · Le design imprimé est bien réel</p>
+</div>
+
 <!-- ===== ABOUT ===== -->
 <div id="about" class="about-section">
   <div class="about-inner">
@@ -657,6 +748,7 @@ footer { padding: 40px 20px; }
       <li><a href="#sunset">Sunset</a></li>
       <li><a href="#lifestyle">Lifestyle</a></li>
       <li><a href="#stickers">Stickers</a></li>
+      <li><a href="#trust">Signature</a></li>
       <li><a href="#about">À propos</a></li>
       <li><a href="mailto:contact@cgmindset.fr">Contact</a></li>
     </ul>
@@ -719,7 +811,7 @@ track.addEventListener('touchend', e => {
 <script>
 // ===== PROTECTION VISUELS =====
 document.addEventListener('contextmenu', e => {
-  if (e.target.tagName === 'IMG' || e.target.closest('.slide-img-wrap, .lifestyle-card, .about-portrait, .flyer-banner')) {
+  if (e.target.tagName === 'IMG' || e.target.closest('.slide-img-wrap, .lifestyle-card, .about-portrait, .flyer-banner, .trust-holo-img-wrap')) {
     e.preventDefault();
     return false;
   }
