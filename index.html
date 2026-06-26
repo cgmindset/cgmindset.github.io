@@ -63,6 +63,16 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .ticker-inner { display: inline-block; animation: ticker 20s linear infinite; font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: white; }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+.sunset-ligne { display: flex; gap: 40px; align-items: center; max-width: 1400px; margin: 0 auto 60px; padding: 0 40px; }
+.sunset-ligne:nth-child(even) { flex-direction: row-reverse; }
+.sunset-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; flex: 1.5; }
+.sunset-photos img { width: 100%; display: block; border-radius: 2px; -webkit-user-drag: none; }
+.sunset-ligne-info { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+@media (max-width: 768px) {
+  .sunset-ligne { flex-direction: column !important; padding: 0 20px; margin-bottom: 48px; }
+  .sunset-ligne-info { align-items: flex-start; }
+}
+
 /* ===== SUNSET ===== */
 .sunset-section { background: var(--noir); padding: var(--section-pad); padding-left: 0; padding-right: 0; border-top: 1px solid rgba(255,107,53,0.2); }
 .sunset-section .section-header { padding: 0 40px; margin-bottom: 48px; }
@@ -300,32 +310,58 @@ body { -webkit-touch-callout: none; }
     <h2 class="section-title">Sunset & Beach<br>Collection</h2>
     <p class="section-sub">4 modèles exclusifs · T-shirts colorés · Designs lifestyle · Expédition France 🇫🇷</p>
   </div>
-  <div class="sunset-grid">
-    <img src="COLLECTION%20SUNSET%20BEACH.PNG" alt="Sunset Beach Collection CG Mindset" class="sunset-img">
-  </div>
-  <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:40px; padding:0 40px;">
-    <div class="sunset-model-card">
+  <!-- Modèle 01 — Sunset Vibes -->
+  <div class="sunset-ligne">
+    <div class="sunset-photos">
+      <img src="1782512425283_SUNSET_VIBES_FACE.png" alt="Sunset Vibes Face">
+      <img src="1782512425284_SUNSET__VIBES_DOS.png" alt="Sunset Vibes Dos">
+    </div>
+    <div class="sunset-ligne-info">
       <div class="sunset-model-tag" style="background:rgba(255,107,53,0.15);color:#FF6B35;">🌅 Modèle 01</div>
       <p class="sunset-model-title">Sunset Vibes</p>
-      <p class="sunset-model-desc">Create Your Own Sunset · Énergie positive · Vibes plage</p>
+      <p class="sunset-model-desc">Create Your Own Sunset · Énergie positive · Vibes plage<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">Crée ton propre coucher de soleil</span></p>
       <a href="mailto:contact@cgmindset.fr?subject=Commande Sunset Vibes CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
     </div>
-    <div class="sunset-model-card">
+  </div>
+
+  <!-- Modèle 02 — Good Life -->
+  <div class="sunset-ligne">
+    <div class="sunset-photos">
+      <img src="1782512425286_GOOD_LIFE_FACE.png" alt="Good Life Face">
+      <img src="1782512425285_GOOD_LIFE_DOS.png" alt="Good Life Dos">
+    </div>
+    <div class="sunset-ligne-info">
       <div class="sunset-model-tag" style="background:rgba(0,180,150,0.15);color:#00B496;">🌊 Modèle 02</div>
       <p class="sunset-model-title">Good Life</p>
-      <p class="sunset-model-desc">Good Mind · Good Life · Profite du moment</p>
+      <p class="sunset-model-desc">Good Mind · Good Life · Profite du moment<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">Bon esprit · Belle vie</span></p>
       <a href="mailto:contact@cgmindset.fr?subject=Commande Good Life CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
     </div>
-    <div class="sunset-model-card">
+  </div>
+
+  <!-- Modèle 03 — Paradise State -->
+  <div class="sunset-ligne">
+    <div class="sunset-photos">
+      <img src="1782512425285_PARADISE_STATE_DEVANT.png" alt="Paradise State Face">
+      <img src="1782512425284_PARADISE_STATE_DOS.png" alt="Paradise State Dos">
+    </div>
+    <div class="sunset-ligne-info">
       <div class="sunset-model-tag" style="background:rgba(100,200,180,0.15);color:#64C8B4;">🌴 Modèle 03</div>
       <p class="sunset-model-title">Paradise State</p>
-      <p class="sunset-model-desc">Paradise is a State of Mind · Esprit positif · Vivre l'instant</p>
+      <p class="sunset-model-desc">Paradise is a State of Mind · Esprit positif · Vivre l'instant<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">Le paradis est un état d'esprit</span></p>
       <a href="mailto:contact@cgmindset.fr?subject=Commande Paradise State CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
     </div>
-    <div class="sunset-model-card">
+  </div>
+
+  <!-- Modèle 04 — Ocean Energy -->
+  <div class="sunset-ligne">
+    <div class="sunset-photos">
+      <img src="1782512425287_OCEAN_ENERGY_FACE.png" alt="Ocean Energy Face">
+      <img src="1782512425286_OCEAN_ENERGY_DOS.png" alt="Ocean Energy Dos">
+    </div>
+    <div class="sunset-ligne-info">
       <div class="sunset-model-tag" style="background:rgba(180,150,220,0.15);color:#B496DC;">⚡ Modèle 04</div>
       <p class="sunset-model-title">Ocean Energy</p>
-      <p class="sunset-model-desc">Energy Flows Where Focus Goes · Focus · Énergie positive</p>
+      <p class="sunset-model-desc">Energy Flows Where Focus Goes · Focus · Énergie positive<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">L'énergie circule où va ton focus</span></p>
       <a href="mailto:contact@cgmindset.fr?subject=Commande Ocean Energy CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
     </div>
   </div>
