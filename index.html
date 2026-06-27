@@ -3,681 +3,417 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CG Mindset — Don't Judge Just Moove</title>
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="CG Mindset">
-<meta name="theme-color" content="#FF1B8D">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
-<link rel="apple-touch-startup-image" href="icon-512.png">
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<title>CG Mindset – Site en construction</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root {
---noir: #0a0a0a;
---gris-dark: #111111;
---gris: #1a1a1a;
---gris-light: #222222;
---rose: #FF1B8D;
---cyan: #00F0FF;
---jaune: #FFE600;
---violet: #BF00FF;
---blanc: #ffffff;
---section-pad: 100px 40px;
---border: 1px solid rgba(255,255,255,0.07);
---radius: 0px;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--noir); color: var(--blanc); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-.eyebrow { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 16px; }
-.section-title { font-family: 'Permanent Marker', cursive; font-size: clamp(36px, 6vw, 72px); background: linear-gradient(135deg, var(--blanc), rgba(255,255,255,0.6)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.05; }
-.section-header { text-align: center; padding: 0 40px; margin-bottom: 64px; }
-.section-sub { color: rgba(255,255,255,0.4); font-size: 13px; margin-top: 16px; letter-spacing: 1px; }
+  body {
+    background: #0a0014;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Oswald', sans-serif;
+  }
 
-.btn-primary { background: linear-gradient(135deg, var(--rose), var(--violet)); color: white; border: none; padding: 14px 36px; font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); transition: opacity 0.2s; }
-.btn-primary:hover { opacity: 0.85; }
-.btn-outline { background: transparent; color: var(--cyan); border: 1px solid var(--cyan); padding: 14px 36px; font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
-.btn-outline:hover { background: var(--cyan); color: var(--noir); }
+  /* ─── Fond synthwave ─── */
+  .bg {
+    position: fixed; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse at 50% 30%, #3a0060 0%, #0a0014 70%);
+  }
+  .sun {
+    position: fixed;
+    left: 50%; top: 18%;
+    transform: translateX(-50%);
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: conic-gradient(from 180deg, #ff9f00, #ff4500, #ff9f00);
+    box-shadow: 0 0 80px 30px #ff450055, 0 0 200px 80px #ff190055;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .sun::after {
+    content:'';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px, transparent 14px,
+      #0a0014 14px, #0a0014 18px
+    );
+    bottom: 0; top: 40%;
+  }
+  .grid {
+    position: fixed;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%) perspective(400px) rotateX(70deg);
+    width: 200vw; height: 80vh;
+    background-image:
+      linear-gradient(to right, #ff2d9533 1px, transparent 1px),
+      linear-gradient(to bottom, #ff2d9533 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 1;
+    opacity: 0.7;
+  }
+  .palm-left, .palm-right {
+    position: fixed; bottom: 0;
+    width: 200px; height: 380px;
+    z-index: 2;
+    opacity: 0.7;
+  }
+  .palm-left { left: -20px; }
+  .palm-right { right: -20px; transform: scaleX(-1); }
 
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,27,141,0.2); }
-.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.nav-logo img { height: 40px; width: auto; filter: invert(1); }
-.nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; font-family: 'Oswald', sans-serif; font-weight: 400; transition: color 0.2s; }
-.nav-links a:hover { color: var(--rose); }
+  /* SVG palm inline */
+  .palm svg { width: 100%; height: 100%; }
 
-.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 40px 80px; position: relative; overflow: hidden; background-image: url('HERO%20BG.png'); background-size: cover; background-position: center bottom; background-repeat: no-repeat; }
-.hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.35) 40%, rgba(10,10,10,0.65) 100%); pointer-events: none; z-index: 0; }
-.hero > * { position: relative; z-index: 1; }
-.hero-logo { width: 160px; filter: invert(1); margin-bottom: 32px; animation: float 4s ease-in-out infinite; }
-@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-.hero-eyebrow { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--rose); margin-bottom: 24px; }
-.hero-title { font-family: 'Permanent Marker', cursive; font-size: clamp(60px, 12vw, 140px); line-height: 0.9; margin-bottom: 24px; background: linear-gradient(135deg, var(--rose) 0%, var(--violet) 40%, var(--cyan) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 40px rgba(255,27,141,0.3)); }
-.hero-sub { font-family: 'Oswald', sans-serif; font-size: clamp(16px, 3vw, 28px); letter-spacing: 6px; text-transform: uppercase; color: var(--jaune); margin-bottom: 16px; }
-.hero-tagline { font-size: 13px; color: rgba(255,255,255,0.4); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 48px; }
-.hero-cta { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  /* ─── Bannière déroulante ─── */
+  .banner-wrap {
+    position: relative; z-index: 10;
+    width: 100%; max-width: 900px;
+    padding: 0 16px;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
 
-.ticker { background: var(--rose); padding: 12px 0; overflow: hidden; white-space: nowrap; }
-.ticker-inner { display: inline-block; animation: ticker 20s linear infinite; font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: white; }
-@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  /* Ruban principal */
+  .ribbon {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(135deg, #1a0033 0%, #2d0060 50%, #1a0033 100%);
+    border: 2px solid #ff2d95;
+    box-shadow:
+      0 0 20px #ff2d9566,
+      0 0 60px #7b00ff44,
+      inset 0 0 30px #ff2d9511;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 28px 0;
+  }
 
-.sunset-ligne { display: flex; gap: 40px; align-items: center; max-width: 1400px; margin: 0 auto 60px; padding: 0 40px; }
-.sunset-ligne:nth-child(even) { flex-direction: row-reverse; }
-.sunset-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; flex: 1.5; }
-.sunset-photos img { width: 100%; display: block; border-radius: 2px; -webkit-user-drag: none; }
-.sunset-ligne-info { flex: 1; display: flex; flex-direction: column; gap: 14px; }
-@media (max-width: 768px) {
-  .sunset-ligne { flex-direction: column !important; padding: 0 20px; margin-bottom: 48px; }
-  .sunset-ligne-info { align-items: flex-start; }
-}
+  /* Bande défilante top */
+  .ticker-top, .ticker-bottom {
+    background: #ff2d95;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 6px 0;
+  }
+  .ticker-bottom { background: #00e5ff; margin-top: 0; }
 
-/* ===== SUNSET ===== */
-.sunset-section { background: var(--noir); padding: var(--section-pad); padding-left: 0; padding-right: 0; border-top: 1px solid rgba(255,107,53,0.2); }
-.sunset-section .section-header { padding: 0 40px; margin-bottom: 48px; }
-.sunset-grid { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
-.sunset-img { width: 100%; display: block; border-radius: 2px; transition: transform 0.3s; }
-.sunset-img:hover { transform: scale(1.01); }
-.sunset-model-card { background: var(--gris-dark); border: var(--border); padding: 24px; flex: 1 1 200px; max-width: 280px; display: flex; flex-direction: column; gap: 10px; }
-.sunset-model-tag { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; display: inline-block; }
-.sunset-model-title { font-family: 'Permanent Marker', cursive; font-size: 22px; color: var(--blanc); }
-.sunset-model-desc { color: rgba(255,255,255,0.4); font-size: 12px; line-height: 1.6; flex: 1; }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 18s linear infinite;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .ticker-inner span { margin: 0 24px; }
 
-/* ===== COLLECTION SPORT ===== */
-.sport-section { background: var(--noir); padding: var(--section-pad); border-top: 1px solid rgba(255,27,141,0.15); }
-.sport-section .section-header { margin-bottom: 48px; }
-.sport-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; max-width: 1400px; margin: 0 auto; }
-.sport-card { background: var(--gris-dark); border: var(--border); overflow: hidden; transition: border-color 0.25s, transform 0.25s; display: flex; flex-direction: column; }
-.sport-card:hover { border-color: rgba(255,27,141,0.4); transform: translateY(-4px); }
-.sport-card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #080808; position: relative; }
-.sport-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
-.sport-card-img::after { content: ''; position: absolute; inset: 0; z-index: 2; background: transparent; pointer-events: auto; }
-.sport-card-info { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.sport-card-word { font-family: 'Permanent Marker', cursive; font-size: 28px; background: linear-gradient(135deg, var(--rose), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.sport-card-sub { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
-.sport-card-desc { color: rgba(255,255,255,0.45); font-size: 11px; line-height: 1.6; flex: 1; }
-.sport-card-price { font-family: 'Permanent Marker', cursive; font-size: 22px; color: var(--jaune); }
-.sport-card-btn { margin-top: 4px; }
-.sport-planche-wrap { max-width: 1000px; margin: 0 auto 64px; padding: 0 40px; }
-.sport-planche-img { width: 100%; display: block; border-radius: 2px; }
-.ia-mention { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.2); text-align: center; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 16px; }
-.ia-mention span { color: rgba(191,0,255,0.4); }
+  @keyframes ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
 
-/* ===== LIFESTYLE ===== */
-.lifestyle-section { background: var(--gris-dark); padding: var(--section-pad); padding-left: 0; padding-right: 0; }
-.lifestyle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; max-width: 1400px; margin: 0 auto; }
-.lifestyle-card { display: flex; flex-direction: column; background: var(--gris-dark); }
-.lifestyle-card img { width: 100%; height: auto; object-fit: contain; display: block; background: #080808; }
-.lifestyle-info { padding: 24px 28px 28px; background: var(--gris-dark); border-top: 1px solid rgba(255,255,255,0.06); }
-.lifestyle-tag { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--rose); display: block; margin-bottom: 8px; }
-.lifestyle-title { font-family: 'Permanent Marker', cursive; font-size: clamp(20px, 2.5vw, 30px); color: var(--blanc); margin-bottom: 6px; }
-.lifestyle-sub { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  /* Contenu central */
+  .ribbon-body {
+    padding: 32px 40px;
+    text-align: center;
+  }
 
-/* ===== STICKERS ===== */
-.sticker-section-wrap { background: var(--gris); padding: var(--section-pad); padding-left: 0; padding-right: 0; }
-.sticker-header { text-align: center; padding: 0 40px; margin-bottom: 56px; }
-.prix-grid { display: flex; justify-content: center; gap: 1px; flex-wrap: wrap; padding: 0 40px; max-width: 800px; margin-left: auto; margin-right: auto; margin-bottom: 64px; }
-.prix-card { border: var(--border); padding: 20px 28px; text-align: center; min-width: 140px; flex: 1; background: var(--gris-dark); }
-.prix-label { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
-.prix-amount { font-family: 'Permanent Marker', cursive; font-size: 30px; color: var(--jaune); }
-.prix-size { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 4px; }
-.carousel-wrapper { position: relative; }
-.carousel-track-outer { overflow: hidden; padding: 8px 0 40px; }
-.carousel-track { display: flex; gap: 16px; padding: 0 40px; transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: grab; user-select: none; }
-.sticker-slide { flex: 0 0 300px; background: var(--gris-dark); border: var(--border); overflow: hidden; transition: border-color 0.25s, transform 0.25s; }
-.sticker-slide:hover { border-color: rgba(255,27,141,0.4); transform: translateY(-4px); }
-.sticker-slide .slide-img-wrap { width: 100%; aspect-ratio: 1/1; overflow: hidden; background: #080808; display: flex; align-items: center; justify-content: center; position: relative; }
-.sticker-slide .slide-img-wrap::after { content: ''; position: absolute; inset: 0; z-index: 2; background: transparent; pointer-events: auto; }
-.sticker-slide .slide-img-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.sticker-slide:hover .slide-img-wrap img { transform: scale(1.04); transition: transform 0.4s; }
-.sticker-slide.slide-cpms-rond { border-top: 2px solid var(--rose); }
-.sticker-slide.slide-cpms-holo { border-top: 2px solid var(--cyan); }
-.sticker-slide.slide-cpms-rect, .sticker-slide.slide-pack { border-top: 2px solid var(--jaune); }
-.slide-info { padding: 20px; }
-.slide-tag { display: inline-block; font-family: 'Oswald', sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; padding: 3px 8px; margin-bottom: 10px; border-radius: 2px; }
-.slide-cpms-rond .slide-tag { background: rgba(255,27,141,0.12); color: var(--rose); }
-.slide-cpms-holo .slide-tag { background: rgba(0,240,255,0.12); color: var(--cyan); }
-.slide-pack .slide-tag { background: rgba(191,0,255,0.12); color: var(--violet); }
-.slide-cpms-rect .slide-tag { background: rgba(255,230,0,0.12); color: var(--jaune); }
-.slide-title { font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; color: var(--blanc); }
-.slide-desc { color: rgba(255,255,255,0.4); font-size: 11px; line-height: 1.6; margin-bottom: 14px; }
-.slide-price { font-family: 'Permanent Marker', cursive; font-size: 24px; color: var(--jaune); margin-bottom: 14px; }
-.slide-pack .slide-img-wrap { background: linear-gradient(135deg,#1a0a2a,#0a1a2a); flex-direction: column; }
-.slide-pack .pack-icon { font-size: 64px; }
-.carousel-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 16px; }
-.carousel-btn { width: 44px; height: 44px; border: var(--border); border-color: rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.6); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; clip-path: polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
-.carousel-btn:hover { background: var(--rose); border-color: var(--rose); color: white; }
-.carousel-btn:disabled { opacity: 0.15; cursor: default; }
-.carousel-dots { display: flex; gap: 6px; }
-.carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; cursor: pointer; padding: 0; transition: all 0.2s; }
-.carousel-dot.active { background: var(--rose); width: 20px; border-radius: 3px; }
+  .logo-line {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .logo-cube {
+    width: 52px; height: 52px;
+    filter: drop-shadow(0 0 10px #ff2d95) drop-shadow(0 0 22px #7b00ff);
+  }
+  .brand-name {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 3rem;
+    color: #fff;
+    text-shadow:
+      0 0 10px #ff2d95,
+      0 0 30px #ff2d9566,
+      2px 2px 0 #7b00ff;
+    letter-spacing: 2px;
+  }
 
-/* ===== TRUST HOLO ===== */
-.trust-holo-section { background: var(--noir); border-top: 1px solid rgba(0,229,255,0.15); padding: 100px 40px; text-align: center; position: relative; overflow: hidden; }
-.trust-holo-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,229,255,0.04) 0%, transparent 70%); pointer-events: none; }
-.trust-holo-eyebrow { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 16px; }
-.trust-holo-title { font-family: 'Permanent Marker', cursive; font-size: clamp(32px, 5vw, 64px); background: linear-gradient(135deg, #00e5ff, #00ff88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; line-height: 1.1; }
-.trust-holo-subtitle { font-family: 'Oswald', sans-serif; color: rgba(255,255,255,0.35); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 48px; }
-.trust-holo-img-wrap { max-width: 1000px; margin: 0 auto 40px; border-radius: 4px; overflow: hidden; box-shadow: 0 0 60px rgba(0,229,255,0.12), 0 0 120px rgba(0,255,136,0.06); position: relative; }
-.trust-holo-img-wrap::after { content: ''; position: absolute; inset: 0; z-index: 2; background: transparent; pointer-events: auto; }
-.trust-holo-img { width: 100%; display: block; -webkit-user-drag: none; }
-.trust-holo-badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
-.trust-holo-badge { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; border-radius: 2px; }
-.trust-holo-badge.cyan { background: rgba(0,240,255,0.1); color: var(--cyan); border: 1px solid rgba(0,240,255,0.2); }
-.trust-holo-badge.green { background: rgba(0,255,136,0.1); color: #00ff88; border: 1px solid rgba(0,255,136,0.2); }
-.trust-holo-badge.jaune { background: rgba(255,230,0,0.1); color: var(--jaune); border: 1px solid rgba(255,230,0,0.2); }
-.trust-holo-ia { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.15); margin-top: 24px; }
+  .tag-line {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 6px;
+    color: #00e5ff;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .tag-line em { color: #ff2d95; font-style: normal; }
 
-/* ===== ABOUT ===== */
-.about-section { background: var(--noir); overflow: hidden; }
-.about-inner { display: grid; grid-template-columns: 1fr 1fr; min-height: 700px; max-width: 1400px; margin: 0 auto; }
-.about-portrait { position: relative; overflow: hidden; min-height: 700px; }
-.about-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-.about-portrait::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 55%, var(--noir) 100%); z-index: 1; }
-.about-content { display: flex; flex-direction: column; justify-content: center; padding: 80px 60px 80px 48px; position: relative; z-index: 1; }
-.about-content::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 80% 50%, rgba(191,0,255,0.06) 0%, transparent 70%); pointer-events: none; }
-.about-quote { font-family: 'Permanent Marker', cursive; font-size: clamp(26px, 3.5vw, 48px); line-height: 1.2; margin-bottom: 28px; color: var(--blanc); }
-.about-quote .rose { color: var(--rose); }
-.about-quote .cyan { color: var(--cyan); }
-.about-quote .jaune { color: var(--jaune); }
-.about-text { color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.9; margin-bottom: 40px; max-width: 460px; }
-.about-valeurs { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
-.valeur-row { display: flex; align-items: center; gap: 14px; }
-.valeur-num { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.2); min-width: 24px; }
-.valeur-bar { height: 1px; width: 28px; opacity: 0.5; }
-.valeur-label { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; }
-.valeur-row:nth-child(1) .valeur-label { color: var(--rose); }
-.valeur-row:nth-child(1) .valeur-bar { background: var(--rose); }
-.valeur-row:nth-child(2) .valeur-label { color: var(--jaune); }
-.valeur-row:nth-child(2) .valeur-bar { background: var(--jaune); }
-.valeur-row:nth-child(3) .valeur-label { color: var(--cyan); }
-.valeur-row:nth-child(3) .valeur-bar { background: var(--cyan); }
-.valeur-row:nth-child(4) .valeur-label { color: var(--violet); }
-.valeur-row:nth-child(4) .valeur-bar { background: var(--violet); }
-.about-signature { font-family: 'Permanent Marker', cursive; font-size: 18px; background: linear-gradient(90deg, var(--rose), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.7; }
+  /* Message principal */
+  .construction-msg {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 4px;
+    line-height: 1.15;
+    position: relative;
+    display: inline-block;
+  }
+  .construction-msg .highlight {
+    color: #ff9f00;
+    text-shadow: 0 0 12px #ff9f00, 0 0 30px #ff450088;
+  }
+  .construction-msg::after {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, #ff2d95, #7b00ff, #00e5ff);
+    border-radius: 2px;
+    margin-top: 10px;
+    animation: shimmer 2.5s linear infinite;
+    background-size: 200%;
+  }
+  @keyframes shimmer {
+    0%   { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
 
-/* ===== FOOTER ===== */
-footer { background: var(--gris); border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 40px; text-align: center; }
-.footer-tagline { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 32px; font-family: 'Oswald', sans-serif; }
-.social-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 32px; }
-.social-link { width: 40px; height: 40px; border: var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,0.4); font-size: 16px; transition: all 0.2s; }
-.social-link:hover { border-color: var(--rose); color: var(--rose); }
-.footer-links { display: flex; justify-content: center; gap: 28px; list-style: none; margin-bottom: 32px; flex-wrap: wrap; }
-.footer-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
-.footer-links a:hover { color: var(--rose); }
-.footer-copy { font-size: 10px; color: rgba(255,255,255,0.15); letter-spacing: 1px; }
+  .sub-msg {
+    margin-top: 18px;
+    font-size: 1rem;
+    color: #cbb8ff;
+    letter-spacing: 2px;
+    font-weight: 400;
+  }
+  .sub-msg strong { color: #ff2d95; font-weight: 700; }
 
-.nav-menu-btn { display: none; }
-.nav-mobile-open { display: flex !important; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,10,10,0.97); z-index: 99; align-items: center; justify-content: center; gap: 40px; }
-.nav-mobile-open a { font-size: 18px !important; letter-spacing: 4px !important; }
+  /* Barre de progression animée */
+  .progress-wrap {
+    margin-top: 28px;
+    width: 100%;
+    max-width: 480px;
+    margin-left: auto; margin-right: auto;
+  }
+  .progress-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.75rem; letter-spacing: 2px;
+    color: #7b00ff; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .progress-label span:last-child { color: #ff2d95; }
+  .progress-bar {
+    height: 8px;
+    background: #1a003388;
+    border-radius: 99px;
+    overflow: hidden;
+    border: 1px solid #7b00ff44;
+    box-shadow: 0 0 10px #7b00ff44;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7b00ff, #ff2d95, #ff9f00);
+    border-radius: 99px;
+    animation: fillBar 3s ease-out 0.5s forwards;
+    box-shadow: 0 0 8px #ff2d95;
+  }
+  @keyframes fillBar {
+    to { width: 72%; }
+  }
 
-img { -webkit-user-drag: none; user-drag: none; -webkit-touch-callout: none; }
-body { -webkit-touch-callout: none; }
+  /* Slogan bas */
+  .slogan {
+    margin-top: 24px;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.1rem;
+    color: #ff2d95;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #ff2d9588;
+  }
 
-@media (max-width: 900px) {
-  .about-inner { grid-template-columns: 1fr; min-height: auto; }
-  .about-portrait { height: 70vw; max-height: 480px; min-height: auto; }
-  .about-portrait::after { background: linear-gradient(to bottom, transparent 60%, var(--noir) 100%); }
-  .about-content { padding: 40px 28px 60px; }
-  .sport-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .lifestyle-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
-}
-@media (max-width: 768px) {
-  :root { --section-pad: 56px 20px; }
-  nav { padding: 14px 20px; }
-  .nav-links { display: none; }
-  .nav-menu-btn { display: flex; }
-  .hero { padding: 100px 24px 60px; }
-  .hero-logo { width: 100px; margin-bottom: 24px; }
-  .hero-title { font-size: clamp(48px, 16vw, 80px); }
-  .hero-cta { flex-direction: column; align-items: center; }
-  .btn-primary, .btn-outline { width: 100%; max-width: 280px; text-align: center; padding: 16px 24px; }
-  .sport-section { padding: 56px 20px; }
-  .sport-grid { grid-template-columns: 1fr; }
-  .sport-planche-wrap { padding: 0 20px; }
-  .section-header { padding: 0 20px; }
-  .sticker-section-wrap { padding: 56px 0; }
-  .sticker-header { padding: 0 20px; margin-bottom: 40px; }
-  .prix-grid { padding: 0 16px; margin-bottom: 40px; gap: 6px; }
-  .prix-card { padding: 12px 8px; min-width: 0; flex: 1 1 calc(50% - 6px); max-width: calc(50% - 6px); }
-  .carousel-track { padding: 0 20px; gap: 16px; }
-  .sticker-slide { flex: 0 0 85vw; max-width: 340px; }
-  .about-portrait { height: 80vw; max-height: 360px; }
-  .about-content { padding: 36px 20px 56px; }
-  .about-quote { font-size: clamp(22px, 7vw, 36px); margin-bottom: 20px; }
-  footer { padding: 40px 20px; }
-  .footer-links { gap: 16px; }
-  .trust-holo-section { padding: 60px 20px; }
-  .sunset-section .section-header { padding: 0 20px; }
-  .sunset-grid { padding: 0 20px; }
-  .sunset-model-card { max-width: 100%; flex: 1 1 100%; }
-}
-@media (max-width: 375px) {
-  .hero-title { font-size: 44px; }
-  .sticker-slide { flex: 0 0 220px; }
-}
+  /* Icônes contact */
+  .contact-row {
+    margin-top: 20px;
+    display: flex; justify-content: center; gap: 32px;
+    flex-wrap: wrap;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: #cbb8ff;
+    letter-spacing: 1px;
+  }
+  .contact-item svg { flex-shrink: 0; }
+
+  /* Coins brillants */
+  .ribbon::before, .ribbon::after {
+    content:'';
+    position: absolute;
+    width: 20px; height: 20px;
+    border-color: #ff2d95;
+    border-style: solid;
+  }
+  .ribbon::before { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+  .ribbon::after  { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+  /* Éclairs déco */
+  .bolt {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.7;
+    animation: pulse 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 8px #ff9f00);
+  }
+  .bolt-l { left: 14px; top: 50%; transform: translateY(-50%); }
+  .bolt-r { right: 14px; top: 50%; transform: translateY(-50%); }
+  @keyframes pulse {
+    from { opacity: 0.4; transform: translateY(-50%) scale(0.9); }
+    to   { opacity: 1;   transform: translateY(-50%) scale(1.1); }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .brand-name { font-size: 2rem; }
+    .construction-msg { font-size: 1.5rem; }
+    .bolt { display: none; }
+    .ribbon-body { padding: 24px 20px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">
-    <img src="logo%20CG%20MINDSET%20noir%20blanc.jpeg" alt="CG Mindset" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-    <span style="display:none; font-family:'Permanent Marker',cursive; font-size:24px; background:linear-gradient(90deg,var(--rose),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">CG Mindset</span>
-  </a>
-  <button class="nav-menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="Menu" style="display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:4px;">
-    <span style="width:22px;height:2px;background:white;display:block;transition:all 0.3s;"></span>
-    <span style="width:22px;height:2px;background:white;display:block;transition:all 0.3s;"></span>
-    <span style="width:22px;height:2px;background:white;display:block;transition:all 0.3s;"></span>
-  </button>
-  <ul class="nav-links">
-    <li><a href="#sunset">Sunset</a></li>
-    <li><a href="#collection">Collection</a></li>
-    <li><a href="#stickers">Stickers</a></li>
-    <li><a href="#trust">Signature</a></li>
-    <li><a href="#about">Mindset</a></li>
-    <li><a href="mailto:contact@cgmindset.fr">Contact</a></li>
-  </ul>
-</nav>
+<!-- Fond -->
+<div class="bg"></div>
+<div class="sun"></div>
+<div class="grid"></div>
 
-<!-- HERO -->
-<div class="hero">
-  <img src="logo%20CG%20MINDSET%20noir%20blanc.jpeg" alt="CG Mindset Logo" class="hero-logo" onerror="this.style.display='none'">
-  <p class="hero-eyebrow">Nouvelle collection 2026</p>
-  <h1 class="hero-title">Don't Judge<br>Just Moove</h1>
-  <p class="hero-sub">CG Mindset</p>
-  <p class="hero-tagline">Mindset · Lifestyle · Freedom</p>
-  <div class="hero-cta">
-    <a href="#collection" class="btn-primary">Voir la collection</a>
-    <a href="mailto:contact@cgmindset.fr" class="btn-outline">Nous contacter</a>
-  </div>
+<!-- Palmiers SVG -->
+<div class="palm-left">
+<svg viewBox="0 0 200 380" xmlns="http://www.w3.org/2000/svg" fill="#1a0033">
+  <rect x="90" y="180" width="18" height="200" rx="6"/>
+  <!-- feuilles -->
+  <ellipse cx="99" cy="140" rx="8" ry="90" transform="rotate(-30 99 140)" opacity=".9"/>
+  <ellipse cx="99" cy="140" rx="8" ry="85" transform="rotate(10 99 140)" opacity=".85"/>
+  <ellipse cx="99" cy="140" rx="7" ry="80" transform="rotate(50 99 140)" opacity=".8"/>
+  <ellipse cx="99" cy="140" rx="6" ry="75" transform="rotate(-70 99 140)" opacity=".75"/>
+  <ellipse cx="99" cy="140" rx="6" ry="70" transform="rotate(80 99 140)" opacity=".7"/>
+  <ellipse cx="99" cy="140" rx="5" ry="65" transform="rotate(-110 99 140)" opacity=".65"/>
+</svg>
+</div>
+<div class="palm-right">
+<svg viewBox="0 0 200 380" xmlns="http://www.w3.org/2000/svg" fill="#1a0033">
+  <rect x="90" y="180" width="18" height="200" rx="6"/>
+  <ellipse cx="99" cy="140" rx="8" ry="90" transform="rotate(-30 99 140)" opacity=".9"/>
+  <ellipse cx="99" cy="140" rx="8" ry="85" transform="rotate(10 99 140)" opacity=".85"/>
+  <ellipse cx="99" cy="140" rx="7" ry="80" transform="rotate(50 99 140)" opacity=".8"/>
+  <ellipse cx="99" cy="140" rx="6" ry="75" transform="rotate(-70 99 140)" opacity=".75"/>
+  <ellipse cx="99" cy="140" rx="6" ry="70" transform="rotate(80 99 140)" opacity=".7"/>
+  <ellipse cx="99" cy="140" rx="5" ry="65" transform="rotate(-110 99 140)" opacity=".65"/>
+</svg>
 </div>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    &nbsp;DON'T JUDGE JUST MOOVE &nbsp;·&nbsp; MINDSET &nbsp;·&nbsp; LIFESTYLE &nbsp;·&nbsp; FREEDOM &nbsp;·&nbsp; CG MINDSET &nbsp;·&nbsp; BREATHE &nbsp;·&nbsp; FOCUS &nbsp;·&nbsp; EVOLVE &nbsp;·&nbsp; FREE &nbsp;·&nbsp; TRUST &nbsp;·&nbsp; ALIVE &nbsp;·&nbsp; HEAL &nbsp;·&nbsp; STRONGER &nbsp;·&nbsp; FEEL &nbsp;·&nbsp;
-    &nbsp;DON'T JUDGE JUST MOOVE &nbsp;·&nbsp; MINDSET &nbsp;·&nbsp; LIFESTYLE &nbsp;·&nbsp; FREEDOM &nbsp;·&nbsp; CG MINDSET &nbsp;·&nbsp; BREATHE &nbsp;·&nbsp; FOCUS &nbsp;·&nbsp; EVOLVE &nbsp;·&nbsp; FREE &nbsp;·&nbsp; TRUST &nbsp;·&nbsp; ALIVE &nbsp;·&nbsp; HEAL &nbsp;·&nbsp; STRONGER &nbsp;·&nbsp; FEEL &nbsp;·&nbsp;
-  </div>
-</div>
+<!-- ═══ BANNIÈRE ═══ -->
+<div class="banner-wrap">
+  <div class="ribbon">
 
-<!-- SUNSET -->
-<div id="sunset" class="sunset-section">
-  <div class="section-header">
-    <span class="eyebrow">New Drop 2026</span>
-    <h2 class="section-title">Sunset & Beach<br>Collection</h2>
-    <p class="section-sub">4 modèles exclusifs · T-shirts colorés · Designs lifestyle · Expédition France 🇫🇷</p>
-  </div>
-  <!-- Modèle 01 — Sunset Vibes -->
-  <div class="sunset-ligne">
-    <div class="sunset-photos">
-      <img src="SUNSET%20VIBES%20FACE.png" alt="Sunset Vibes Face">
-      <img src="SUNSET%20VIBES%20DOS.png" alt="Sunset Vibes Dos">
-    </div>
-    <div class="sunset-ligne-info">
-      <div class="sunset-model-tag" style="background:rgba(255,107,53,0.15);color:#FF6B35;">🌅 Modèle 01</div>
-      <p class="sunset-model-title">Sunset Vibes</p>
-      <p class="sunset-model-desc">Create Your Own Sunset · Énergie positive · Vibes plage<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">Crée ton propre coucher de soleil</span></p>
-      <a href="mailto:contact@cgmindset.fr?subject=Commande Sunset Vibes CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
-    </div>
-  </div>
-
-  <!-- Modèle 02 — Good Life -->
-  <div class="sunset-ligne">
-    <div class="sunset-photos">
-      <img src="GOOD%20LIFE%20FACE.png" alt="Good Life Face">
-      <img src="GOOD%20LIFE%20DOS.png" alt="Good Life Dos">
-    </div>
-    <div class="sunset-ligne-info">
-      <div class="sunset-model-tag" style="background:rgba(0,180,150,0.15);color:#00B496;">🌊 Modèle 02</div>
-      <p class="sunset-model-title">Good Life</p>
-      <p class="sunset-model-desc">Good Mind · Good Life · Profite du moment<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">Bon esprit · Belle vie</span></p>
-      <a href="mailto:contact@cgmindset.fr?subject=Commande Good Life CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
-    </div>
-  </div>
-
-  <!-- Modèle 03 — Paradise State -->
-  <div class="sunset-ligne">
-    <div class="sunset-photos">
-      <img src="PARADISE%20STATE%20DEVANT.png" alt="Paradise State Face">
-      <img src="PARADISE%20STATE%20DOS.png" alt="Paradise State Dos">
-    </div>
-    <div class="sunset-ligne-info">
-      <div class="sunset-model-tag" style="background:rgba(100,200,180,0.15);color:#64C8B4;">🌴 Modèle 03</div>
-      <p class="sunset-model-title">Paradise State</p>
-      <p class="sunset-model-desc">Paradise is a State of Mind · Esprit positif · Vivre l'instant<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">Le paradis est un état d'esprit</span></p>
-      <a href="mailto:contact@cgmindset.fr?subject=Commande Paradise State CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
-    </div>
-  </div>
-
-  <!-- Modèle 04 — Ocean Energy -->
-  <div class="sunset-ligne">
-    <div class="sunset-photos">
-      <img src="OCEAN%20ENERGY%20FACE.png" alt="Ocean Energy Face">
-      <img src="OCEAN%20ENERGY%20DOS.png" alt="Ocean Energy Dos">
-    </div>
-    <div class="sunset-ligne-info">
-      <div class="sunset-model-tag" style="background:rgba(180,150,220,0.15);color:#B496DC;">⚡ Modèle 04</div>
-      <p class="sunset-model-title">Ocean Energy</p>
-      <p class="sunset-model-desc">Energy Flows Where Focus Goes · Focus · Énergie positive<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">L'énergie circule où va ton focus</span></p>
-      <a href="mailto:contact@cgmindset.fr?subject=Commande Ocean Energy CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
-    </div>
-  </div>
-</div>
-
-<!-- COLLECTION SPORT -->
-<div id="collection" class="sport-section">
-  <div class="section-header">
-    <span class="eyebrow">Collection Sport 2026</span>
-    <h2 class="section-title">9 Designs<br>Wear Your Mindset</h2>
-    <p class="section-sub">Débardeurs · Impression DTF · Qualité premium · Expédition France 🇫🇷</p>
-  </div>
-
-  <!-- Grille produits -->
-  <div class="sport-grid" style="max-width:1400px;margin:0 auto;padding:0 40px;">
-
-    <div class="sport-card">
-      <div class="sport-card-img"><img src="BREATHE.PNG" alt="Débardeur BREATHE CG Mindset"></div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Breathe</p>
-        <p class="sport-card-sub">Débardeur · Noir · DTF</p>
-        <p class="sport-card-desc">Slow Down. Be Here. Right Now.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Ralentis. Sois là. Maintenant.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur BREATHE" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+    <!-- Ruban défilant haut -->
+    <div class="ticker-top">
+      <div class="ticker-inner">
+        <span>⚡ COMING SOON</span><span>✦ DON'T JUDGE. JUST MOVE.</span>
+        <span>🔥 LIFESTYLE · MINDSET · FREEDOM</span><span>✦ CG MINDSET</span>
+        <span>⚡ COMING SOON</span><span>✦ DON'T JUDGE. JUST MOVE.</span>
+        <span>🔥 LIFESTYLE · MINDSET · FREEDOM</span><span>✦ CG MINDSET</span>
       </div>
     </div>
 
-    <div class="sport-card">
-      <div class="sport-card-img"><img src="FOCUS.PNG" alt="Débardeur FOCUS CG Mindset"></div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Focus</p>
-        <p class="sport-card-sub">Débardeur · Noir · DTF</p>
-        <p class="sport-card-desc">Clear Mind. Sharp Goals. No Excuses.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Esprit clair. Objectifs précis. Sans excuses.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur FOCUS" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+    <!-- Éclairs déco -->
+    <div class="bolt bolt-l">⚡</div>
+    <div class="bolt bolt-r">⚡</div>
+
+    <!-- Corps -->
+    <div class="ribbon-body">
+
+      <!-- Logo + nom -->
+      <div class="logo-line">
+        <!-- Cube CG simplifié SVG -->
+        <svg class="logo-cube" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="26,4 48,16 48,36 26,48 4,36 4,16" fill="#1a0033" stroke="#ff2d95" stroke-width="2"/>
+          <polygon points="26,4 48,16 26,28 4,16" fill="#2d0060" stroke="#7b00ff" stroke-width="1.5"/>
+          <polygon points="4,16 26,28 26,48 4,36" fill="#110022" stroke="#ff2d95" stroke-width="1.5"/>
+          <polygon points="48,16 26,28 26,48 48,36" fill="#200044" stroke="#00e5ff" stroke-width="1.5"/>
+          <text x="26" y="23" text-anchor="middle" font-family="Oswald,sans-serif" font-weight="700" font-size="11" fill="white">CG</text>
+        </svg>
+        <span class="brand-name">MINDSET</span>
       </div>
-    </div>
 
-    <div class="sport-card">
-      <div class="sport-card-img"><img src="EVOLVE.PNG" alt="Débardeur EVOLVE CG Mindset"></div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Evolve</p>
-        <p class="sport-card-sub">Débardeur · Noir · DTF</p>
-        <p class="sport-card-desc">Growth Is Your Only Option.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Évoluer est ta seule option.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur EVOLVE" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+      <div class="tag-line">
+        <em>Lifestyle</em> &nbsp;·&nbsp; <em>Mindset</em> &nbsp;·&nbsp; <em>Freedom</em>
       </div>
-    </div>
 
-    <div class="sport-card">
-      <div class="sport-card-img"><img src="FREE.PNG" alt="Débardeur FREE CG Mindset"></div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Free</p>
-        <p class="sport-card-sub">Débardeur · Noir · DTF</p>
-        <p class="sport-card-desc">No Chains. No Limits. Just You.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Pas de chaînes. Pas de limites. Juste toi.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur FREE" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+      <!-- Message -->
+      <div class="construction-msg">
+        🚧 Site en <span class="highlight">construction</span> 🚧
       </div>
-    </div>
 
-    <div class="sport-card">
-      <div class="sport-card-img"><img src="TRUST.PNG" alt="Débardeur TRUST CG Mindset"></div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Trust</p>
-        <p class="sport-card-sub">Débardeur · Noir · DTF</p>
-        <p class="sport-card-desc">Trust Yourself. You Know The Way.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Fais-toi confiance. Tu connais le chemin.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur TRUST" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
-      </div>
-    </div>
+      <p class="sub-msg">
+        On prépare quelque chose de <strong>grand</strong>.<br>
+        Reviens très vite — ça va <strong>décoiffer</strong> !
+      </p>
 
-    <div class="sport-card">
-      <div class="sport-card-img"><img src="ALIVE.PNG" alt="Débardeur ALIVE CG Mindset"></div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Alive</p>
-        <p class="sport-card-sub">Débardeur · Noir · DTF</p>
-        <p class="sport-card-desc">Live Fully. Love Deeply. No Regrets.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Vis pleinement. Aime profondément. Sans regrets.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur ALIVE" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
-      </div>
-    </div>
-
-    <div class="sport-card">
-      <div class="sport-card-img"><img src="HEAL.PNG" alt="Débardeur HEAL CG Mindset"></div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Heal</p>
-        <p class="sport-card-sub">Débardeur · Noir · DTF</p>
-        <p class="sport-card-desc">Everything. Learn. Grow. Repeat.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Tout. Apprendre. Grandir. Recommencer.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur HEAL" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
-      </div>
-    </div>
-
-    <div class="sport-card">
-      <div class="sport-card-img"><img src="FEEL.PNG" alt="Débardeur FEEL CG Mindset"></div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Feel</p>
-        <p class="sport-card-sub">Débardeur · Noir · DTF</p>
-        <p class="sport-card-desc">Feel It All. That's Life.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Ressens tout. C'est ça la vie.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur FEEL" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
-      </div>
-    </div>
-
-    <div class="sport-card">
-      <div class="sport-card-img"><img src="STROGER.PNG" alt="Débardeur STRONGER CG Mindset"></div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Stronger</p>
-        <p class="sport-card-sub">Débardeur · Noir · DTF</p>
-        <p class="sport-card-desc">Built By Challenges. Driven By Choice.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Forgé par les épreuves. Guidé par le choix.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur STRONGER" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- STICKERS -->
-<div id="stickers" class="sticker-section-wrap">
-  <div class="sticker-header">
-    <span class="eyebrow">Collection Stickers</span>
-    <h2 class="section-title">Wear Your Mindset.<br>Partout.</h2>
-    <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-top:16px;">Stickers premium waterproof · Vinyle haute qualité · Expédition France 🇫🇷</p>
-  </div>
-  <div class="prix-grid">
-    <div class="prix-card"><div class="prix-label" style="color:var(--rose);">Petit</div><div class="prix-amount">3 €</div><div class="prix-size">5–6 cm</div></div>
-    <div class="prix-card" style="border-color:rgba(0,240,255,0.3);background:rgba(0,240,255,0.03);"><div class="prix-label">Moyen</div><div class="prix-amount">4,50 €</div><div class="prix-size">8–10 cm</div></div>
-    <div class="prix-card" style="border-color:rgba(191,0,255,0.3);"><div class="prix-label" style="color:var(--violet);">Grand</div><div class="prix-amount">7 €</div><div class="prix-size">12–15 cm</div></div>
-    <div class="prix-card" style="border-color:rgba(255,230,0,0.4);background:rgba(255,230,0,0.03);"><div class="prix-label" style="color:var(--jaune);">✨ Holographique</div><div class="prix-amount">+2 €</div><div class="prix-size">Effet premium</div></div>
-  </div>
-  <div class="carousel-wrapper">
-    <div class="carousel-track-outer">
-      <div class="carousel-track" id="carouselTrack">
-        <div class="sticker-slide slide-cpms-rond">
-          <div class="slide-img-wrap"><img src="STICKER%20SYMBOLIQUE.PNG" alt="CPMS Rond Neon"></div>
-          <div class="slide-info">
-            <span class="slide-tag">⚡ Signature</span>
-            <p class="slide-title">C'est Pas Marrant Sinon</p>
-            <p class="slide-desc">Format rond · Neon · Résilience · Humour · Mindset · Le sticker signature CG Mindset</p>
-            <p class="slide-price">À partir de 3 €</p>
-            <a href="mailto:contact@cgmindset.fr?subject=Commande sticker CPMS Rond" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a>
-          </div>
+      <!-- Barre de progression -->
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>Progression</span>
+          <span>72 %</span>
         </div>
-        <div class="sticker-slide slide-cpms-rect">
-          <div class="slide-img-wrap"><img src="STICKER%20SYMBOLIQUE%20RECTANGULAIRE.PNG" alt="CPMS Rectangulaire"></div>
-          <div class="slide-info">
-            <span class="slide-tag">🎯 Rectangulaire</span>
-            <p class="slide-title">C'est Pas Marrant Sinon</p>
-            <p class="slide-desc">Format rectangulaire · Sunset rétro · Style plaque de rue · Écriture brush fluo</p>
-            <p class="slide-price">À partir de 3 €</p>
-            <a href="mailto:contact@cgmindset.fr?subject=Commande sticker CPMS Rectangulaire" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a>
-          </div>
-        </div>
-        <div class="sticker-slide slide-cpms-holo">
-          <div class="slide-img-wrap"><img src="STICKER%20HOLOGRAPHIQUE.PNG" alt="CPMS Holographique"></div>
-          <div class="slide-info">
-            <span class="slide-tag">✨ Holographique</span>
-            <p class="slide-title">C'est Pas Marrant Sinon</p>
-            <p class="slide-desc">Format rond · Effet holographique premium · Reflets arc-en-ciel · Édition exclusive</p>
-            <p class="slide-price">À partir de 5 €</p>
-            <a href="mailto:contact@cgmindset.fr?subject=Commande sticker CPMS Holographique" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a>
-          </div>
-        </div>
-        <div class="sticker-slide slide-pack">
-          <div class="slide-img-wrap"><span class="pack-icon">🎁</span></div>
-          <div class="slide-info">
-            <span class="slide-tag">✨ Sur mesure</span>
-            <p class="slide-title">Pack Personnalisé</p>
-            <p class="slide-desc">Tu veux mixer les collections ? Tarifs dégressifs dès 5 stickers. On crée ton pack sur mesure !</p>
-            <p class="slide-price">Nous contacter</p>
-            <a href="mailto:contact@cgmindset.fr?subject=Pack stickers personnalisé" class="btn-primary" style="font-size:12px;padding:10px 20px;">Créer mon pack</a>
-          </div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
         </div>
       </div>
-    </div>
-    <div class="carousel-controls">
-      <button class="carousel-btn" id="prevBtn" onclick="carouselMove(-1)" disabled>&#8592;</button>
-      <div class="carousel-dots" id="carouselDots"></div>
-      <button class="carousel-btn" id="nextBtn" onclick="carouselMove(1)">&#8594;</button>
-    </div>
-  </div>
-</div>
 
-<!-- SWEAT TRUST HOLOGRAPHIQUE -->
-<div id="trust" class="trust-holo-section">
-  <span class="trust-holo-eyebrow">Pièce Signature · Édition Limitée</span>
-  <h2 class="trust-holo-title">✨ Sweat TRUST<br>Holographique</h2>
-  <p class="trust-holo-subtitle">Recto · Verso · Design exclusif CG Mindset</p>
-  <div class="trust-holo-img-wrap">
-    <img src="SWEAT%20HOLOGRAPHIQUE.PNG" alt="Sweat TRUST Holographique CG Mindset — Recto Verso" class="trust-holo-img" draggable="false">
-  </div>
-  <div class="trust-holo-badges">
-    <span class="trust-holo-badge cyan">✨ Holographique vert/bleu</span>
-    <span class="trust-holo-badge green">🖨️ Impression DTF</span>
-    <span class="trust-holo-badge jaune">🖤 Sweat noir premium</span>
-  </div>
-  <a href="mailto:contact@cgmindset.fr?subject=Commande Sweat TRUST Holographique CG Mindset" class="btn-primary">Commander ce modèle</a>
-  <p class="trust-holo-ia">🤖 Visuel généré par IA · Rendu à titre indicatif · Le design imprimé est bien réel</p>
-</div>
+      <!-- Slogan -->
+      <div class="slogan">Don't Judge. Just Move. ✦</div>
 
-<!-- ABOUT -->
-<div id="about" class="about-section">
-  <div class="about-inner">
-    <div class="about-portrait">
-      <img src="PORTRAIT%20COMIC%20BOOK.PNG" alt="CG Mindset — La vision" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a0a2a,#0a0a1a)'">
-    </div>
-    <div class="about-content">
-      <span class="eyebrow">La vision</span>
-      <p class="about-quote">Faire de son vécu<br>une <span class="rose">force</span>.<br>Croire en ses <span class="cyan">rêves</span>.<br>Prôner ce qui <span class="jaune">compte</span>.</p>
-      <p class="about-text">CG Mindset n'est pas juste une marque de vêtements. C'est une conviction portée sur tissu. Chaque design naît d'une émotion vraie, d'un mot qui résonne, d'un état d'esprit qu'on refuse d'abandonner. Créé depuis Ruelle-sur-Touvre, pensé pour ceux qui refusent de rester immobiles.</p>
-      <div class="about-valeurs">
-        <div class="valeur-row"><span class="valeur-num">01</span><span class="valeur-bar" style="background:var(--rose);"></span><span class="valeur-label" style="color:var(--rose);">Passion</span></div>
-        <div class="valeur-row"><span class="valeur-num">02</span><span class="valeur-bar" style="background:var(--jaune);"></span><span class="valeur-label" style="color:var(--jaune);">Créativité</span></div>
-        <div class="valeur-row"><span class="valeur-num">03</span><span class="valeur-bar" style="background:var(--cyan);"></span><span class="valeur-label" style="color:var(--cyan);">Authenticité</span></div>
-        <div class="valeur-row"><span class="valeur-num">04</span><span class="valeur-bar" style="background:var(--violet);"></span><span class="valeur-label" style="color:var(--violet);">Engagement</span></div>
+      <!-- Contact -->
+      <div class="contact-row">
+        <div class="contact-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff2d95" stroke-width="2" stroke-linecap="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="#ff2d95" stroke="none"/>
+          </svg>
+          @cg.mindset
+        </div>
+        <div class="contact-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/>
+          </svg>
+          www.cgmindset.fr
+        </div>
+        <div class="contact-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff9f00" stroke-width="2" stroke-linecap="round">
+            <rect x="2" y="4" width="20" height="16" rx="3"/><polyline points="2,4 12,13 22,4"/>
+          </svg>
+          contact@cgmindset.fr
+        </div>
       </div>
-      <p class="about-signature">Don't Judge Just Moove ⚡</p>
+
     </div>
+
+    <!-- Ruban défilant bas -->
+    <div class="ticker-bottom">
+      <div class="ticker-inner" style="animation-direction:reverse; color:#0a0014;">
+        <span>✦ DON'T JUDGE. JUST MOVE.</span><span>⚡ COMING SOON</span>
+        <span>✦ CG MINDSET</span><span>🔥 LIFESTYLE · MINDSET · FREEDOM</span>
+        <span>✦ DON'T JUDGE. JUST MOVE.</span><span>⚡ COMING SOON</span>
+        <span>✦ CG MINDSET</span><span>🔥 LIFESTYLE · MINDSET · FREEDOM</span>
+      </div>
+    </div>
+
   </div>
 </div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-bottom">
-    <p class="footer-tagline">Don't Judge Just Moove</p>
-    <div class="social-links">
-      <a href="https://instagram.com/cgmindset" class="social-link" target="_blank">📷</a>
-      <a href="https://facebook.com/cgmindset" class="social-link" target="_blank">📘</a>
-      <a href="mailto:contact@cgmindset.fr" class="social-link">✉️</a>
-    </div>
-    <ul class="footer-links">
-      <li><a href="#collection">Collection</a></li>
-      <li><a href="#sunset">Sunset</a></li>
-      <li><a href="#stickers">Stickers</a></li>
-      <li><a href="#trust">Signature</a></li>
-      <li><a href="#about">À propos</a></li>
-      <li><a href="mailto:contact@cgmindset.fr">Contact</a></li>
-    </ul>
-    <p class="footer-copy">© 2026 CG Mindset — Marque déposée INPI n°5263394 · Tous droits réservés · contact@cgmindset.fr</p>
-    <p style="font-size:10px;color:rgba(255,255,255,0.12);margin-top:12px;letter-spacing:1px;">🤖 Les mannequins présentant nos vêtements sont des personnages générés par intelligence artificielle. Les designs et impressions sont 100% réels.</p>
-    <p class="footer-copy" style="margin-top:8px;">Visuels produits générés par <span style="color:rgba(191,0,255,0.5);">Intelligence Artificielle</span> · Rendu à titre indicatif</p>
-  </div>
-</footer>
-
-<script>
-const track = document.getElementById('carouselTrack');
-const slides = track.querySelectorAll('.sticker-slide');
-const dotsContainer = document.getElementById('carouselDots');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-let current = 0;
-const total = slides.length;
-slides.forEach((_, i) => {
-  const dot = document.createElement('button');
-  dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-  dot.onclick = () => goTo(i);
-  dotsContainer.appendChild(dot);
-});
-function getSlideWidth() { return slides[0].offsetWidth + 16; }
-function goTo(index) {
-  current = Math.max(0, Math.min(index, total - 1));
-  track.style.transform = `translateX(-${current * getSlideWidth()}px)`;
-  dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-  prevBtn.disabled = current === 0;
-  nextBtn.disabled = current === total - 1;
-}
-function carouselMove(dir) { goTo(current + dir); }
-let startX = 0;
-track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-track.addEventListener('touchend', e => {
-  const diff = startX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 50) carouselMove(diff > 0 ? 1 : -1);
-});
-</script>
-
-<script>
-document.addEventListener('contextmenu', e => {
-  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
-});
-document.addEventListener('keydown', e => {
-  if ((e.ctrlKey || e.metaKey) && ['s','S','u','U'].includes(e.key)) e.preventDefault();
-});
-document.querySelectorAll('img').forEach(img => {
-  img.addEventListener('dragstart', e => e.preventDefault());
-  img.setAttribute('draggable', 'false');
-});
-console.log('%c© CG Mindset 2026 — Marque déposée INPI n°5263394. Toute reproduction interdite.', 'color: #FF1B8D; font-weight: bold; font-size: 14px;');
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(e => {}); });
-}
-function toggleMenu() {
-  const links = document.querySelector('.nav-links');
-  const btn = document.getElementById('menuBtn');
-  links.classList.toggle('nav-mobile-open');
-  const spans = btn.querySelectorAll('span');
-  if (links.classList.contains('nav-mobile-open')) {
-    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-    spans[1].style.opacity = '0';
-    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-  } else { spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; }); }
-}
-document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', () => {
-    document.querySelector('.nav-links').classList.remove('nav-mobile-open');
-    document.getElementById('menuBtn').querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
-  });
-});
-function checkMenu() {
-  const btn = document.getElementById('menuBtn');
-  if (window.innerWidth <= 768) btn.style.display = 'flex';
-  else { btn.style.display = 'none'; document.querySelector('.nav-links').classList.remove('nav-mobile-open'); }
-}
-checkMenu();
-window.addEventListener('resize', checkMenu);
-</script>
 
 </body>
 </html>
