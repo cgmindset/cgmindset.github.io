@@ -65,8 +65,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 
 .sunset-ligne { display: flex; gap: 40px; align-items: center; max-width: 1400px; margin: 0 auto 60px; padding: 0 40px; }
 .sunset-ligne:nth-child(even) { flex-direction: row-reverse; }
-.sunset-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; flex: 1.5; }
-.sunset-photos img { width: 100%; display: block; border-radius: 2px; -webkit-user-drag: none; }
+.sunset-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; flex: 1.5; background: #0a0a0a; }
+.sunset-photos img { width: 100%; display: block; border-radius: 2px; -webkit-user-drag: none; object-fit: cover; aspect-ratio: 3/4; }
 .sunset-ligne-info { flex: 1; display: flex; flex-direction: column; gap: 14px; }
 @media (max-width: 768px) {
   .sunset-ligne { flex-direction: column !important; padding: 0 20px; margin-bottom: 48px; }
@@ -258,6 +258,23 @@ body { -webkit-touch-callout: none; }
   .sticker-slide { flex: 0 0 220px; }
 }
 </style>
+<script src="https://www.paypal.com/sdk/js?client-id=ATE0eN0ZoSQ-NZgQb4LpUGoYpilEEaGzns2cTWKq7Ki4I3dgG4ofKUJ2HjkO3cYbM2rzsBZltaWoZjrW&currency=EUR&locale=fr_FR&intent=capture"></script>
+<style>
+/* ===== PAYPAL MODAL ===== */
+.pp-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9999; display:none; align-items:center; justify-content:center; padding:20px; }
+.pp-overlay.active { display:flex; }
+.pp-modal { background:#111; border:1px solid rgba(255,27,141,0.3); padding:32px 28px; max-width:420px; width:100%; position:relative; }
+.pp-modal-close { position:absolute; top:14px; right:16px; background:none; border:none; color:rgba(255,255,255,0.4); font-size:22px; cursor:pointer; line-height:1; }
+.pp-modal-close:hover { color:var(--rose); }
+.pp-modal-title { font-family:'Permanent Marker',cursive; font-size:26px; background:linear-gradient(135deg,var(--rose),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:4px; }
+.pp-modal-sub { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px; }
+.pp-modal-price { font-family:'Permanent Marker',cursive; font-size:32px; color:var(--jaune); margin-bottom:8px; }
+.pp-size-row { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+.pp-size-btn { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:8px 16px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:rgba(255,255,255,0.6); cursor:pointer; transition:all 0.2s; }
+.pp-size-btn.selected, .pp-size-btn:hover { border-color:var(--rose); color:var(--rose); background:rgba(255,27,141,0.08); }
+.pp-paypal-container { margin-top:4px; min-height:45px; }
+.pp-note { font-size:10px; color:rgba(255,255,255,0.2); text-align:center; margin-top:12px; letter-spacing:1px; }
+</style>
 </head>
 <body>
 
@@ -321,7 +338,7 @@ body { -webkit-touch-callout: none; }
       <div class="sunset-model-tag" style="background:rgba(255,107,53,0.15);color:#FF6B35;">🌅 Modèle 01</div>
       <p class="sunset-model-title">Sunset Vibes</p>
       <p class="sunset-model-desc">Create Your Own Sunset · Énergie positive · Vibes plage<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">Crée ton propre coucher de soleil</span></p>
-      <a href="mailto:contact@cgmindset.fr?subject=Commande Sunset Vibes CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
+      <button class="btn-primary" onclick="openPP('Sunset Vibes',35,'T-shirt · Sunset &amp; Beach')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander — 35 €</button>
     </div>
   </div>
 
@@ -335,7 +352,7 @@ body { -webkit-touch-callout: none; }
       <div class="sunset-model-tag" style="background:rgba(0,180,150,0.15);color:#00B496;">🌊 Modèle 02</div>
       <p class="sunset-model-title">Good Life</p>
       <p class="sunset-model-desc">Good Mind · Good Life · Profite du moment<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">Bon esprit · Belle vie</span></p>
-      <a href="mailto:contact@cgmindset.fr?subject=Commande Good Life CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
+      <button class="btn-primary" onclick="openPP('Good Life',35,'T-shirt · Sunset &amp; Beach')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander — 35 €</button>
     </div>
   </div>
 
@@ -349,7 +366,7 @@ body { -webkit-touch-callout: none; }
       <div class="sunset-model-tag" style="background:rgba(100,200,180,0.15);color:#64C8B4;">🌴 Modèle 03</div>
       <p class="sunset-model-title">Paradise State</p>
       <p class="sunset-model-desc">Paradise is a State of Mind · Esprit positif · Vivre l'instant<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">Le paradis est un état d'esprit</span></p>
-      <a href="mailto:contact@cgmindset.fr?subject=Commande Paradise State CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
+      <button class="btn-primary" onclick="openPP('Paradise State',35,'T-shirt · Sunset &amp; Beach')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander — 35 €</button>
     </div>
   </div>
 
@@ -363,7 +380,7 @@ body { -webkit-touch-callout: none; }
       <div class="sunset-model-tag" style="background:rgba(180,150,220,0.15);color:#B496DC;">⚡ Modèle 04</div>
       <p class="sunset-model-title">Ocean Energy</p>
       <p class="sunset-model-desc">Energy Flows Where Focus Goes · Focus · Énergie positive<br><span style="color:rgba(255,255,255,0.25);font-size:11px;">L'énergie circule où va ton focus</span></p>
-      <a href="mailto:contact@cgmindset.fr?subject=Commande Ocean Energy CG Mindset" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander — 35 €</a>
+      <button class="btn-primary" onclick="openPP('Ocean Energy',35,'T-shirt · Sunset &amp; Beach')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander — 35 €</button>
     </div>
   </div>
 </div>
@@ -385,7 +402,7 @@ body { -webkit-touch-callout: none; }
         <p class="sport-card-sub">Débardeur · Noir · DTF</p>
         <p class="sport-card-desc">Slow Down. Be Here. Right Now.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Ralentis. Sois là. Maintenant.</span></p>
         <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur BREATHE" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Breathe',35,'Débardeur · Noir · DTF')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander</button></div>
       </div>
     </div>
 
@@ -396,7 +413,7 @@ body { -webkit-touch-callout: none; }
         <p class="sport-card-sub">Débardeur · Noir · DTF</p>
         <p class="sport-card-desc">Clear Mind. Sharp Goals. No Excuses.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Esprit clair. Objectifs précis. Sans excuses.</span></p>
         <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur FOCUS" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Focus',35,'Débardeur · Noir · DTF')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander</button></div>
       </div>
     </div>
 
@@ -407,7 +424,7 @@ body { -webkit-touch-callout: none; }
         <p class="sport-card-sub">Débardeur · Noir · DTF</p>
         <p class="sport-card-desc">Growth Is Your Only Option.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Évoluer est ta seule option.</span></p>
         <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur EVOLVE" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Evolve',35,'Débardeur · Noir · DTF')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander</button></div>
       </div>
     </div>
 
@@ -418,7 +435,7 @@ body { -webkit-touch-callout: none; }
         <p class="sport-card-sub">Débardeur · Noir · DTF</p>
         <p class="sport-card-desc">No Chains. No Limits. Just You.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Pas de chaînes. Pas de limites. Juste toi.</span></p>
         <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur FREE" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Free',35,'Débardeur · Noir · DTF')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander</button></div>
       </div>
     </div>
 
@@ -429,7 +446,7 @@ body { -webkit-touch-callout: none; }
         <p class="sport-card-sub">Débardeur · Noir · DTF</p>
         <p class="sport-card-desc">Trust Yourself. You Know The Way.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Fais-toi confiance. Tu connais le chemin.</span></p>
         <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur TRUST" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Trust',35,'Débardeur · Noir · DTF')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander</button></div>
       </div>
     </div>
 
@@ -440,7 +457,7 @@ body { -webkit-touch-callout: none; }
         <p class="sport-card-sub">Débardeur · Noir · DTF</p>
         <p class="sport-card-desc">Live Fully. Love Deeply. No Regrets.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Vis pleinement. Aime profondément. Sans regrets.</span></p>
         <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur ALIVE" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Alive',35,'Débardeur · Noir · DTF')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander</button></div>
       </div>
     </div>
 
@@ -451,7 +468,7 @@ body { -webkit-touch-callout: none; }
         <p class="sport-card-sub">Débardeur · Noir · DTF</p>
         <p class="sport-card-desc">Everything. Learn. Grow. Repeat.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Tout. Apprendre. Grandir. Recommencer.</span></p>
         <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur HEAL" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Heal',35,'Débardeur · Noir · DTF')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander</button></div>
       </div>
     </div>
 
@@ -462,7 +479,7 @@ body { -webkit-touch-callout: none; }
         <p class="sport-card-sub">Débardeur · Noir · DTF</p>
         <p class="sport-card-desc">Feel It All. That's Life.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Ressens tout. C'est ça la vie.</span></p>
         <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur FEEL" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Feel',35,'Débardeur · Noir · DTF')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander</button></div>
       </div>
     </div>
 
@@ -473,7 +490,7 @@ body { -webkit-touch-callout: none; }
         <p class="sport-card-sub">Débardeur · Noir · DTF</p>
         <p class="sport-card-desc">Built By Challenges. Driven By Choice.<br><span style="color:rgba(255,255,255,0.25);font-size:10px;">Forgé par les épreuves. Guidé par le choix.</span></p>
         <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><a href="mailto:contact@cgmindset.fr?subject=Commande Débardeur STRONGER" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a></div>
+        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Stronger',35,'Débardeur · Noir · DTF')" style="font-size:12px;padding:10px 20px;cursor:pointer;">Commander</button></div>
       </div>
     </div>
 
@@ -559,7 +576,7 @@ body { -webkit-touch-callout: none; }
     <span class="trust-holo-badge green">🖨️ Impression DTF</span>
     <span class="trust-holo-badge jaune">🖤 Sweat noir premium</span>
   </div>
-  <a href="mailto:contact@cgmindset.fr?subject=Commande Sweat TRUST Holographique CG Mindset" class="btn-primary">Commander ce modèle</a>
+  <button class="btn-primary" onclick="openPP('Sweat TRUST Holographique',70,'Édition Limitée · Holographique · Précommande')" style="cursor:pointer;">Précommander — 70 €</button>
   <p class="trust-holo-ia">🤖 Visuel généré par IA · Rendu à titre indicatif · Le design imprimé est bien réel</p>
 </div>
 
@@ -679,5 +696,82 @@ checkMenu();
 window.addEventListener('resize', checkMenu);
 </script>
 
+
+<!-- PAYPAL MODAL -->
+<div class="pp-overlay" id="ppOverlay" onclick="if(event.target===this)closePP()">
+  <div class="pp-modal">
+    <button class="pp-modal-close" onclick="closePP()">✕</button>
+    <p class="pp-modal-title" id="ppProductName">Breathe</p>
+    <p class="pp-modal-sub" id="ppProductSub">Débardeur · CG Mindset</p>
+    <p class="pp-modal-price" id="ppProductPrice">35 €</p>
+    <p style="font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;">Taille</p>
+    <div class="pp-size-row" id="ppSizeRow">
+      <button class="pp-size-btn selected" onclick="selectSize(this,'S')">S</button>
+      <button class="pp-size-btn" onclick="selectSize(this,'M')">M</button>
+      <button class="pp-size-btn" onclick="selectSize(this,'L')">L</button>
+      <button class="pp-size-btn" onclick="selectSize(this,'XL')">XL</button>
+      <button class="pp-size-btn" onclick="selectSize(this,'2XL')">2XL</button>
+    </div>
+    <div class="pp-paypal-container" id="ppContainer"></div>
+    <p class="pp-note">🔒 Paiement sécurisé PayPal · contact@cgmindset.fr</p>
+  </div>
+</div>
+
+<script>
+// ===== PAYPAL MODAL =====
+let ppRendered = false;
+let selectedSize = 'S';
+let currentProduct = {};
+
+function selectSize(btn, size) {
+  selectedSize = size;
+  document.querySelectorAll('.pp-size-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function openPP(name, price, sub) {
+  currentProduct = { name, price, sub };
+  selectedSize = 'S';
+  document.querySelectorAll('.pp-size-btn').forEach((b,i) => b.classList.toggle('selected', i===0));
+  document.getElementById('ppProductName').textContent = name;
+  document.getElementById('ppProductSub').textContent = sub || 'CG Mindset';
+  document.getElementById('ppProductPrice').textContent = price + ' €';
+  document.getElementById('ppOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  if (!ppRendered) { renderPayPal(); ppRendered = true; }
+}
+
+function closePP() {
+  document.getElementById('ppOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function renderPayPal() {
+  paypal.Buttons({
+    style: { layout:'vertical', color:'gold', shape:'rect', label:'pay', height:45 },
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          description: currentProduct.name + ' — Taille ' + selectedSize + ' — CG Mindset',
+          amount: {
+            currency_code: 'EUR',
+            value: String(currentProduct.price)
+          },
+          custom_id: currentProduct.name + '_' + selectedSize
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        closePP();
+        alert('✅ Merci ' + (details.payer.name.given_name || '') + ' ! Ta commande est confirmée.\nTu vas recevoir un email de confirmation à ' + details.payer.email_address + '\n\nOn te recontacte très vite pour l\'expédition !');
+      });
+    },
+    onError: function(err) {
+      alert('Une erreur est survenue. Merci de réessayer ou de nous contacter à contact@cgmindset.fr');
+    }
+  }).render('#ppContainer');
+}
+</script>
 </body>
 </html>
