@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CG Mindset — Informations légales</title>
+<meta name="theme-color" content="#FF1B8D">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+--noir: #0a0a0a;
+--gris-dark: #111111;
+--gris: #1a1a1a;
+--rose: #FF1B8D;
+--cyan: #00F0FF;
+--jaune: #FFE600;
+--violet: #BF00FF;
+--blanc: #ffffff;
+--txt: rgba(255,255,255,0.72);
+--txt-soft: rgba(255,255,255,0.45);
+--border: 1px solid rgba(255,255,255,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--noir); color:var(--txt); font-family:'Inter',sans-serif; line-height:1.8; overflow-x:hidden; }
+a { color:var(--cyan); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+nav { position:sticky; top:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:16px 40px; background:rgba(10,10,10,0.94); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,27,141,0.2); }
+.nav-logo { font-family:'Permanent Marker',cursive; font-size:22px; background:linear-gradient(90deg,var(--rose),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-back { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--txt-soft); }
+
+.hero-legal { text-align:center; padding:70px 24px 30px; }
+.hero-legal .eyebrow { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--cyan); }
+.hero-legal h1 { font-family:'Permanent Marker',cursive; font-size:clamp(32px,6vw,56px); margin-top:12px; background:linear-gradient(135deg,var(--rose),var(--violet),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+.tabs { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; padding:24px 20px 0; max-width:900px; margin:0 auto; }
+.tab-btn { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:10px 18px; border:1px solid rgba(255,255,255,0.15); background:transparent; color:var(--txt-soft); cursor:pointer; transition:all 0.2s; }
+.tab-btn:hover { border-color:var(--rose); color:var(--rose); }
+.tab-btn.active { background:linear-gradient(135deg,var(--rose),var(--violet)); border-color:transparent; color:white; }
+
+.wrap { max-width:820px; margin:0 auto; padding:48px 24px 100px; }
+.panel { display:none; }
+.panel.active { display:block; animation:fade 0.3s ease; }
+@keyframes fade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.panel h2 { font-family:'Oswald',sans-serif; font-size:22px; letter-spacing:1px; text-transform:uppercase; color:var(--blanc); margin:40px 0 14px; padding-bottom:10px; border-bottom:1px solid rgba(255,27,141,0.25); }
+.panel h2:first-child { margin-top:0; }
+.panel h3 { font-family:'Oswald',sans-serif; font-size:15px; letter-spacing:1px; text-transform:uppercase; color:var(--cyan); margin:26px 0 8px; }
+.panel p { margin-bottom:14px; font-size:15px; }
+.panel ul { margin:0 0 16px 22px; }
+.panel li { margin-bottom:8px; font-size:15px; }
+.panel strong { color:var(--blanc); }
+.info-box { background:var(--gris-dark); border:var(--border); border-left:3px solid var(--rose); padding:20px 24px; margin:16px 0 24px; }
+.info-box p { margin-bottom:6px; }
+.todo { background:rgba(255,230,0,0.08); border:1px dashed rgba(255,230,0,0.4); color:var(--jaune); padding:2px 8px; font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:1px; border-radius:2px; }
+.maj { font-size:12px; color:var(--txt-soft); font-style:italic; margin-top:40px; text-align:center; }
+
+footer { background:var(--gris); border-top:var(--border); padding:40px 24px; text-align:center; }
+.footer-copy { font-size:11px; color:rgba(255,255,255,0.25); letter-spacing:1px; }
+
+@media (max-width:600px) { nav { padding:14px 20px; } .wrap { padding:32px 18px 80px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">CG Mindset</span>
+  <a href="index.html" class="nav-back">← Retour à la boutique</a>
+</nav>
+
+<div class="hero-legal">
+  <span class="eyebrow">Informations légales</span>
+  <h1>Le sérieux derrière<br>l'étincelle</h1>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('mentions',this)">Mentions légales</button>
+  <button class="tab-btn" onclick="showTab('cgv',this)">CGV</button>
+  <button class="tab-btn" onclick="showTab('confid',this)">Confidentialité</button>
+  <button class="tab-btn" onclick="showTab('retours',this)">Retours & remboursements</button>
+</div>
+
+<div class="wrap">
+
+  <!-- ===== MENTIONS LÉGALES ===== -->
+  <div class="panel active" id="mentions">
+    <h2>Mentions légales</h2>
+    <p>Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, voici les informations relatives à l'éditeur et à l'hébergeur du présent site.</p>
+
+    <h3>Éditeur du site</h3>
+    <div class="info-box">
+      <p><strong>CG Mindset</strong></p>
+      <p>Entreprise individuelle sous le régime de la micro-entreprise</p>
+      <p>Responsable de la publication : Céline George</p>
+      <p>SIREN : 106 739 303</p>
+      <p>Siège / atelier : Ruelle-sur-Touvre (16600), France</p>
+      <p>Adresse e-mail : contact@cgmindset.fr</p>
+      <p>Téléphone : <span class="todo">[À COMPLÉTER — numéro pro]</span></p>
+      <p>Marque déposée à l'INPI n° 5263394</p>
+    </div>
+    <p>TVA non applicable, article 293 B du Code général des impôts (franchise en base de TVA).</p>
+
+    <h3>Hébergeur du site</h3>
+    <div class="info-box">
+      <p><strong>GitHub, Inc.</strong></p>
+      <p>88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</p>
+      <p>Site : github.com</p>
+    </div>
+    <p>Le nom de domaine cgmindset.fr est enregistré auprès de <span class="todo">[À COMPLÉTER — nom du registrar, ex. OVH, Gandi, Namecheap…]</span>.</p>
+
+    <h3>Propriété intellectuelle</h3>
+    <p>L'ensemble des éléments présents sur ce site (visuels, designs, logos, textes, slogans dont « Don't Judge Just Moove », la marque CG Mindset et son identité graphique) sont la propriété exclusive de Céline George / CG Mindset, sauf mention contraire. La marque est déposée à l'INPI sous le numéro 5263394. Toute reproduction, représentation ou exploitation, totale ou partielle, sans autorisation écrite préalable, est interdite et constitue une contrefaçon sanctionnée par le Code de la propriété intellectuelle.</p>
+
+    <h3>Visuels produits</h3>
+    <p>Certains visuels de présentation (mannequins, mises en scène) sont générés par intelligence artificielle et fournis à titre indicatif. Les designs et impressions proposés à la vente sont bien réels. Le rendu final du produit livré peut présenter de légères variations par rapport aux visuels de présentation.</p>
+  </div>
+
+  <!-- ===== CGV ===== -->
+  <div class="panel" id="cgv">
+    <h2>Conditions générales de vente</h2>
+    <p>Les présentes conditions générales de vente (CGV) régissent les ventes de produits réalisées sur le site cgmindset.fr entre CG Mindset (le vendeur) et toute personne physique non commerçante effectuant un achat (le client). Toute commande implique l'acceptation pleine et entière des présentes CGV.</p>
+
+    <h3>Article 1 — Produits</h3>
+    <p>CG Mindset propose à la vente des vêtements et accessoires personnalisés (t-shirts, débardeurs, sweats), ainsi que des stickers, créés sous la marque CG Mindset. Les produits sont décrits et présentés avec la plus grande exactitude possible. Les visuels de présentation, y compris ceux générés par intelligence artificielle, ont une valeur indicative et n'engagent pas le vendeur sur le rendu exact.</p>
+
+    <h3>Article 2 — Prix</h3>
+    <p>Les prix sont indiqués en euros, toutes taxes comprises. En application de l'article 293 B du Code général des impôts, CG Mindset bénéficie de la franchise en base de TVA : la TVA n'est donc pas applicable. Les frais de livraison sont <span class="todo">[À COMPLÉTER — inclus dans le prix / facturés en supplément : préciser le montant]</span>. Le vendeur se réserve le droit de modifier ses prix à tout moment, étant entendu que le prix applicable est celui en vigueur au moment de la validation de la commande.</p>
+
+    <h3>Article 3 — Commande</h3>
+    <p>Le client sélectionne le produit, la taille et valide sa commande via le module de paiement. La commande n'est définitive qu'après confirmation du paiement. Le client reçoit une confirmation par e-mail. CG Mindset se réserve le droit d'annuler ou de refuser toute commande d'un client avec lequel existerait un litige relatif au paiement d'une commande antérieure.</p>
+
+    <h3>Article 4 — Paiement</h3>
+    <p>Le paiement s'effectue en ligne, de manière sécurisée, via le service PayPal (carte bancaire ou compte PayPal). Le débit est réalisé au moment de la validation de la commande. CG Mindset n'a jamais accès aux données bancaires du client, qui sont traitées directement par PayPal.</p>
+
+    <h3>Article 5 — Fabrication et expédition</h3>
+    <p>Les produits sont fabriqués à la demande (impression à la commande). Selon le produit :</p>
+    <ul>
+      <li>Certains articles (t-shirts, débardeurs) sont produits et expédiés par notre atelier partenaire situé en France.</li>
+      <li>D'autres articles (notamment les pièces à finition spéciale et les stickers) sont réalisés et expédiés directement par CG Mindset depuis son atelier à Ruelle-sur-Touvre.</li>
+    </ul>
+    <p>Les délais de fabrication et de livraison sont estimés à <span class="todo">[À COMPLÉTER — ex. 5 à 10 jours ouvrés]</span> à compter de la confirmation de la commande. Ces délais sont donnés à titre indicatif. Les produits étant fabriqués sur commande, un délai supplémentaire de production est à prévoir. La livraison est assurée sur le territoire <span class="todo">[À COMPLÉTER — France métropolitaine / autre]</span>.</p>
+
+    <h3>Article 6 — Droit de rétractation</h3>
+    <p>Conformément aux articles L221-18 et suivants du Code de la consommation, le client dispose d'un délai de quatorze (14) jours à compter de la réception de sa commande pour exercer son droit de rétractation, sans avoir à justifier de motif.</p>
+    <p><strong>Exception importante :</strong> conformément à l'article L221-28 3° du Code de la consommation, le droit de rétractation ne s'applique pas aux biens confectionnés selon les spécifications du consommateur ou nettement personnalisés. Nos produits étant imprimés/personnalisés à la demande, le droit de rétractation peut ne pas s'appliquer aux articles personnalisés. Les modalités précises figurent dans notre politique de retours.</p>
+
+    <h3>Article 7 — Garanties légales</h3>
+    <p>Indépendamment de toute garantie commerciale, le client bénéficie de la garantie légale de conformité (articles L217-3 et suivants du Code de la consommation) et de la garantie contre les vices cachés (articles 1641 et suivants du Code civil). En cas de produit non conforme ou défectueux, le client peut nous contacter à contact@cgmindset.fr.</p>
+
+    <h3>Article 8 — Responsabilité</h3>
+    <p>CG Mindset ne saurait être tenue responsable de l'inexécution du contrat en cas de force majeure, de perturbation ou grève des services postaux et de transport, ou de mauvaise utilisation du produit par le client (entretien non conforme, etc.).</p>
+
+    <h3>Article 9 — Médiation et litiges</h3>
+    <p>Les présentes CGV sont soumises au droit français. En cas de litige, le client peut recourir gratuitement à un médiateur de la consommation. Conformément à l'article L612-1 du Code de la consommation : <span class="todo">[À COMPLÉTER — nom et coordonnées du médiateur de la consommation auprès duquel vous adhérez]</span>. Le client peut également utiliser la plateforme européenne de règlement en ligne des litiges : <a href="https://ec.europa.eu/consumers/odr" target="_blank">ec.europa.eu/consumers/odr</a>.</p>
+  </div>
+
+  <!-- ===== CONFIDENTIALITÉ ===== -->
+  <div class="panel" id="confid">
+    <h2>Politique de confidentialité</h2>
+    <p>CG Mindset attache une grande importance à la protection de vos données personnelles. La présente politique explique quelles données sont collectées, pourquoi, et quels sont vos droits, conformément au Règlement général sur la protection des données (RGPD - Règlement UE 2016/679) et à la loi Informatique et Libertés.</p>
+
+    <h3>Responsable du traitement</h3>
+    <p>Le responsable du traitement des données est Céline George, pour CG Mindset — contact@cgmindset.fr.</p>
+
+    <h3>Données collectées</h3>
+    <p>Dans le cadre d'une commande, nous collectons les données strictement nécessaires :</p>
+    <ul>
+      <li>Nom et prénom</li>
+      <li>Adresse e-mail</li>
+      <li>Adresse de livraison</li>
+      <li>Détail de la commande (produit, taille)</li>
+    </ul>
+    <p>Les données de paiement (numéro de carte, etc.) ne sont <strong>jamais</strong> collectées ni conservées par CG Mindset : elles sont traitées directement et exclusivement par PayPal, notre prestataire de paiement.</p>
+
+    <h3>Finalités et base légale</h3>
+    <p>Vos données sont utilisées uniquement pour : traiter et expédier votre commande, vous contacter au sujet de celle-ci, et respecter nos obligations légales (comptables et fiscales). La base légale est l'exécution du contrat de vente et le respect de nos obligations légales.</p>
+
+    <h3>Destinataires</h3>
+    <p>Vos données peuvent être transmises à nos partenaires strictement pour l'exécution de la commande : notre atelier d'impression et d'expédition partenaire (pour les produits qu'il fabrique et expédie), et les services postaux/transporteurs. Aucune donnée n'est vendue ni cédée à des tiers à des fins commerciales.</p>
+
+    <h3>Durée de conservation</h3>
+    <p>Vos données de commande sont conservées pour la durée nécessaire au traitement, puis archivées conformément aux obligations légales comptables (10 ans pour les pièces comptables).</p>
+
+    <h3>Vos droits</h3>
+    <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité de vos données. Pour les exercer, écrivez à contact@cgmindset.fr. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank">cnil.fr</a>).</p>
+
+    <h3>Cookies</h3>
+    <p>Ce site utilise uniquement les cookies techniques nécessaires à son fonctionnement et au module de paiement PayPal. <span class="todo">[À COMPLÉTER si vous ajoutez des outils de statistiques (Google Analytics, Meta Pixel…) : il faudra alors un bandeau de consentement aux cookies.]</span></p>
+  </div>
+
+  <!-- ===== RETOURS ===== -->
+  <div class="panel" id="retours">
+    <h2>Retours & remboursements</h2>
+
+    <h3>Produits personnalisés</h3>
+    <p>Nos produits sont imprimés et personnalisés à la demande. Conformément à l'article L221-28 du Code de la consommation, les articles confectionnés selon vos spécifications (taille choisie, design personnalisé) ne bénéficient pas du droit de rétractation de 14 jours. Nous vous invitons donc à vérifier attentivement votre choix (modèle, taille) avant de valider votre commande.</p>
+
+    <h3>Produit défectueux ou erreur de commande</h3>
+    <p>Nous mettons un point d'honneur à la qualité. Si vous recevez un article <strong>défectueux, endommagé, ou non conforme à votre commande</strong> (erreur de modèle, de taille, défaut d'impression), nous nous engageons à le remplacer ou à vous rembourser. Pour cela :</p>
+    <ul>
+      <li>Contactez-nous à <a href="mailto:contact@cgmindset.fr">contact@cgmindset.fr</a> dans un délai de <span class="todo">[À COMPLÉTER — ex. 14 jours]</span> après réception.</li>
+      <li>Joignez votre numéro de commande et une ou plusieurs photos du problème constaté.</li>
+      <li>Nous vous répondrons sous <span class="todo">[À COMPLÉTER — ex. 48 à 72h]</span> avec la marche à suivre.</li>
+    </ul>
+
+    <h3>Modalités de remboursement</h3>
+    <p>En cas de remboursement accepté, celui-ci est effectué via PayPal, sur le compte ayant servi au paiement, dans un délai de <span class="todo">[À COMPLÉTER — ex. 14 jours]</span> après validation du retour.</p>
+
+    <h3>Erreur d'adresse</h3>
+    <p>Il appartient au client de fournir une adresse de livraison exacte et complète. CG Mindset ne pourra être tenue responsable d'un colis non livré en raison d'une adresse erronée communiquée par le client.</p>
+
+    <div class="info-box">
+      <p><strong>Une question sur votre commande ?</strong></p>
+      <p>Écrivez-nous à <a href="mailto:contact@cgmindset.fr">contact@cgmindset.fr</a> — on vous répond avec plaisir.</p>
+    </div>
+  </div>
+
+  <p class="maj">Dernière mise à jour : <span class="todo">[date de mise en ligne]</span> · CG Mindset · Ruelle-sur-Touvre, France</p>
+
+</div>
+
+<footer>
+  <p class="footer-copy">© 2026 CG Mindset — Marque déposée INPI n°5263394 · contact@cgmindset.fr</p>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
