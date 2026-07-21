@@ -35,6 +35,14 @@
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: var(--noir); color: var(--encre); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+/* Fond fixe décoratif derrière tout le contenu */
+body::before { content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 15%, rgba(255,91,76,0.10), transparent 60%),
+    radial-gradient(ellipse 55% 50% at 85% 25%, rgba(23,190,187,0.10), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(255,46,147,0.08), transparent 65%),
+    var(--noir);
+  background-attachment:fixed; }
 
 .eyebrow { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 16px; font-weight:600; }
 .section-title { font-family: 'Permanent Marker', cursive; font-size: clamp(36px, 6vw, 72px); color: var(--encre); line-height: 1.05; }
@@ -80,7 +88,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 }
 
 /* ===== SUNSET ===== */
-.sunset-section { background: var(--noir); padding: var(--section-pad); padding-left: 0; padding-right: 0; border-top: 1px solid rgba(255,107,53,0.2); }
+.sunset-section { background: transparent; padding: var(--section-pad); padding-left: 0; padding-right: 0; border-top: 1px solid rgba(255,107,53,0.2); }
 .sunset-section .section-header { padding: 0 40px; margin-bottom: 48px; }
 .sunset-grid { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
 .sunset-img { width: 100%; display: block; border-radius: 2px; transition: transform 0.3s; }
@@ -91,7 +99,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .sunset-model-desc { color: rgba(43,35,32,0.5); font-size: 12px; line-height: 1.6; flex: 1; }
 
 /* ===== COLLECTION SPORT ===== */
-.sport-section { background: var(--noir); padding: var(--section-pad); border-top: 1px solid rgba(255,27,141,0.15); }
+.sport-section { background: rgba(255,255,255,0.35); padding: var(--section-pad); border-top: 1px solid rgba(255,27,141,0.15); }
 .sport-section .section-header { margin-bottom: 48px; }
 .sport-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; max-width: 1400px; margin: 0 auto; }
 .sport-card { background: var(--gris-dark); border: var(--border); border-radius:18px; box-shadow:0 8px 30px rgba(43,35,32,0.06); overflow: hidden; transition: border-color 0.25s, transform 0.25s; display: flex; flex-direction: column; }
@@ -103,7 +111,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .sport-card-word { font-family: 'Permanent Marker', cursive; font-size: 28px; background: linear-gradient(135deg, var(--rose), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .sport-card-sub { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(43,35,32,0.45); }
 .sport-card-desc { color: rgba(43,35,32,0.55); font-size: 11px; line-height: 1.6; flex: 1; }
-.sport-card-price { font-family: 'Permanent Marker', cursive; font-size: 22px; color: var(--jaune); }
+.sport-card-price { font-family: 'Permanent Marker', cursive; font-size: 24px; color: var(--corail); }
 .sport-card-btn { margin-top: 4px; }
 .sport-planche-wrap { max-width: 1000px; margin: 0 auto 64px; padding: 0 40px; }
 .sport-planche-img { width: 100%; display: block; border-radius: 2px; }
@@ -121,7 +129,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .lifestyle-sub { font-size: 11px; color: rgba(43,35,32,0.5); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
 
 /* ===== STICKERS ===== */
-.sticker-section-wrap { background: var(--gris); padding: var(--section-pad); padding-left: 0; padding-right: 0; }
+.sticker-section-wrap { background: transparent; padding: var(--section-pad); padding-left: 0; padding-right: 0; }
 .sticker-header { text-align: center; padding: 0 40px; margin-bottom: 56px; }
 .prix-grid { display: flex; justify-content: center; gap: 1px; flex-wrap: wrap; padding: 0 40px; max-width: 800px; margin-left: auto; margin-right: auto; margin-bottom: 64px; }
 .prix-card { border: var(--border); border-radius:16px; padding: 20px 28px; text-align: center; min-width: 140px; flex: 1; background: var(--gris-dark); box-shadow:0 6px 20px rgba(43,35,32,0.05); }
@@ -148,7 +156,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .slide-cpms-rect .slide-tag { background: rgba(255,230,0,0.12); color: var(--jaune); }
 .slide-title { font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; color: var(--blanc); }
 .slide-desc { color: rgba(43,35,32,0.5); font-size: 11px; line-height: 1.6; margin-bottom: 14px; }
-.slide-price { font-family: 'Permanent Marker', cursive; font-size: 24px; color: var(--jaune); margin-bottom: 14px; }
+.slide-price { font-family: 'Permanent Marker', cursive; font-size: 24px; color: var(--corail); margin-bottom: 14px; }
 .slide-pack .slide-img-wrap { background: linear-gradient(135deg,#FFE8D6,#D6F0F0); flex-direction: column; }
 .slide-pack .pack-icon { font-size: 64px; }
 .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 16px; }
@@ -160,7 +168,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .carousel-dot.active { background: var(--rose); width: 20px; border-radius: 3px; }
 
 /* ===== TRUST HOLO ===== */
-.trust-holo-section { background: var(--noir); border-top: 1px solid rgba(0,229,255,0.15); padding: 100px 40px; text-align: center; position: relative; overflow: hidden; }
+.trust-holo-section { background: rgba(255,255,255,0.35); border-top: 1px solid rgba(0,229,255,0.15); padding: 100px 40px; text-align: center; position: relative; overflow: hidden; }
 .trust-holo-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,229,255,0.04) 0%, transparent 70%); pointer-events: none; }
 .trust-holo-eyebrow { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 16px; }
 .trust-holo-title { font-family: 'Permanent Marker', cursive; font-size: clamp(32px, 5vw, 64px); background: linear-gradient(135deg, var(--corail), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; line-height: 1.1; }
@@ -182,9 +190,9 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .mascotte-wrap { position:relative; }
 .mascotte-float { width: 340px; max-width:78vw; display:block; animation: mascFloat 4s ease-in-out infinite; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.18)); border-radius:24px; }
 @keyframes mascFloat { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-18px) rotate(1deg); } }
-.mascotte-bulle { position:absolute; top:30%; right:-40px; background:#fff; border:3px solid var(--encre); border-radius:22px; padding:14px 20px; font-family:'Permanent Marker',cursive; font-size:16px; color:var(--encre); max-width:190px; line-height:1.3; box-shadow:0 8px 20px rgba(0,0,0,0.12); animation:bullePop 4s ease-in-out infinite; transform-origin:left center; z-index:3; }
-.mascotte-bulle::after { content:''; position:absolute; left:-16px; top:50%; transform:translateY(-50%); border-width:10px 18px 10px 0; border-style:solid; border-color:transparent #fff transparent transparent; }
-.mascotte-bulle::before { content:''; position:absolute; left:-21px; top:50%; transform:translateY(-50%); border-width:12px 20px 12px 0; border-style:solid; border-color:transparent var(--encre) transparent transparent; }
+.mascotte-bulle { position:absolute; top:-24px; right:-30px; background:#fff; border:3px solid var(--encre); border-radius:22px; padding:14px 20px; font-family:'Permanent Marker',cursive; font-size:16px; color:var(--encre); max-width:190px; line-height:1.3; box-shadow:0 8px 20px rgba(0,0,0,0.12); animation:bullePop 4s ease-in-out infinite; transform-origin:left bottom; z-index:3; }
+.mascotte-bulle::after { content:''; position:absolute; left:32px; bottom:-15px; border-width:16px 12px 0 0; border-style:solid; border-color:#fff transparent transparent transparent; }
+.mascotte-bulle::before { content:''; position:absolute; left:30px; bottom:-20px; border-width:20px 15px 0 0; border-style:solid; border-color:var(--encre) transparent transparent transparent; }
 @keyframes bullePop { 0%,35% { opacity:0; transform:scale(0.7);} 50%,88% { opacity:1; transform:scale(1);} 100%{opacity:0;transform:scale(0.7);} }
 .about-portrait::after { display:none; }
 .about-content { display: flex; flex-direction: column; justify-content: center; padding: 80px 60px 80px 48px; position: relative; z-index: 1; }
@@ -278,15 +286,15 @@ body { -webkit-touch-callout: none; }
 .pp-badge span { font-family:'Oswald',sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(43,35,32,0.45); }
 
 /* ===== MODALE / PANIER ===== */
-.pp-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9999; display:none; align-items:flex-start; justify-content:center; padding:20px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+.pp-overlay { position:fixed; inset:0; background:rgba(43,35,32,0.55); backdrop-filter:blur(4px); z-index:9999; display:none; align-items:flex-start; justify-content:center; padding:20px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
 .pp-overlay.active { display:flex; }
-.pp-modal { background:#111; border:1px solid rgba(255,27,141,0.3); padding:32px 28px; max-width:440px; width:100%; position:relative; margin:auto; }
+.pp-modal { background:var(--noir); border:1px solid rgba(255,46,147,0.25); border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.25); padding:32px 28px; max-width:440px; width:100%; position:relative; margin:auto; }
 .pp-modal-close { position:absolute; top:14px; right:16px; background:none; border:none; color:rgba(43,35,32,0.5); font-size:22px; cursor:pointer; line-height:1; }
 .pp-modal-close:hover { color:var(--rose); }
-.pp-modal-title { font-family:'Permanent Marker',cursive; font-size:26px; background:linear-gradient(135deg,var(--rose),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:4px; }
+.pp-modal-title { font-family:'Permanent Marker',cursive; font-size:26px; color:var(--encre); margin-bottom:4px; }
 .pp-modal-sub { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(43,35,32,0.45); margin-bottom:20px; }
-.pp-modal-price { font-family:'Permanent Marker',cursive; font-size:32px; color:var(--jaune); margin-bottom:8px; }
-.pp-precommande { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--cyan); background:rgba(0,240,255,0.06); border:1px solid rgba(0,240,255,0.18); padding:10px 12px; margin-bottom:20px; line-height:1.5; }
+.pp-modal-price { font-family:'Permanent Marker',cursive; font-size:32px; color:var(--corail); margin-bottom:8px; }
+.pp-precommande { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:#0E8583; background:rgba(23,190,187,0.10); border:1px solid rgba(23,190,187,0.3); padding:10px 12px; margin-bottom:20px; line-height:1.5; }
 .pp-label { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(43,35,32,0.5); margin-bottom:10px; }
 .pp-size-row { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
 .pp-size-btn { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:8px 16px; border:1px solid rgba(43,35,32,0.25); background:transparent; color:rgba(43,35,32,0.75); cursor:pointer; transition:all 0.2s; }
@@ -623,7 +631,7 @@ body { -webkit-touch-callout: none; }
             <p class="slide-title">C'est Pas Marrant Sinon</p>
             <p class="slide-desc">Format rond · Neon · Résilience · Humour · Mindset · Le sticker signature CG Mindset</p>
             <p class="slide-price">À partir de 3 €</p>
-            <a href="mailto:contact@cgmindset.fr?subject=Commande sticker CPMS Rond" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a>
+            <button class="btn-primary" onclick="openPP('Sticker CPMS Rond',3,'Sticker · Format rond · Vinyle premium')" style="font-size:12px;padding:10px 20px;border:none;cursor:pointer;">Ajouter au panier</button>
           </div>
         </div>
         <div class="sticker-slide slide-cpms-rect">
@@ -633,7 +641,7 @@ body { -webkit-touch-callout: none; }
             <p class="slide-title">C'est Pas Marrant Sinon</p>
             <p class="slide-desc">Format rectangulaire · Sunset rétro · Style plaque de rue · Écriture brush fluo</p>
             <p class="slide-price">À partir de 3 €</p>
-            <a href="mailto:contact@cgmindset.fr?subject=Commande sticker CPMS Rectangulaire" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a>
+            <button class="btn-primary" onclick="openPP('Sticker CPMS Rectangulaire',3,'Sticker · Format rectangulaire · Vinyle premium')" style="font-size:12px;padding:10px 20px;border:none;cursor:pointer;">Ajouter au panier</button>
           </div>
         </div>
         <div class="sticker-slide slide-cpms-holo">
@@ -643,7 +651,7 @@ body { -webkit-touch-callout: none; }
             <p class="slide-title">C'est Pas Marrant Sinon</p>
             <p class="slide-desc">Format rond · Effet holographique premium · Reflets arc-en-ciel · Édition exclusive</p>
             <p class="slide-price">À partir de 5 €</p>
-            <a href="mailto:contact@cgmindset.fr?subject=Commande sticker CPMS Holographique" class="btn-primary" style="font-size:12px;padding:10px 20px;">Commander</a>
+            <button class="btn-primary" onclick="openPP('Sticker CPMS Holographique',5,'Sticker · Holographique · Édition exclusive')" style="font-size:12px;padding:10px 20px;border:none;cursor:pointer;">Ajouter au panier</button>
           </div>
         </div>
         <div class="sticker-slide slide-pack">
@@ -816,8 +824,8 @@ window.addEventListener('resize', checkMenu);
     <p class="pp-modal-title" id="ppProductName">Breathe</p>
     <p class="pp-modal-sub" id="ppProductSub">Débardeur · CG Mindset</p>
     <p class="pp-modal-price" id="ppProductPrice">35 €</p>
-    <div class="pp-precommande">📦 Pièce réalisée à la commande · Expédiée sous 10 à 15 jours 🇫🇷<br>Livraison et adresse choisies à l'étape panier.</div>
-    <p class="pp-label">Taille</p>
+    <div class="pp-precommande" id="ppPrecommande">📦 Pièce réalisée à la commande · Expédiée sous 10 à 15 jours 🇫🇷<br>Livraison et adresse choisies à l'étape panier.</div>
+    <p class="pp-label" id="ppSizeLabel">Taille</p>
     <div class="pp-size-row" id="ppSizeRow">
       <button class="pp-size-btn selected" onclick="selectSize(this,'S')">S</button>
       <button class="pp-size-btn" onclick="selectSize(this,'M')">M</button>
@@ -900,7 +908,15 @@ function selectSize(btn, size) {
 // Ouvre la modale d'ajout pour un produit
 function openPP(name, price, sub) {
   currentProduct = { name: name, price: Number(price), sub: sub || 'CG Mindset' };
-  selectedSize = 'S';
+  var isSticker = /sticker/i.test(name);
+  // Masquer taille + mention précommande pour les stickers
+  var sizeLabel = document.getElementById('ppSizeLabel');
+  var sizeRow = document.getElementById('ppSizeRow');
+  var precmd = document.getElementById('ppPrecommande');
+  if (sizeLabel) sizeLabel.style.display = isSticker ? 'none' : '';
+  if (sizeRow) sizeRow.style.display = isSticker ? 'none' : '';
+  if (precmd) precmd.style.display = isSticker ? 'none' : '';
+  selectedSize = isSticker ? '-' : 'S';
   document.querySelectorAll('#ppSizeRow .pp-size-btn').forEach((b,i) => b.classList.toggle('selected', i===0));
   document.getElementById('ppProductName').textContent = name;
   document.getElementById('ppProductSub').textContent = currentProduct.sub;
