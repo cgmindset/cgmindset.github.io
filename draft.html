@@ -34,15 +34,16 @@
 --radius: 18px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--noir); color: var(--encre); font-family: 'Inter', sans-serif; overflow-x: hidden; }
-/* Fond fixe décoratif derrière tout le contenu */
+body { background: transparent; color: var(--encre); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+/* Fond fixe décoratif pastel — reste derrière quand on défile */
 body::before { content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
   background:
-    radial-gradient(ellipse 60% 50% at 15% 15%, rgba(255,91,76,0.10), transparent 60%),
-    radial-gradient(ellipse 55% 50% at 85% 25%, rgba(23,190,187,0.10), transparent 60%),
-    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(255,46,147,0.08), transparent 65%),
-    var(--noir);
-  background-attachment:fixed; }
+    radial-gradient(ellipse 70% 55% at 12% 8%, rgba(255,91,76,0.22), transparent 55%),
+    radial-gradient(ellipse 65% 55% at 90% 20%, rgba(23,190,187,0.20), transparent 55%),
+    radial-gradient(ellipse 80% 60% at 25% 92%, rgba(255,46,147,0.18), transparent 60%),
+    radial-gradient(ellipse 75% 60% at 88% 95%, rgba(245,168,0,0.20), transparent 60%),
+    linear-gradient(160deg, #FFE9DC 0%, #FDEEF3 40%, #E3F4F3 100%);
+}
 
 .eyebrow { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 16px; font-weight:600; }
 .section-title { font-family: 'Permanent Marker', cursive; font-size: clamp(36px, 6vw, 72px); color: var(--encre); line-height: 1.05; }
@@ -99,7 +100,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .sunset-model-desc { color: rgba(43,35,32,0.5); font-size: 12px; line-height: 1.6; flex: 1; }
 
 /* ===== COLLECTION SPORT ===== */
-.sport-section { background: rgba(255,255,255,0.35); padding: var(--section-pad); border-top: 1px solid rgba(255,27,141,0.15); }
+.sport-section { background: rgba(255,255,255,0.45); padding: var(--section-pad); border-top: 1px solid rgba(255,27,141,0.15); }
 .sport-section .section-header { margin-bottom: 48px; }
 .sport-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; max-width: 1400px; margin: 0 auto; }
 .sport-card { background: var(--gris-dark); border: var(--border); border-radius:18px; box-shadow:0 8px 30px rgba(43,35,32,0.06); overflow: hidden; transition: border-color 0.25s, transform 0.25s; display: flex; flex-direction: column; }
@@ -168,7 +169,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .carousel-dot.active { background: var(--rose); width: 20px; border-radius: 3px; }
 
 /* ===== TRUST HOLO ===== */
-.trust-holo-section { background: rgba(255,255,255,0.35); border-top: 1px solid rgba(0,229,255,0.15); padding: 100px 40px; text-align: center; position: relative; overflow: hidden; }
+.trust-holo-section { background: rgba(255,255,255,0.4); border-top: 1px solid rgba(0,229,255,0.15); padding: 100px 40px; text-align: center; position: relative; overflow: hidden; }
 .trust-holo-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,229,255,0.04) 0%, transparent 70%); pointer-events: none; }
 .trust-holo-eyebrow { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 16px; }
 .trust-holo-title { font-family: 'Permanent Marker', cursive; font-size: clamp(32px, 5vw, 64px); background: linear-gradient(135deg, var(--corail), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; line-height: 1.1; }
@@ -218,7 +219,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .about-signature { font-family: 'Permanent Marker', cursive; font-size: 18px; background: linear-gradient(90deg, var(--rose), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.7; }
 
 /* ===== FOOTER ===== */
-footer { background: var(--gris); border-top: 1px solid rgba(43,35,32,0.08); padding: 60px 40px; text-align: center; }
+footer { background: rgba(243,234,221,0.55); border-top: 1px solid rgba(43,35,32,0.08); padding: 60px 40px; text-align: center; }
 .footer-tagline { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(43,35,32,0.35); margin-bottom: 32px; font-family: 'Oswald', sans-serif; }
 .social-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 32px; }
 .social-link { width: 40px; height: 40px; border: var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(43,35,32,0.5); font-size: 16px; transition: all 0.2s; }
@@ -833,6 +834,13 @@ window.addEventListener('resize', checkMenu);
       <button class="pp-size-btn" onclick="selectSize(this,'XL')">XL</button>
       <button class="pp-size-btn" onclick="selectSize(this,'2XL')">2XL</button>
     </div>
+    <p class="pp-label" id="ppStickerLabel" style="display:none;">Format</p>
+    <div class="pp-size-row" id="ppStickerRow" style="display:none;">
+      <button class="pp-size-btn selected" onclick="selectSticker(this,'Petit',3)">Petit · 3 €</button>
+      <button class="pp-size-btn" onclick="selectSticker(this,'Moyen',4.5)">Moyen · 4,50 €</button>
+      <button class="pp-size-btn" onclick="selectSticker(this,'Grand',7)">Grand · 7 €</button>
+      <button class="pp-size-btn" onclick="selectSticker(this,'Holographique',9)">Holo · 9 €</button>
+    </div>
     <div class="pp-actions">
       <button class="pp-add-btn" onclick="addToCartAndCheckout()">Ajouter au panier et voir le panier</button>
       <button class="pp-continue-btn" onclick="addToCartAndContinue()">Continuer mes achats</button>
@@ -905,22 +913,44 @@ function selectSize(btn, size) {
   btn.classList.add('selected');
 }
 
+// Sélection format sticker : change le prix affiché et le prix courant
+function selectSticker(btn, format, price) {
+  selectedSize = format;
+  currentProduct.price = Number(price);
+  document.querySelectorAll('#ppStickerRow .pp-size-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  var pr = price % 1 === 0 ? price + ' €' : String(price).replace('.', ',') + ' €';
+  document.getElementById('ppProductPrice').textContent = pr;
+}
+
 // Ouvre la modale d'ajout pour un produit
 function openPP(name, price, sub) {
   currentProduct = { name: name, price: Number(price), sub: sub || 'CG Mindset' };
   var isSticker = /sticker/i.test(name);
-  // Masquer taille + mention précommande pour les stickers
   var sizeLabel = document.getElementById('ppSizeLabel');
   var sizeRow = document.getElementById('ppSizeRow');
+  var stickerLabel = document.getElementById('ppStickerLabel');
+  var stickerRow = document.getElementById('ppStickerRow');
   var precmd = document.getElementById('ppPrecommande');
+  // Vêtements : tailles S-2XL. Stickers : formats avec prix.
   if (sizeLabel) sizeLabel.style.display = isSticker ? 'none' : '';
   if (sizeRow) sizeRow.style.display = isSticker ? 'none' : '';
+  if (stickerLabel) stickerLabel.style.display = isSticker ? '' : 'none';
+  if (stickerRow) stickerRow.style.display = isSticker ? 'flex' : 'none';
   if (precmd) precmd.style.display = isSticker ? 'none' : '';
-  selectedSize = isSticker ? '-' : 'S';
-  document.querySelectorAll('#ppSizeRow .pp-size-btn').forEach((b,i) => b.classList.toggle('selected', i===0));
+  if (isSticker) {
+    // format par défaut = Petit (3 €)
+    selectedSize = 'Petit';
+    currentProduct.price = 3;
+    document.querySelectorAll('#ppStickerRow .pp-size-btn').forEach((b,i) => b.classList.toggle('selected', i===0));
+    document.getElementById('ppProductPrice').textContent = '3 €';
+  } else {
+    selectedSize = 'S';
+    document.querySelectorAll('#ppSizeRow .pp-size-btn').forEach((b,i) => b.classList.toggle('selected', i===0));
+    document.getElementById('ppProductPrice').textContent = price + ' €';
+  }
   document.getElementById('ppProductName').textContent = name;
   document.getElementById('ppProductSub').textContent = currentProduct.sub;
-  document.getElementById('ppProductPrice').textContent = price + ' €';
   document.getElementById('ppOverlay').classList.add('active');
   document.getElementById('ppOverlay').scrollTop = 0;
 }
