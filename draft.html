@@ -107,6 +107,20 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .sport-section { background: rgba(255,255,255,0.15); padding: var(--section-pad); border-top: 1px solid rgba(255,27,141,0.15); }
 .sport-section .section-header { margin-bottom: 48px; }
 .sport-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; max-width: 1400px; margin: 0 auto; }
+/* ===== CARROUSEL SPORT (3 à la fois, glissement) ===== */
+.sport-carousel { max-width:1300px; margin:0 auto; position:relative; }
+.sport-carousel-outer { overflow:hidden; padding:8px 0; }
+.sport-carousel-track { display:flex; gap:20px; padding:0 10px; transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+.sport-carousel-track .sport-card { flex:0 0 calc((100% - 40px) / 3); border-radius:18px; box-shadow:0 8px 30px rgba(43,35,32,0.08); }
+.sport-carousel-controls { display:flex; align-items:center; justify-content:center; gap:18px; margin-top:24px; }
+.sport-carousel-btn { width:50px; height:50px; border:1px solid rgba(43,35,32,0.2); border-radius:50%; background:#fff; color:var(--encre); font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; box-shadow:0 4px 12px rgba(43,35,32,0.08); }
+.sport-carousel-btn:hover { background:var(--rose); border-color:var(--rose); color:#fff; }
+.sport-carousel-btn:disabled { opacity:0.25; cursor:default; }
+.sport-carousel-dots { display:flex; gap:7px; }
+.sport-carousel-dot { width:8px; height:8px; border-radius:50%; background:rgba(43,35,32,0.2); border:none; cursor:pointer; padding:0; transition:all 0.2s; }
+.sport-carousel-dot.active { background:var(--rose); width:24px; border-radius:4px; }
+@media (max-width:900px){ .sport-carousel-track .sport-card { flex:0 0 calc((100% - 20px) / 2); } }
+@media (max-width:640px){ .sport-carousel-track .sport-card { flex:0 0 100%; } }
 .sport-card { background: var(--gris-dark); border: var(--border); border-radius:18px; box-shadow:0 8px 30px rgba(43,35,32,0.06); overflow: hidden; transition: border-color 0.25s, transform 0.25s; display: flex; flex-direction: column; }
 .sport-card:hover { border-color: rgba(255,27,141,0.4); transform: translateY(-4px); }
 .sport-card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #F0E8DC; position: relative; }
@@ -498,7 +512,9 @@ body { -webkit-touch-callout: none; }
     <p class="section-sub">Débardeurs · Impression DTF · Réalisé à la commande · Livraison dès 5 € 🇫🇷</p>
   </div>
 
-  <div class="sport-grid" style="max-width:1400px;margin:0 auto;padding:0 40px;">
+  <div class="sport-carousel">
+    <div class="sport-carousel-outer">
+      <div class="sport-carousel-track" id="sportTrack">
 
     <div class="sport-card">
       <div class="sport-card-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F0E8DC;">
@@ -625,6 +641,13 @@ body { -webkit-touch-callout: none; }
         <p class="sport-card-price">35 €</p>
         <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Stronger',35,'Débardeur · Noir · DTF')" style="font-size:13px;padding:14px 28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;">AJOUTER AU PANIER <img src='https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png' alt='PayPal' style='height:20px;'></button></div>
       </div>
+    </div>
+      </div>
+    </div>
+    <div class="sport-carousel-controls">
+      <button class="sport-carousel-btn" id="sportPrev" onclick="sportMove(-1)" disabled>&#8592;</button>
+      <div class="sport-carousel-dots" id="sportDots"></div>
+      <button class="sport-carousel-btn" id="sportNext" onclick="sportMove(1)">&#8594;</button>
     </div>
   </div>
 </div>
@@ -1165,6 +1188,57 @@ document.addEventListener('DOMContentLoaded', function() {
 function closeImgZoom() {
   document.getElementById('imgZoomOverlay').classList.remove('active');
 }
+</script>
+
+<!-- CARROUSEL SPORT -->
+<script>
+(function(){
+  var track = document.getElementById('sportTrack');
+  if (!track) return;
+  var cards = track.querySelectorAll('.sport-card');
+  var dotsBox = document.getElementById('sportDots');
+  var prev = document.getElementById('sportPrev');
+  var next = document.getElementById('sportNext');
+  var page = 0;
+
+  function perView(){
+    if (window.innerWidth <= 640) return 1;
+    if (window.innerWidth <= 900) return 2;
+    return 3;
+  }
+  function pageCount(){ return Math.ceil(cards.length / perView()); }
+
+  function buildDots(){
+    dotsBox.innerHTML = '';
+    for (var i=0; i<pageCount(); i++){
+      var d = document.createElement('button');
+      d.className = 'sport-carousel-dot' + (i===0?' active':'');
+      (function(idx){ d.onclick = function(){ goPage(idx); }; })(i);
+      dotsBox.appendChild(d);
+    }
+  }
+  function goPage(p){
+    var max = pageCount()-1;
+    page = Math.max(0, Math.min(p, max));
+    var cardW = cards[0].offsetWidth + 20; // largeur + gap
+    track.style.transform = 'translateX(-' + (page * perView() * cardW) + 'px)';
+    dotsBox.querySelectorAll('.sport-carousel-dot').forEach(function(d,i){ d.classList.toggle('active', i===page); });
+    prev.disabled = (page===0);
+    next.disabled = (page===max);
+  }
+  window.sportMove = function(dir){ goPage(page + dir); };
+
+  // Swipe tactile
+  var startX = 0;
+  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) window.sportMove(diff > 0 ? 1 : -1);
+  });
+
+  buildDots(); goPage(0);
+  window.addEventListener('resize', function(){ buildDots(); goPage(0); });
+})();
 </script>
 
 </body>
