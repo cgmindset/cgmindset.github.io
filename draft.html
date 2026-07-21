@@ -266,14 +266,15 @@ body { -webkit-touch-callout: none; }
 .pp-badge span { font-family:'Oswald',sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); }
 
 /* ===== PAYPAL MODAL ===== */
-.pp-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9999; display:none; align-items:center; justify-content:center; padding:20px; }
+.pp-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9999; display:none; align-items:flex-start; justify-content:center; padding:20px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
 .pp-overlay.active { display:flex; }
-.pp-modal { background:#111; border:1px solid rgba(255,27,141,0.3); padding:32px 28px; max-width:420px; width:100%; position:relative; }
+.pp-modal { background:#111; border:1px solid rgba(255,27,141,0.3); padding:32px 28px; max-width:420px; width:100%; position:relative; margin:auto; }
 .pp-modal-close { position:absolute; top:14px; right:16px; background:none; border:none; color:rgba(255,255,255,0.4); font-size:22px; cursor:pointer; line-height:1; }
 .pp-modal-close:hover { color:var(--rose); }
 .pp-modal-title { font-family:'Permanent Marker',cursive; font-size:26px; background:linear-gradient(135deg,var(--rose),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:4px; }
 .pp-modal-sub { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px; }
 .pp-modal-price { font-family:'Permanent Marker',cursive; font-size:32px; color:var(--jaune); margin-bottom:8px; }
+.pp-precommande { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--cyan); background:rgba(0,240,255,0.06); border:1px solid rgba(0,240,255,0.18); padding:10px 12px; margin-bottom:20px; line-height:1.5; }
 .pp-size-row { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
 .pp-size-btn { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:8px 16px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:rgba(255,255,255,0.6); cursor:pointer; transition:all 0.2s; }
 .pp-size-btn.selected, .pp-size-btn:hover { border-color:var(--rose); color:var(--rose); background:rgba(255,27,141,0.08); }
@@ -330,7 +331,7 @@ body { -webkit-touch-callout: none; }
   <div class="section-header">
     <span class="eyebrow">New Drop 2026</span>
     <h2 class="section-title">Sunset & Beach<br>Collection</h2>
-    <p class="section-sub">4 modèles exclusifs · 100% coton · Coupe unisexe · Expédition France 🇫🇷</p>
+    <p class="section-sub">4 modèles exclusifs · 100% coton · Coupe unisexe · Réalisé à la commande · Port offert 🇫🇷</p>
   </div>
 
   <!-- Modèle 01 — Energy Flows (Mauve) -->
@@ -395,7 +396,7 @@ body { -webkit-touch-callout: none; }
   <div class="section-header">
     <span class="eyebrow">Collection Sport 2026</span>
     <h2 class="section-title">9 Designs<br>Wear Your Mindset</h2>
-    <p class="section-sub">Débardeurs · Impression DTF · Qualité premium · Expédition France 🇫🇷</p>
+    <p class="section-sub">Débardeurs · Impression DTF · Réalisé à la commande · Port offert 🇫🇷</p>
   </div>
 
   <div class="sport-grid" style="max-width:1400px;margin:0 auto;padding:0 40px;">
@@ -728,6 +729,7 @@ window.addEventListener('resize', checkMenu);
     <p class="pp-modal-title" id="ppProductName">Breathe</p>
     <p class="pp-modal-sub" id="ppProductSub">Débardeur · CG Mindset</p>
     <p class="pp-modal-price" id="ppProductPrice">35 €</p>
+    <div class="pp-precommande">📦 Pièce réalisée à la commande · Expédiée sous 10 à 15 jours · Port offert 🇫🇷<br>L'adresse de livraison est demandée par PayPal à l'étape suivante.</div>
     <p style="font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;">Taille</p>
     <div class="pp-size-row" id="ppSizeRow">
       <button class="pp-size-btn selected" onclick="selectSize(this,'S')">S</button>
@@ -761,13 +763,12 @@ function openPP(name, price, sub) {
   document.getElementById('ppProductSub').textContent = sub || 'CG Mindset';
   document.getElementById('ppProductPrice').textContent = price + ' €';
   document.getElementById('ppOverlay').classList.add('active');
-  document.body.style.overflow = 'hidden';
+  document.getElementById('ppOverlay').scrollTop = 0;
   if (!ppRendered) { renderPayPal(); ppRendered = true; }
 }
 
 function closePP() {
   document.getElementById('ppOverlay').classList.remove('active');
-  document.body.style.overflow = '';
 }
 
 function renderPayPal() {
@@ -775,6 +776,10 @@ function renderPayPal() {
     style: { layout:'vertical', color:'gold', shape:'rect', label:'pay', height:45 },
     createOrder: function(data, actions) {
       return actions.order.create({
+        // Force la collecte de l'adresse de livraison par PayPal
+        application_context: {
+          shipping_preference: 'GET_FROM_FILE'
+        },
         purchase_units: [{
           description: currentProduct.name + ' — Taille ' + selectedSize + ' — CG Mindset',
           amount: {
@@ -788,7 +793,20 @@ function renderPayPal() {
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details) {
         closePP();
-        alert('✅ Merci ' + (details.payer.name.given_name || '') + ' ! Ta commande est confirmée.\nTu vas recevoir un email de confirmation à ' + details.payer.email_address + '\n\nOn te recontacte très vite pour l\'expédition !');
+        var ship = '';
+        try {
+          var pu = details.purchase_units && details.purchase_units[0];
+          if (pu && pu.shipping && pu.shipping.address) {
+            var a = pu.shipping.address;
+            var nom = (pu.shipping.name && pu.shipping.name.full_name) ? pu.shipping.name.full_name : '';
+            ship = '\n\n📦 Livraison :\n' + nom + '\n'
+                 + (a.address_line_1 || '') + '\n'
+                 + (a.address_line_2 ? a.address_line_2 + '\n' : '')
+                 + (a.postal_code || '') + ' ' + (a.admin_area_2 || '') + '\n'
+                 + (a.country_code || '');
+          }
+        } catch(e) {}
+        alert('✅ Merci ' + (details.payer.name.given_name || '') + ' ! Ta commande est confirmée.\nTu vas recevoir un email de confirmation à ' + details.payer.email_address + ship + '\n\nOn te recontacte très vite pour l\'expédition !');
       });
     },
     onError: function(err) {
