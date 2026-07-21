@@ -35,16 +35,9 @@
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: transparent; color: var(--encre); font-family: 'Inter', sans-serif; overflow-x: hidden; }
-/* Fond fixe : image sunset — reste derrière quand on défile */
+/* Fond clair uni pour le corps du site (le sunset reste seulement dans le hero) */
 body::before { content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
-  background-image: url('fond-sunset.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-/* voile clair par-dessus le fond pour garder le texte lisible */
-body::after { content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
-  background: rgba(251,246,239,0.35);
+  background: linear-gradient(160deg, #FFF3EC 0%, #FDF6F2 45%, #F0F7F6 100%);
 }
 
 .eyebrow { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 16px; font-weight:600; }
