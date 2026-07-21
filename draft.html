@@ -35,14 +35,16 @@
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: transparent; color: var(--encre); font-family: 'Inter', sans-serif; overflow-x: hidden; }
-/* Fond fixe décoratif pastel — reste derrière quand on défile */
+/* Fond fixe : image sunset — reste derrière quand on défile */
 body::before { content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
-  background:
-    radial-gradient(ellipse 70% 55% at 12% 8%, rgba(255,91,76,0.30), transparent 55%),
-    radial-gradient(ellipse 65% 55% at 90% 20%, rgba(23,190,187,0.28), transparent 55%),
-    radial-gradient(ellipse 80% 60% at 25% 92%, rgba(255,46,147,0.26), transparent 60%),
-    radial-gradient(ellipse 75% 60% at 88% 95%, rgba(245,168,0,0.28), transparent 60%),
-    linear-gradient(160deg, #FFE2D0 0%, #FCE6EF 40%, #D8F0EF 100%);
+  background-image: url('fond-sunset.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* voile clair par-dessus le fond pour garder le texte lisible */
+body::after { content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background: rgba(251,246,239,0.35);
 }
 
 .eyebrow { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 16px; font-weight:600; }
