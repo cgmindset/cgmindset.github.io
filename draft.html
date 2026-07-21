@@ -103,19 +103,26 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .sport-section .section-header { margin-bottom: 48px; }
 .sport-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; max-width: 1400px; margin: 0 auto; }
 /* ===== CARROUSEL SPORT (3 à la fois, glissement) ===== */
-.sport-carousel { max-width:1300px; margin:0 auto; position:relative; }
-.sport-carousel-outer { overflow:hidden; padding:8px 0; }
-.sport-carousel-track { display:flex; gap:20px; padding:0 10px; transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
-.sport-carousel-track .sport-card { flex:0 0 calc((100% - 40px) / 3); border-radius:18px; box-shadow:0 8px 30px rgba(43,35,32,0.08); }
-.sport-carousel-controls { display:flex; align-items:center; justify-content:center; gap:18px; margin-top:24px; }
-.sport-carousel-btn { width:50px; height:50px; border:1px solid rgba(43,35,32,0.2); border-radius:50%; background:#fff; color:var(--encre); font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; box-shadow:0 4px 12px rgba(43,35,32,0.08); }
-.sport-carousel-btn:hover { background:var(--rose); border-color:var(--rose); color:#fff; }
-.sport-carousel-btn:disabled { opacity:0.25; cursor:default; }
-.sport-carousel-dots { display:flex; gap:7px; }
-.sport-carousel-dot { width:8px; height:8px; border-radius:50%; background:rgba(43,35,32,0.2); border:none; cursor:pointer; padding:0; transition:all 0.2s; }
-.sport-carousel-dot.active { background:var(--rose); width:24px; border-radius:4px; }
-@media (max-width:900px){ .sport-carousel-track .sport-card { flex:0 0 calc((100% - 20px) / 2); } }
-@media (max-width:640px){ .sport-carousel-track .sport-card { flex:0 0 100%; } }
+/* ===== SÉLECTEUR HOMME / FEMME ===== */
+.genre-switch-wrap { display:flex; justify-content:center; margin:8px 0 44px; }
+.genre-switch { display:inline-flex; background:#fff; border:2px solid var(--encre); border-radius:40px; padding:5px; box-shadow:0 6px 18px rgba(43,35,32,0.1); position:relative; }
+.genre-switch button { border:none; background:transparent; font-family:'Oswald',sans-serif; font-size:14px; letter-spacing:2px; text-transform:uppercase; padding:12px 34px; border-radius:34px; cursor:pointer; color:var(--encre-doux); transition:color 0.3s; z-index:2; font-weight:600; }
+.genre-switch button.active { color:#fff; }
+.genre-slider { position:absolute; top:5px; bottom:5px; left:5px; width:calc(50% - 5px); background:linear-gradient(135deg,var(--corail),var(--rose)); border-radius:34px; transition:transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), background 0.35s; z-index:1; }
+.genre-switch.femme .genre-slider { transform:translateX(100%); background:linear-gradient(135deg,var(--rose),var(--cyan)); }
+
+/* ===== GRILLE MOSAÏQUE 3x3 ===== */
+.mosaic { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:960px; margin:0 auto; padding:0 20px; }
+.tile { position:relative; aspect-ratio:1/1; border-radius:18px; overflow:hidden; cursor:pointer; background:#111; box-shadow:0 6px 20px rgba(43,35,32,0.1); transition:transform 0.25s, box-shadow 0.25s; }
+.tile img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s; }
+.tile:hover { transform:translateY(-6px) scale(1.02); box-shadow:0 16px 36px rgba(255,46,147,0.28); }
+.tile:hover img { transform:scale(1.08); }
+.tile-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(20,15,13,0.9) 0%, rgba(20,15,13,0.35) 40%, transparent 65%); display:flex; flex-direction:column; justify-content:flex-end; padding:16px; }
+.tile-word { font-family:'Permanent Marker',cursive; font-size:clamp(20px,2.4vw,28px); color:#fff; line-height:1; text-shadow:0 2px 8px rgba(0,0,0,0.5); }
+.tile-tw { font-family:'Caveat',cursive; font-weight:700; font-size:clamp(15px,1.8vw,20px); color:var(--jaune); }
+.tile-plus { position:absolute; top:12px; right:12px; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.92); color:var(--encre); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; opacity:0; transition:opacity 0.2s; }
+.tile:hover .tile-plus { opacity:1; }
+@media (max-width:640px){ .mosaic { grid-template-columns:repeat(2,1fr); gap:12px; padding:0 12px; } }
 .sport-card { background: var(--gris-dark); border: var(--border); border-radius:18px; box-shadow:0 8px 30px rgba(43,35,32,0.06); overflow: hidden; transition: border-color 0.25s, transform 0.25s; display: flex; flex-direction: column; }
 .sport-card:hover { border-color: rgba(255,27,141,0.4); transform: translateY(-4px); }
 .sport-card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #F0E8DC; position: relative; }
@@ -398,7 +405,8 @@ body { -webkit-touch-callout: none; }
   </button>
   <ul class="nav-links">
     <li><a href="#sunset">Sunset</a></li>
-    <li><a href="#collection">Collection</a></li>
+    <li><a href="#collection" onclick="setGenre('homme')">Homme</a></li>
+    <li><a href="#collection" onclick="setGenre('femme')">Femme</a></li>
     <li><a href="#stickers">Stickers</a></li>
     <li><a href="#trust">Signature</a></li>
     <li><a href="#about">Mindset</a></li>
@@ -501,150 +509,23 @@ body { -webkit-touch-callout: none; }
 <!-- COLLECTION SPORT -->
 <div id="collection" class="sport-section">
   <div class="section-header">
-    <span class="eyebrow">Collection Sport 2026</span>
+    <span class="eyebrow" id="sportEyebrow">Collection Sport 2026 · Homme</span>
     <h2 class="section-title">9 Designs<br>Wear Your Mindset</h2>
     <span class="trad" style="font-size:24px;">9 designs · Porte ton état d'esprit</span>
-    <p class="section-sub">Débardeurs · Impression DTF · Réalisé à la commande · Livraison dès 5 € 🇫🇷</p>
+    <p class="section-sub" id="sportSub">Débardeurs · Impression DTF · Réalisé à la commande · Livraison dès 5 € 🇫🇷</p>
   </div>
 
-  <div class="sport-carousel">
-    <div class="sport-carousel-outer">
-      <div class="sport-carousel-track" id="sportTrack">
-
-    <div class="sport-card">
-      <div class="sport-card-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F0E8DC;">
-        <img src="breathe-face.jpg" alt="Débardeur Breathe Face CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-        <img src="dos-cg.jpg" alt="Débardeur Breathe Dos CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-      </div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Breathe</p>
-        <span class="trad-word">(Respire)</span>
-        <p class="sport-card-sub">Débardeur · Noir · DTF · Face + Dos</p>
-        <p class="sport-card-desc">Slow Down. Be Here. Right Now.<br><span class="trad">Ralentis. Sois là. Maintenant.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Breathe',35,'Débardeur · Noir · DTF')" style="font-size:13px;padding:14px 28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;">AJOUTER AU PANIER <img src='https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png' alt='PayPal' style='height:20px;'></button></div>
-      </div>
-    </div>
-    <div class="sport-card">
-      <div class="sport-card-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F0E8DC;">
-        <img src="focus-face.jpg" alt="Débardeur Focus Face CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-        <img src="dos-cg.jpg" alt="Débardeur Focus Dos CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-      </div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Focus</p>
-        <span class="trad-word">(Concentre-toi)</span>
-        <p class="sport-card-sub">Débardeur · Noir · DTF · Face + Dos</p>
-        <p class="sport-card-desc">Clear Mind. Sharp Goals. No Excuses.<br><span class="trad">Esprit clair. Objectifs précis. Sans excuses.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Focus',35,'Débardeur · Noir · DTF')" style="font-size:13px;padding:14px 28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;">AJOUTER AU PANIER <img src='https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png' alt='PayPal' style='height:20px;'></button></div>
-      </div>
-    </div>
-    <div class="sport-card">
-      <div class="sport-card-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F0E8DC;">
-        <img src="evolve-face.jpg" alt="Débardeur Evolve Face CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-        <img src="dos-cg.jpg" alt="Débardeur Evolve Dos CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-      </div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Evolve</p>
-        <span class="trad-word">(Évolue)</span>
-        <p class="sport-card-sub">Débardeur · Noir · DTF · Face + Dos</p>
-        <p class="sport-card-desc">Growth Is Your Only Option.<br><span class="trad">Évoluer est ta seule option.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Evolve',35,'Débardeur · Noir · DTF')" style="font-size:13px;padding:14px 28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;">AJOUTER AU PANIER <img src='https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png' alt='PayPal' style='height:20px;'></button></div>
-      </div>
-    </div>
-    <div class="sport-card">
-      <div class="sport-card-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F0E8DC;">
-        <img src="free-face.jpg" alt="Débardeur Free Face CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-        <img src="dos-cg.jpg" alt="Débardeur Free Dos CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-      </div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Free</p>
-        <span class="trad-word">(Libre)</span>
-        <p class="sport-card-sub">Débardeur · Noir · DTF · Face + Dos</p>
-        <p class="sport-card-desc">No Chains. No Limits. Just You.<br><span class="trad">Pas de chaînes. Pas de limites. Juste toi.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Free',35,'Débardeur · Noir · DTF')" style="font-size:13px;padding:14px 28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;">AJOUTER AU PANIER <img src='https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png' alt='PayPal' style='height:20px;'></button></div>
-      </div>
-    </div>
-    <div class="sport-card">
-      <div class="sport-card-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F0E8DC;">
-        <img src="trust-face.jpg" alt="Débardeur Trust Face CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-        <img src="dos-cg.jpg" alt="Débardeur Trust Dos CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-      </div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Trust</p>
-        <span class="trad-word">(Confiance)</span>
-        <p class="sport-card-sub">Débardeur · Noir · DTF · Face + Dos</p>
-        <p class="sport-card-desc">Trust Yourself. You Know The Way.<br><span class="trad">Fais-toi confiance. Tu connais le chemin.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Trust',35,'Débardeur · Noir · DTF')" style="font-size:13px;padding:14px 28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;">AJOUTER AU PANIER <img src='https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png' alt='PayPal' style='height:20px;'></button></div>
-      </div>
-    </div>
-    <div class="sport-card">
-      <div class="sport-card-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F0E8DC;">
-        <img src="alive-face.jpg" alt="Débardeur Alive Face CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-        <img src="dos-cg.jpg" alt="Débardeur Alive Dos CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-      </div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Alive</p>
-        <span class="trad-word">(Vivant)</span>
-        <p class="sport-card-sub">Débardeur · Noir · DTF · Face + Dos</p>
-        <p class="sport-card-desc">Live Fully. Love Deeply. No Regrets.<br><span class="trad">Vis pleinement. Aime profondément. Sans regrets.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Alive',35,'Débardeur · Noir · DTF')" style="font-size:13px;padding:14px 28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;">AJOUTER AU PANIER <img src='https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png' alt='PayPal' style='height:20px;'></button></div>
-      </div>
-    </div>
-    <div class="sport-card">
-      <div class="sport-card-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F0E8DC;">
-        <img src="heal-face.jpg" alt="Débardeur Heal Face CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-        <img src="dos-cg.jpg" alt="Débardeur Heal Dos CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-      </div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Heal</p>
-        <span class="trad-word">(Guéris)</span>
-        <p class="sport-card-sub">Débardeur · Noir · DTF · Face + Dos</p>
-        <p class="sport-card-desc">Everything. Learn. Grow. Repeat.<br><span class="trad">Tout. Apprendre. Grandir. Recommencer.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Heal',35,'Débardeur · Noir · DTF')" style="font-size:13px;padding:14px 28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;">AJOUTER AU PANIER <img src='https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png' alt='PayPal' style='height:20px;'></button></div>
-      </div>
-    </div>
-    <div class="sport-card">
-      <div class="sport-card-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F0E8DC;">
-        <img src="feel-face.jpg" alt="Débardeur Feel Face CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-        <img src="dos-cg.jpg" alt="Débardeur Feel Dos CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-      </div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Feel</p>
-        <span class="trad-word">(Ressens)</span>
-        <p class="sport-card-sub">Débardeur · Noir · DTF · Face + Dos</p>
-        <p class="sport-card-desc">Feel It All. That's Life.<br><span class="trad">Ressens tout. C'est ça la vie.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Feel',35,'Débardeur · Noir · DTF')" style="font-size:13px;padding:14px 28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;">AJOUTER AU PANIER <img src='https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png' alt='PayPal' style='height:20px;'></button></div>
-      </div>
-    </div>
-    <div class="sport-card">
-      <div class="sport-card-imgs" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F0E8DC;">
-        <img src="stronger-face.jpg" alt="Débardeur Stronger Face CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-        <img src="dos-cg.jpg" alt="Débardeur Stronger Dos CG Mindset" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;">
-      </div>
-      <div class="sport-card-info">
-        <p class="sport-card-word">Stronger</p>
-        <span class="trad-word">(Plus fort)</span>
-        <p class="sport-card-sub">Débardeur · Noir · DTF · Face + Dos</p>
-        <p class="sport-card-desc">Built By Challenges. Driven By Choice.<br><span class="trad">Forgé par les épreuves. Guidé par le choix.</span></p>
-        <p class="sport-card-price">35 €</p>
-        <div class="sport-card-btn"><button class="btn-primary" onclick="openPP('Stronger',35,'Débardeur · Noir · DTF')" style="font-size:13px;padding:14px 28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:14px;width:100%;">AJOUTER AU PANIER <img src='https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png' alt='PayPal' style='height:20px;'></button></div>
-      </div>
-    </div>
-      </div>
-    </div>
-    <div class="sport-carousel-controls">
-      <button class="sport-carousel-btn" id="sportPrev" onclick="sportMove(-1)" disabled>&#8592;</button>
-      <div class="sport-carousel-dots" id="sportDots"></div>
-      <button class="sport-carousel-btn" id="sportNext" onclick="sportMove(1)">&#8594;</button>
+  <!-- Sélecteur Homme / Femme -->
+  <div class="genre-switch-wrap">
+    <div class="genre-switch" id="genreSwitch">
+      <div class="genre-slider"></div>
+      <button class="active" id="btnHomme" onclick="setGenre('homme')">♂ Homme</button>
+      <button id="btnFemme" onclick="setGenre('femme')">♀ Femme</button>
     </div>
   </div>
+
+  <!-- Grille mosaïque 3x3 -->
+  <div class="mosaic" id="sportMosaic"></div>
 </div>
 
 <!-- STICKERS -->
@@ -867,11 +748,12 @@ window.addEventListener('resize', checkMenu);
     <div class="pp-precommande" id="ppPrecommande">📦 Pièce réalisée à la commande · Expédiée sous 10 à 15 jours 🇫🇷<br>Livraison et adresse choisies à l'étape panier.</div>
     <p class="pp-label" id="ppSizeLabel">Taille</p>
     <div class="pp-size-row" id="ppSizeRow">
+      <button class="pp-size-btn" id="ppSizeXS" onclick="selectSize(this,'XS')" style="display:none;">XS</button>
       <button class="pp-size-btn selected" onclick="selectSize(this,'S')">S</button>
       <button class="pp-size-btn" onclick="selectSize(this,'M')">M</button>
       <button class="pp-size-btn" onclick="selectSize(this,'L')">L</button>
       <button class="pp-size-btn" onclick="selectSize(this,'XL')">XL</button>
-      <button class="pp-size-btn" onclick="selectSize(this,'2XL')">2XL</button>
+      <button class="pp-size-btn" id="ppSize2XL" onclick="selectSize(this,'2XL')">2XL</button>
     </div>
     <p class="pp-label" id="ppStickerLabel" style="display:none;">Format</p>
     <div class="pp-size-row" id="ppStickerRow" style="display:none;">
@@ -984,8 +866,17 @@ function openPP(name, price, sub) {
     document.querySelectorAll('#ppStickerRow .pp-size-btn').forEach((b,i) => b.classList.toggle('selected', i===0));
     document.getElementById('ppProductPrice').textContent = '3 €';
   } else {
+    // Vêtement : crop top femme -> XS visible, 2XL masqué ; sinon S-2XL
+    var isCropFemme = /crop top femme/i.test(name);
+    var xsBtn = document.getElementById('ppSizeXS');
+    var xxlBtn = document.getElementById('ppSize2XL');
+    if (xsBtn) xsBtn.style.display = isCropFemme ? '' : 'none';
+    if (xxlBtn) xxlBtn.style.display = isCropFemme ? 'none' : '';
     selectedSize = 'S';
-    document.querySelectorAll('#ppSizeRow .pp-size-btn').forEach((b,i) => b.classList.toggle('selected', i===0));
+    document.querySelectorAll('#ppSizeRow .pp-size-btn').forEach((b) => b.classList.remove('selected'));
+    // sélectionne S par défaut
+    var sBtn = Array.from(document.querySelectorAll('#ppSizeRow .pp-size-btn')).find(b => b.textContent.trim()==='S');
+    if (sBtn) sBtn.classList.add('selected');
     document.getElementById('ppProductPrice').textContent = price + ' €';
   }
   document.getElementById('ppProductName').textContent = name;
@@ -1185,54 +1076,61 @@ function closeImgZoom() {
 }
 </script>
 
-<!-- CARROUSEL SPORT -->
+<!-- COLLECTION SPORT : mosaïque + bascule Homme/Femme -->
 <script>
 (function(){
-  var track = document.getElementById('sportTrack');
-  if (!track) return;
-  var cards = track.querySelectorAll('.sport-card');
-  var dotsBox = document.getElementById('sportDots');
-  var prev = document.getElementById('sportPrev');
-  var next = document.getElementById('sportNext');
-  var page = 0;
+  // Les 9 designs. dosH = dos homme, dosF = dos femme.
+  var designs = [
+    { word:'Breathe',  tw:'(Respire)',        faceH:'breathe-face.jpg',  faceF:'breathe-femme.jpg' },
+    { word:'Focus',    tw:'(Concentre-toi)',  faceH:'focus-face.jpg',    faceF:'focus-femme.jpg' },
+    { word:'Evolve',   tw:'(Évolue)',         faceH:'evolve-face.jpg',   faceF:'evolve-femme.jpg' },
+    { word:'Free',     tw:'(Libre)',          faceH:'free-face.jpg',     faceF:'free-femme.jpg' },
+    { word:'Trust',    tw:'(Confiance)',      faceH:'trust-face.jpg',    faceF:'trust-femme.jpg' },
+    { word:'Alive',    tw:'(Vivant)',         faceH:'alive-face.jpg',    faceF:'alive-femme.jpg' },
+    { word:'Heal',     tw:'(Guéris)',         faceH:'heal-face.jpg',     faceF:'heal-femme.jpg' },
+    { word:'Feel',     tw:'(Ressens)',        faceH:'feel-face.jpg',     faceF:'feel-femme.jpg' },
+    { word:'Stronger', tw:'(Plus fort)',      faceH:'stronger-face.jpg', faceF:'stronger-femme.jpg' }
+  ];
+  var dosImg = { homme:'dos-cg.jpg', femme:'sport-dos-femme.jpg' };
+  var prixGenre = { homme:35, femme:25 };
+  var currentGenre = 'homme';
 
-  function perView(){
-    if (window.innerWidth <= 640) return 1;
-    if (window.innerWidth <= 900) return 2;
-    return 3;
+  function renderMosaic(){
+    var m = document.getElementById('sportMosaic');
+    if (!m) return;
+    m.innerHTML = designs.map(function(d, i){
+      var face = currentGenre === 'homme' ? d.faceH : d.faceF;
+      return '<div class="tile" onclick="openSportModal('+i+')">'+
+        '<img src="'+face+'" alt="'+d.word+' '+(currentGenre==='homme'?'débardeur':'crop top')+' CG Mindset" onerror="this.style.opacity=0.15">'+
+        '<div class="tile-plus">+</div>'+
+        '<div class="tile-overlay"><div class="tile-word">'+d.word+'</div><div class="tile-tw">'+d.tw+'</div></div>'+
+      '</div>';
+    }).join('');
   }
-  function pageCount(){ return Math.ceil(cards.length / perView()); }
 
-  function buildDots(){
-    dotsBox.innerHTML = '';
-    for (var i=0; i<pageCount(); i++){
-      var d = document.createElement('button');
-      d.className = 'sport-carousel-dot' + (i===0?' active':'');
-      (function(idx){ d.onclick = function(){ goPage(idx); }; })(i);
-      dotsBox.appendChild(d);
-    }
-  }
-  function goPage(p){
-    var max = pageCount()-1;
-    page = Math.max(0, Math.min(p, max));
-    var cardW = cards[0].offsetWidth + 20; // largeur + gap
-    track.style.transform = 'translateX(-' + (page * perView() * cardW) + 'px)';
-    dotsBox.querySelectorAll('.sport-carousel-dot').forEach(function(d,i){ d.classList.toggle('active', i===page); });
-    prev.disabled = (page===0);
-    next.disabled = (page===max);
-  }
-  window.sportMove = function(dir){ goPage(page + dir); };
+  window.setGenre = function(g){
+    currentGenre = g;
+    var sw = document.getElementById('genreSwitch');
+    sw.classList.toggle('femme', g==='femme');
+    document.getElementById('btnHomme').classList.toggle('active', g==='homme');
+    document.getElementById('btnFemme').classList.toggle('active', g==='femme');
+    document.getElementById('sportEyebrow').textContent = g==='homme' ? 'Collection Sport 2026 · Homme' : 'Collection Sport 2026 · Femme';
+    document.getElementById('sportSub').textContent = g==='homme'
+      ? 'Débardeurs · Impression DTF · Réalisé à la commande · Livraison dès 5 € 🇫🇷'
+      : 'Crop tops · Coupe féminine · Impression DTF · Réalisé à la commande · Livraison dès 5 € 🇫🇷';
+    renderMosaic();
+  };
 
-  // Swipe tactile
-  var startX = 0;
-  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-  track.addEventListener('touchend', function(e){
-    var diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) window.sportMove(diff > 0 ? 1 : -1);
-  });
+  // Ouvre la fenêtre produit (réutilise le système panier openPP)
+  window.openSportModal = function(i){
+    var d = designs[i];
+    var prix = prixGenre[currentGenre];
+    var type = currentGenre === 'homme' ? 'Débardeur · Noir · DTF' : 'Crop top · Coupe féminine · Noir · DTF';
+    var nom = d.word + (currentGenre==='femme' ? ' (Crop top femme)' : '');
+    openPP(nom, prix, type);
+  };
 
-  buildDots(); goPage(0);
-  window.addEventListener('resize', function(){ buildDots(); goPage(0); });
+  renderMosaic();
 })();
 </script>
 
