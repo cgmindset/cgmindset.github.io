@@ -265,21 +265,56 @@ body { -webkit-touch-callout: none; }
 .pp-badge img { height:14px; width:auto; }
 .pp-badge span { font-family:'Oswald',sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); }
 
-/* ===== PAYPAL MODAL ===== */
+/* ===== MODALE / PANIER ===== */
 .pp-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9999; display:none; align-items:flex-start; justify-content:center; padding:20px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
 .pp-overlay.active { display:flex; }
-.pp-modal { background:#111; border:1px solid rgba(255,27,141,0.3); padding:32px 28px; max-width:420px; width:100%; position:relative; margin:auto; }
+.pp-modal { background:#111; border:1px solid rgba(255,27,141,0.3); padding:32px 28px; max-width:440px; width:100%; position:relative; margin:auto; }
 .pp-modal-close { position:absolute; top:14px; right:16px; background:none; border:none; color:rgba(255,255,255,0.4); font-size:22px; cursor:pointer; line-height:1; }
 .pp-modal-close:hover { color:var(--rose); }
 .pp-modal-title { font-family:'Permanent Marker',cursive; font-size:26px; background:linear-gradient(135deg,var(--rose),var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:4px; }
 .pp-modal-sub { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px; }
 .pp-modal-price { font-family:'Permanent Marker',cursive; font-size:32px; color:var(--jaune); margin-bottom:8px; }
 .pp-precommande { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--cyan); background:rgba(0,240,255,0.06); border:1px solid rgba(0,240,255,0.18); padding:10px 12px; margin-bottom:20px; line-height:1.5; }
+.pp-label { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:10px; }
 .pp-size-row { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
 .pp-size-btn { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:8px 16px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:rgba(255,255,255,0.6); cursor:pointer; transition:all 0.2s; }
 .pp-size-btn.selected, .pp-size-btn:hover { border-color:var(--rose); color:var(--rose); background:rgba(255,27,141,0.08); }
-.pp-paypal-container { margin-top:4px; min-height:45px; }
-.pp-note { font-size:10px; color:rgba(255,255,255,0.2); text-align:center; margin-top:12px; letter-spacing:1px; }
+.pp-actions { display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+.pp-add-btn { width:100%; background:linear-gradient(135deg,var(--rose),var(--violet)); color:#fff; border:none; padding:15px; font-family:'Oswald',sans-serif; font-size:13px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:opacity 0.2s; }
+.pp-add-btn:hover { opacity:0.88; }
+.pp-continue-btn { width:100%; background:transparent; color:var(--cyan); border:1px solid var(--cyan); padding:14px; font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.2s; }
+.pp-continue-btn:hover { background:var(--cyan); color:var(--noir); }
+.pp-note { font-size:10px; color:rgba(255,255,255,0.2); text-align:center; margin-top:16px; letter-spacing:1px; }
+
+/* Ligne panier */
+.pp-cart-empty { color:rgba(255,255,255,0.35); font-size:13px; text-align:center; padding:24px 0; line-height:1.6; }
+.pp-cart-item { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+.pp-cart-item-info { flex:1; }
+.pp-cart-item-name { font-family:'Oswald',sans-serif; font-size:14px; letter-spacing:1px; text-transform:uppercase; color:var(--blanc); }
+.pp-cart-item-detail { font-size:11px; color:rgba(255,255,255,0.4); margin-top:2px; }
+.pp-cart-item-price { font-family:'Permanent Marker',cursive; font-size:18px; color:var(--jaune); }
+.pp-cart-item-remove { background:none; border:none; color:rgba(255,255,255,0.3); font-size:18px; cursor:pointer; padding:4px 8px; line-height:1; }
+.pp-cart-item-remove:hover { color:var(--rose); }
+.pp-promo { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:#00ff88; background:rgba(0,255,136,0.08); border:1px solid rgba(0,255,136,0.2); padding:10px 12px; margin:16px 0; text-align:center; line-height:1.5; }
+.pp-promo-next { color:rgba(255,255,255,0.4); font-size:10px; margin-top:4px; }
+.pp-ship-row { display:flex; gap:8px; margin:16px 0; flex-wrap:wrap; }
+.pp-ship-btn { flex:1; min-width:150px; font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:0.5px; text-transform:uppercase; padding:12px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:rgba(255,255,255,0.6); cursor:pointer; transition:all 0.2s; text-align:center; line-height:1.5; }
+.pp-ship-btn.selected, .pp-ship-btn:hover { border-color:var(--cyan); color:var(--cyan); background:rgba(0,240,255,0.08); }
+.pp-totals { border-top:1px solid rgba(255,255,255,0.1); padding-top:14px; margin-top:8px; }
+.pp-total-line { display:flex; justify-content:space-between; font-family:'Oswald',sans-serif; font-size:13px; letter-spacing:0.5px; color:rgba(255,255,255,0.55); margin-bottom:8px; }
+.pp-total-line.remise { color:#00ff88; }
+.pp-total-line.grand { font-size:15px; text-transform:uppercase; color:var(--blanc); margin-top:6px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.08); }
+.pp-total-line.grand strong { font-family:'Permanent Marker',cursive; font-size:26px; color:var(--jaune); }
+.pp-paypal-container { margin-top:16px; min-height:45px; }
+.pp-back-btn { width:100%; background:transparent; color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.2); padding:12px; font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.2s; margin-top:10px; }
+.pp-back-btn:hover { border-color:var(--rose); color:var(--rose); }
+
+/* Bouton panier flottant */
+.cart-fab { position:fixed; bottom:24px; right:24px; z-index:200; background:linear-gradient(135deg,var(--rose),var(--violet)); color:#fff; border:none; width:auto; padding:14px 20px; border-radius:40px; font-family:'Oswald',sans-serif; font-size:13px; letter-spacing:1px; text-transform:uppercase; cursor:pointer; box-shadow:0 6px 24px rgba(255,27,141,0.4); display:none; align-items:center; gap:10px; transition:transform 0.2s; }
+.cart-fab:hover { transform:translateY(-2px); }
+.cart-fab.visible { display:inline-flex; }
+.cart-fab-count { background:#fff; color:var(--rose); border-radius:50%; min-width:22px; height:22px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; padding:0 6px; }
+@media (max-width:768px){ .cart-fab { bottom:16px; right:16px; padding:12px 16px; } }
 </style>
 </head>
 <body>
@@ -331,7 +366,7 @@ body { -webkit-touch-callout: none; }
   <div class="section-header">
     <span class="eyebrow">New Drop 2026</span>
     <h2 class="section-title">Sunset & Beach<br>Collection</h2>
-    <p class="section-sub">4 modèles exclusifs · 100% coton · Coupe unisexe · Réalisé à la commande · Port offert 🇫🇷</p>
+    <p class="section-sub">4 modèles exclusifs · 100% coton · Coupe unisexe · Réalisé à la commande · Livraison dès 5 € 🇫🇷</p>
   </div>
 
   <!-- Modèle 01 — Energy Flows (Mauve) -->
@@ -396,7 +431,7 @@ body { -webkit-touch-callout: none; }
   <div class="section-header">
     <span class="eyebrow">Collection Sport 2026</span>
     <h2 class="section-title">9 Designs<br>Wear Your Mindset</h2>
-    <p class="section-sub">Débardeurs · Impression DTF · Réalisé à la commande · Port offert 🇫🇷</p>
+    <p class="section-sub">Débardeurs · Impression DTF · Réalisé à la commande · Livraison dès 5 € 🇫🇷</p>
   </div>
 
   <div class="sport-grid" style="max-width:1400px;margin:0 auto;padding:0 40px;">
@@ -722,15 +757,20 @@ window.addEventListener('resize', checkMenu);
 </script>
 
 
-<!-- PAYPAL MODAL -->
+<!-- BOUTON PANIER FLOTTANT -->
+<button class="cart-fab" id="cartFab" onclick="openCart()">
+  🛒 Mon panier <span class="cart-fab-count" id="cartFabCount">0</span>
+</button>
+
+<!-- MODALE AJOUT ARTICLE -->
 <div class="pp-overlay" id="ppOverlay" onclick="if(event.target===this)closePP()">
   <div class="pp-modal">
     <button class="pp-modal-close" onclick="closePP()">✕</button>
     <p class="pp-modal-title" id="ppProductName">Breathe</p>
     <p class="pp-modal-sub" id="ppProductSub">Débardeur · CG Mindset</p>
     <p class="pp-modal-price" id="ppProductPrice">35 €</p>
-    <div class="pp-precommande">📦 Pièce réalisée à la commande · Expédiée sous 10 à 15 jours · Port offert 🇫🇷<br>L'adresse de livraison est demandée par PayPal à l'étape suivante.</div>
-    <p style="font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;">Taille</p>
+    <div class="pp-precommande">📦 Pièce réalisée à la commande · Expédiée sous 10 à 15 jours 🇫🇷<br>Livraison et adresse choisies à l'étape panier.</div>
+    <p class="pp-label">Taille</p>
     <div class="pp-size-row" id="ppSizeRow">
       <button class="pp-size-btn selected" onclick="selectSize(this,'S')">S</button>
       <button class="pp-size-btn" onclick="selectSize(this,'M')">M</button>
@@ -738,61 +778,215 @@ window.addEventListener('resize', checkMenu);
       <button class="pp-size-btn" onclick="selectSize(this,'XL')">XL</button>
       <button class="pp-size-btn" onclick="selectSize(this,'2XL')">2XL</button>
     </div>
-    <div class="pp-paypal-container" id="ppContainer"></div>
+    <div class="pp-actions">
+      <button class="pp-add-btn" onclick="addToCartAndCheckout()">Ajouter et voir le panier</button>
+      <button class="pp-continue-btn" onclick="addToCartAndContinue()">Ajouter et continuer mes achats</button>
+    </div>
     <p class="pp-note">🔒 Paiement sécurisé PayPal · contact@cgmindset.fr</p>
   </div>
 </div>
 
+<!-- MODALE PANIER -->
+<div class="pp-overlay" id="cartOverlay" onclick="if(event.target===this)closeCart()">
+  <div class="pp-modal">
+    <button class="pp-modal-close" onclick="closeCart()">✕</button>
+    <p class="pp-modal-title">Mon panier</p>
+    <p class="pp-modal-sub">CG Mindset · Réalisé à la commande</p>
+
+    <div id="cartItems"></div>
+
+    <div id="cartPromo"></div>
+
+    <div id="cartShipping" style="display:none;">
+      <p class="pp-label" style="margin-top:8px;">Mode de livraison</p>
+      <div class="pp-ship-row">
+        <button class="pp-ship-btn selected" id="shipRelais" onclick="selectShip('relais')">📍 Point relais<br>+5 €</button>
+        <button class="pp-ship-btn" id="shipDomicile" onclick="selectShip('domicile')">🏠 À domicile<br>+7 €</button>
+      </div>
+    </div>
+
+    <div class="pp-totals" id="cartTotals" style="display:none;"></div>
+
+    <div class="pp-paypal-container" id="ppContainer"></div>
+
+    <button class="pp-back-btn" onclick="closeCart()">← Continuer mes achats</button>
+    <p class="pp-note">🔒 Paiement sécurisé PayPal · L'adresse de livraison est demandée par PayPal · contact@cgmindset.fr</p>
+  </div>
+</div>
+
 <script>
-// ===== PAYPAL MODAL =====
-let ppRendered = false;
+// ================= PANIER CG MINDSET =================
+// Réductions par nombre d'articles (sur le sous-total articles, jamais sur le port)
+//   2 articles  -> -5%
+//   3 articles et + -> -10%
+// Livraison : point relais 5 € / domicile 7 €
+// Panier gardé en mémoire (se vide si la page est rechargée).
+
+let cart = [];
 let selectedSize = 'S';
 let currentProduct = {};
+let shipMethod = 'relais';
+let ppButtonsRendered = false;
+
+const SHIP_COST = { relais: 5, domicile: 7 };
 
 function selectSize(btn, size) {
   selectedSize = size;
-  document.querySelectorAll('.pp-size-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('#ppSizeRow .pp-size-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
 }
 
+// Ouvre la modale d'ajout pour un produit
 function openPP(name, price, sub) {
-  currentProduct = { name, price, sub };
+  currentProduct = { name: name, price: Number(price), sub: sub || 'CG Mindset' };
   selectedSize = 'S';
-  document.querySelectorAll('.pp-size-btn').forEach((b,i) => b.classList.toggle('selected', i===0));
+  document.querySelectorAll('#ppSizeRow .pp-size-btn').forEach((b,i) => b.classList.toggle('selected', i===0));
   document.getElementById('ppProductName').textContent = name;
-  document.getElementById('ppProductSub').textContent = sub || 'CG Mindset';
+  document.getElementById('ppProductSub').textContent = currentProduct.sub;
   document.getElementById('ppProductPrice').textContent = price + ' €';
   document.getElementById('ppOverlay').classList.add('active');
   document.getElementById('ppOverlay').scrollTop = 0;
-  if (!ppRendered) { renderPayPal(); ppRendered = true; }
+}
+function closePP() { document.getElementById('ppOverlay').classList.remove('active'); }
+
+function addToCart() {
+  cart.push({ name: currentProduct.name, size: selectedSize, price: currentProduct.price, sub: currentProduct.sub });
+  updateFab();
+}
+function addToCartAndContinue() { addToCart(); closePP(); }
+function addToCartAndCheckout() { addToCart(); closePP(); openCart(); }
+
+function removeFromCart(i) {
+  cart.splice(i, 1);
+  updateFab();
+  renderCart();
+  if (cart.length === 0) closeCart();
 }
 
-function closePP() {
-  document.getElementById('ppOverlay').classList.remove('active');
+// Bouton flottant
+function updateFab() {
+  const fab = document.getElementById('cartFab');
+  const count = document.getElementById('cartFabCount');
+  count.textContent = cart.length;
+  fab.classList.toggle('visible', cart.length > 0);
+}
+
+// Calcul des totaux
+function computeTotals() {
+  const subtotal = cart.reduce((s, it) => s + it.price, 0);
+  let rate = 0;
+  if (cart.length >= 3) rate = 0.10;
+  else if (cart.length === 2) rate = 0.05;
+  const discount = +(subtotal * rate).toFixed(2);
+  const ship = cart.length > 0 ? SHIP_COST[shipMethod] : 0;
+  const total = +(subtotal - discount + ship).toFixed(2);
+  return { subtotal, rate, discount, ship, total };
+}
+
+function openCart() {
+  renderCart();
+  document.getElementById('cartOverlay').classList.add('active');
+  document.getElementById('cartOverlay').scrollTop = 0;
+}
+function closeCart() { document.getElementById('cartOverlay').classList.remove('active'); }
+
+function selectShip(method) {
+  shipMethod = method;
+  document.getElementById('shipRelais').classList.toggle('selected', method === 'relais');
+  document.getElementById('shipDomicile').classList.toggle('selected', method === 'domicile');
+  renderCart();
+}
+
+function renderCart() {
+  const itemsEl = document.getElementById('cartItems');
+  const promoEl = document.getElementById('cartPromo');
+  const shipEl = document.getElementById('cartShipping');
+  const totalsEl = document.getElementById('cartTotals');
+
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<div class="pp-cart-empty">Ton panier est vide.<br>Ajoute un article pour commencer 🖤</div>';
+    promoEl.innerHTML = '';
+    shipEl.style.display = 'none';
+    totalsEl.style.display = 'none';
+    document.getElementById('ppContainer').innerHTML = '';
+    ppButtonsRendered = false;
+    return;
+  }
+
+  // Articles
+  itemsEl.innerHTML = cart.map((it, i) =>
+    '<div class="pp-cart-item">' +
+      '<div class="pp-cart-item-info">' +
+        '<div class="pp-cart-item-name">' + it.name + '</div>' +
+        '<div class="pp-cart-item-detail">Taille ' + it.size + ' · ' + it.sub + '</div>' +
+      '</div>' +
+      '<div class="pp-cart-item-price">' + it.price + ' €</div>' +
+      '<button class="pp-cart-item-remove" onclick="removeFromCart(' + i + ')" aria-label="Retirer">✕</button>' +
+    '</div>'
+  ).join('');
+
+  const t = computeTotals();
+
+  // Promo / incitation
+  if (t.rate > 0) {
+    promoEl.innerHTML = '<div class="pp-promo">🎉 Réduction fidélité appliquée : -' + Math.round(t.rate*100) + '% sur tes articles</div>';
+  } else if (cart.length === 1) {
+    promoEl.innerHTML = '<div class="pp-promo" style="color:var(--cyan);background:rgba(0,240,255,0.06);border-color:rgba(0,240,255,0.2);">Ajoute 1 article et profite de -5% 🔥<div class="pp-promo-next">-10% dès 3 articles</div></div>';
+  } else {
+    promoEl.innerHTML = '';
+  }
+
+  shipEl.style.display = 'block';
+
+  // Totaux
+  let html = '<div class="pp-total-line"><span>Sous-total (' + cart.length + ' article' + (cart.length>1?'s':'') + ')</span><span>' + t.subtotal.toFixed(2) + ' €</span></div>';
+  if (t.discount > 0) {
+    html += '<div class="pp-total-line remise"><span>Réduction -' + Math.round(t.rate*100) + '%</span><span>-' + t.discount.toFixed(2) + ' €</span></div>';
+  }
+  html += '<div class="pp-total-line"><span>Livraison ' + (shipMethod==='relais'?'point relais':'à domicile') + '</span><span>' + t.ship.toFixed(2) + ' €</span></div>';
+  html += '<div class="pp-total-line grand"><span>Total à payer</span><strong>' + t.total.toFixed(2) + ' €</strong></div>';
+  totalsEl.innerHTML = html;
+  totalsEl.style.display = 'block';
+
+  renderPayPal();
 }
 
 function renderPayPal() {
+  const container = document.getElementById('ppContainer');
+  container.innerHTML = '';
+  if (typeof paypal === 'undefined') {
+    container.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:12px;text-align:center;padding:12px;">Le paiement PayPal s\'affiche sur le site en ligne.</p>';
+    return;
+  }
   paypal.Buttons({
     style: { layout:'vertical', color:'gold', shape:'rect', label:'pay', height:45 },
     createOrder: function(data, actions) {
+      const t = computeTotals();
+      const itemList = cart.map(it => it.name + ' (T.' + it.size + ')').join(' + ');
       return actions.order.create({
-        // Force la collecte de l'adresse de livraison par PayPal
-        application_context: {
-          shipping_preference: 'GET_FROM_FILE'
-        },
+        application_context: { shipping_preference: 'GET_FROM_FILE' },
         purchase_units: [{
-          description: currentProduct.name + ' — Taille ' + selectedSize + ' — CG Mindset',
+          description: ('CG Mindset — ' + itemList).substring(0, 127),
+          custom_id: 'CART_' + cart.length + 'ART_' + shipMethod,
           amount: {
             currency_code: 'EUR',
-            value: String(currentProduct.price)
+            value: t.total.toFixed(2),
+            breakdown: {
+              item_total: { currency_code:'EUR', value: t.subtotal.toFixed(2) },
+              shipping:   { currency_code:'EUR', value: t.ship.toFixed(2) },
+              discount:   { currency_code:'EUR', value: t.discount.toFixed(2) }
+            }
           },
-          custom_id: currentProduct.name + '_' + selectedSize
+          items: cart.map(it => ({
+            name: (it.name + ' - T.' + it.size).substring(0, 127),
+            unit_amount: { currency_code:'EUR', value: Number(it.price).toFixed(2) },
+            quantity: '1'
+          }))
         }]
       });
     },
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details) {
-        closePP();
         var ship = '';
         try {
           var pu = details.purchase_units && details.purchase_units[0];
@@ -806,6 +1000,9 @@ function renderPayPal() {
                  + (a.country_code || '');
           }
         } catch(e) {}
+        cart = [];
+        updateFab();
+        closeCart();
         alert('✅ Merci ' + (details.payer.name.given_name || '') + ' ! Ta commande est confirmée.\nTu vas recevoir un email de confirmation à ' + details.payer.email_address + ship + '\n\nOn te recontacte très vite pour l\'expédition !');
       });
     },
